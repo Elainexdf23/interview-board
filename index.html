@@ -334,7 +334,7 @@
       <button class="btn-can" id="cancelContrib">取消</button>
       <span class="status" id="contribStatus"></span>
     </div>
-    <div class="note">提交后由看板管理员（主控人）审核，核实后合并进看板。本站不收录编造内容，3 年以上且无佐证的一般不收录。</div>
+    <div class="note">点「提交投稿」会调起你的邮件客户端并填好内容，<b>收件人：elainexdf23ca@163.com</b>，请确认后点发送（内容也会自动复制，没弹出邮件窗口时可自行粘贴发送）。投稿由看板管理员审核，核实后合并进看板。本站不收录编造内容，3 年以上且无佐证的一般不收录。</div>
   </div>
 </div>
 
@@ -1802,11 +1802,12 @@ renderSchoolIndex();
 render();
 
 /* ============ 投稿功能 ============ */
-/* 主控人填这里：接收端点。优先 Formspree（https://formspree.io/f/xxxxxx），
-   留空则退回 mailto 到 ownerEmail。两端都未配置时仅本地校验、不发送。 */
+/* 纯静态站点，不接第三方表单服务：submitEndpoint 留空，统一走 mailto 到 ownerEmail。
+   投稿人点提交 → 调起其本机邮件客户端发送给主控人；同时自动把投稿内容复制到剪贴板，
+   以防对方没装邮件客户端导致内容丢失（可自行粘贴发到 ownerEmail）。 */
 const CONFIG = {
-  submitEndpoint: "https://formspree.io/f/YOUR_FORM_ID",  // ← 替换为你的 Formspree 表单地址
-  ownerEmail: "your-email@example.com"                   // ← 替换为你的邮箱（mailto 兜底）
+  submitEndpoint: "",                          // 留空 = 不接任何第三方接口
+  ownerEmail: "elainexdf23ca@163.com"          // ← 主控人收件邮箱
 };
 
 (function(){
@@ -1855,14 +1856,17 @@ const CONFIG = {
       }
       btn.disabled = false; return;
     }
-    // 兜底：mailto
+    // 兜底：mailto。同时把内容复制到剪贴板——对方若没装邮件客户端，
+    // mailto 会静默失败，有了复制就不会丢投稿，可自行粘贴发到收件邮箱。
     if(CONFIG.ownerEmail && !CONFIG.ownerEmail.includes('example.com')){
       const body = `【面经投稿】\n地区：${v.region}\n阶段：${v.stage}\n学校：${v.school}\n项目/专业：${v.prog}\n题目性质：${v.kind}\n年份：${v.year}\n来源类型：${v.srctype}\n来源详情：${v.src}\n联系方式：${v.contact}\n\n面经题目：\n${v.questions}`;
-      window.location.href = `mailto:${CONFIG.ownerEmail}?subject=面经投稿-${v.school}-${v.prog}&body=`+encodeURIComponent(body);
-      status.textContent='已调起邮件客户端，发送即完成投稿。'; status.className='status ok';
+      copyText(body);
+      window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${encodeURIComponent('面经投稿-'+v.school+'-'+v.prog)}&body=`+encodeURIComponent(body);
+      status.textContent='已调起邮件客户端，发送即完成投稿；投稿内容也已复制。若没弹出邮件窗口，请把已复制的内容发到 '+CONFIG.ownerEmail;
+      status.className='status ok';
       btn.disabled = false; return;
     }
-    status.textContent='尚未配置接收端点（CONFIG.submitEndpoint / ownerEmail），请主控人填写后再提交。';
+    status.textContent='尚未配置收件邮箱（CONFIG.ownerEmail），请主控人填写后再提交。';
     status.className='status err'; btn.disabled = false;
   });
 
