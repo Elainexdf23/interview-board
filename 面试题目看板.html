@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>留学面试题目看板 · 加拿大 / 新加坡 / 香港</title>
+<style>
+  :root{
+    --bg:#f6f5f3;--panel:#fff;--panel-2:#faf9f7;
+    --line:#e4e0da;--line-2:#d6d1c9;
+    --ink:#1f1d1a;--ink-2:#4a4640;--ink-3:#7d766d;
+    --accent:#e8734a;--accent-soft:#fdf1ec;
+    --shadow:0 1px 3px rgba(31,29,26,.06),0 8px 24px rgba(31,29,26,.05);
+    --ca:#d52b1e;--sg:#ef7d00;--hk:#d4002a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px 80px}
+
+  header.top{padding:42px 0 22px;border-bottom:1px solid var(--line);margin-bottom:0}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+    background:var(--accent-soft);padding:6px 12px;border-radius:100px;margin-bottom:14px}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 3px rgba(232,115,74,.18)}
+  h1{font-size:30px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+  .sub{color:var(--ink-2);font-size:15px}
+  .upd{font-size:12.5px;color:var(--ink-3);margin-top:9px}
+
+  /* sticky nav */
+  .nav{position:sticky;top:0;z-index:30;background:rgba(246,245,243,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:22px}
+  .nav .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .rtab{font-size:13.5px;font-weight:700;padding:8px 16px;border-radius:9px;cursor:pointer;
+    border:1px solid var(--line);background:var(--panel);color:var(--ink-2);transition:.15s;font-family:inherit}
+  .rtab:hover{border-color:var(--line-2)}
+  .rtab.ca{border-left:4px solid var(--ca)} .rtab.sg{border-left:4px solid var(--sg)} .rtab.hk{border-left:4px solid var(--hk)}
+  .rtab.on{color:#fff;border-color:transparent}
+  .rtab.ca.on{background:var(--ca)} .rtab.sg.on{background:var(--sg)} .rtab.hk.on{background:var(--hk)}
+  .search{display:flex;align-items:center;gap:8px;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:8px 14px;flex:1;min-width:240px;max-width:420px;margin-left:auto}
+  .search input{border:none;outline:none;background:none;font-size:14px;width:100%;font-family:inherit;color:var(--ink)}
+  .search svg{color:var(--ink-3);flex-shrink:0}
+
+  /* school index row */
+  .srow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .srow .lbl{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-right:4px;flex-shrink:0}
+  .stab{font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:8px;cursor:pointer;
+    border:1px solid var(--line);background:var(--panel);color:var(--ink-2);transition:.15s;font-family:inherit;
+    display:inline-flex;align-items:center;gap:6px}
+  .stab .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .stab:hover{border-color:var(--line-2);color:var(--ink)}
+  .stab.on{background:var(--ink);color:#fff;border-color:transparent}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin:18px 0 6px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat .n{font-size:25px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+  .stat .l{font-size:12px;color:var(--ink-3);margin-top:2px}
+  .stat.hi .n{color:var(--accent)}
+
+  /* region section */
+  .region{padding-top:30px;scroll-margin-top:64px}
+  .rhead{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  .rhead .flag{font-size:26px}
+  .rhead h2{font-size:23px;font-weight:700;letter-spacing:-.01em}
+  .rhead .en{color:var(--ink-3);font-size:13px;font-weight:600;letter-spacing:.05em}
+  .rline{height:3px;border-radius:2px;margin:10px 0 6px}
+  .rdesc{font-size:13.5px;color:var(--ink-3);margin-bottom:14px}
+
+  .school{margin:20px 0 8px;display:flex;align-items:center;gap:10px;scroll-margin-top:120px}
+  .school .badge{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+  .school h3{font-size:17px;font-weight:700}
+  .school .sc{font-size:12.5px;color:var(--ink-3)}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:.18s}
+  .card:hover{box-shadow:var(--shadow);border-color:var(--line-2)}
+  .card-h{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+  .stage{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;margin-bottom:8px}
+  .stage.ug{background:#e8f0fb;color:#1f5fa6} .stage.gr{background:#f0e9fb;color:#6a3fb0}
+  .card-h h4{font-size:16px;font-weight:700;line-height:1.3;margin-bottom:3px}
+  .itype{font-size:12.5px;color:var(--ink-2);margin-top:6px;padding:7px 10px;background:var(--panel-2);border-radius:8px;border:1px solid var(--line)}
+  .itype b{color:var(--ink)}
+
+  .card-b{padding:13px 18px 4px;flex:1}
+  .blk{margin-bottom:13px}
+  .blk-t{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+  .blk-t::before{content:"";width:4px;height:13px;border-radius:2px;background:var(--accent)}
+  .off{display:flex;gap:8px;font-size:13px;padding:3px 0}
+  .off .k{color:var(--ink-3);min-width:84px;flex-shrink:0}
+  .off .v{color:var(--ink-2)}
+  .flow{list-style:none;counter-reset:f}
+  .flow li{counter-increment:f;font-size:13px;color:var(--ink-2);padding:4px 0 4px 26px;position:relative}
+  .flow li::before{content:counter(f);position:absolute;left:0;top:4px;width:18px;height:18px;border-radius:50%;
+    background:var(--accent-soft);color:var(--accent);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+  .q{display:flex;gap:9px;padding:9px 0;border-top:1px dashed var(--line-2)}
+  .q .tag{flex-shrink:0;font-size:10px;font-weight:800;padding:3px 7px;border-radius:5px;height:fit-content;white-space:nowrap;margin-top:1px}
+  .tag.actual{background:#e7eefb;color:#1f5fa6} .tag.variant{background:#eee;color:#6b6b6b}
+  .q .body{font-size:13px;color:var(--ink)}
+  .q .en{font-weight:600;color:var(--ink)}
+  .q .zh{color:var(--ink-2)}
+  .q .cat{display:inline-block;font-size:10.5px;color:var(--ink-3);background:var(--panel-2);border:1px solid var(--line);padding:1px 6px;border-radius:4px;margin-left:6px}
+  .q .tip{display:block;color:var(--ink-3);font-size:12px;margin-top:2px}
+  .q .src{font-size:11px;color:#1f5fa6}
+
+  .warn{list-style:none}
+  .warn li{font-size:12.5px;color:var(--ink-2);padding:3px 0 3px 18px;position:relative}
+  .warn li::before{content:"⚠";position:absolute;left:0;top:3px;color:var(--accent);font-size:11px}
+  .srcs{font-size:11.5px;color:var(--ink-3)}
+  .srcs a{color:#1f5fa6;text-decoration:none} .srcs a:hover{text-decoration:underline}
+  .pending{background:var(--panel-2);border:1px dashed var(--line-2);border-radius:14px;padding:16px 18px;color:var(--ink-3);font-size:13px}
+  .pending b{color:var(--ink-2)}
+
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--ink-3);line-height:1.7}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-3);margin:8px 0 2px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .lg{width:14px;height:14px;border-radius:4px}
+  .empty{text-align:center;padding:40px 20px;color:var(--ink-3);font-size:14px}
+  .toolbar2{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 4px}
+  .schip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;
+    background:var(--panel);border:1px solid var(--line);color:var(--ink-2);font-family:inherit}
+  .schip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}.search{margin-left:0}}
+
+  /* 投稿按钮 & 弹窗 */
+  .ctab{font-size:13px;font-weight:700;padding:8px 16px;border-radius:9px;cursor:pointer;
+    border:1px solid var(--accent);background:var(--accent);color:#fff;transition:.15s;font-family:inherit;white-space:nowrap}
+  .ctab:hover{filter:brightness(.94)}
+  .ctab.ghost{background:var(--panel);color:var(--accent)}
+  .overlay{position:fixed;inset:0;background:rgba(31,29,26,.45);backdrop-filter:blur(3px);
+    display:none;align-items:center;justify-content:center;z-index:80;padding:18px}
+  .overlay.on{display:flex}
+  .modal{background:var(--panel);width:min(560px,100%);max-height:92vh;overflow:auto;border-radius:16px;
+    box-shadow:var(--shadow);border:1px solid var(--line)}
+  .modal-h{display:flex;align-items:center;gap:10px;padding:18px 22px;border-bottom:1px solid var(--line)}
+  .modal-h h3{font-size:18px;font-weight:700;flex:1}
+  .modal-h .x{cursor:pointer;font-size:22px;color:var(--ink-3);line-height:1;background:none;border:none}
+  .modal-b{padding:8px 22px 4px}
+  .fld{margin:14px 0}
+  .fld label{display:block;font-size:12.5px;font-weight:700;color:var(--ink-2);margin-bottom:6px}
+  .fld .req{color:var(--accent)}
+  .fld input,.fld select,.fld textarea{width:100%;font-size:14px;font-family:inherit;color:var(--ink);
+    border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--panel-2);outline:none}
+  .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--accent);background:#fff}
+  .fld textarea{resize:vertical;min-height:84px;line-height:1.55}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  .hint{font-size:12px;color:var(--ink-3);margin-top:5px;line-height:1.5}
+  .modal-f{padding:14px 22px 22px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .btn-send{font-size:14px;font-weight:700;padding:11px 22px;border-radius:10px;border:none;cursor:pointer;
+    background:var(--accent);color:#fff;font-family:inherit}
+  .btn-send:disabled{opacity:.6;cursor:wait}
+  .btn-can{font-size:14px;font-weight:600;padding:11px 18px;border-radius:10px;cursor:pointer;
+    background:var(--panel);border:1px solid var(--line);color:var(--ink-2);font-family:inherit}
+  .status{font-size:13px;flex:1;min-width:140px}
+  .status.ok{color:#1f8a4c} .status.err{color:#c0392b}
+  .note{font-size:12px;color:var(--ink-3);padding:0 22px 18px;line-height:1.6}
+
+  /* 卡片内「复制链接」按钮 + 只读聚焦视图 */
+  .sharebtn{position:absolute;top:12px;right:12px;font-size:11.5px;font-weight:700;cursor:pointer;
+    border:1px solid var(--line);background:var(--panel);color:var(--ink-2);border-radius:7px;
+    padding:4px 9px;font-family:inherit;transition:.15s;opacity:0}
+  .card:hover .sharebtn{opacity:1}
+  .sharebtn:hover{border-color:var(--accent);color:var(--accent)}
+  .card{position:relative}
+  .fbar{position:sticky;top:0;z-index:40;display:none;align-items:center;gap:12px;
+    background:#1f1d1a;color:#fff;padding:11px 18px;font-size:13.5px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+  .fbar.on{display:flex}
+  .fbar .back{cursor:pointer;font-weight:700;background:#fff;color:#1f1d1a;border:none;
+    border-radius:8px;padding:6px 14px;font-family:inherit;font-size:13px}
+  .fbar .tag{background:rgba(255,255,255,.16);padding:3px 10px;border-radius:100px;font-size:12px}
+  .fbar .ro{margin-left:auto;font-size:12px;opacity:.8}
+  body.focus .nav,body.focus .stats,body.focus .toolbar2,body.focus .legend,
+  body.focus #schoolIndex,body.focus footer{display:none!important}
+  .card.flash{box-shadow:0 0 0 3px var(--accent);border-color:var(--accent)}
+  /* 账密门 */
+  #authOverlay{position:fixed;inset:0;z-index:9999;background:rgba(20,18,16,.93);
+    display:none;align-items:center;justify-content:center;font-family:inherit;padding:24px;box-sizing:border-box}
+  #authOverlay .box{background:#fff;color:#1f2329;border-radius:16px;padding:34px 30px;width:100%;max-width:360px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35)}
+  #authOverlay h2{margin:0 0 6px;font-size:20px}
+  #authOverlay .sub{margin:0 0 20px;font-size:13px;color:#666}
+  #authOverlay label{display:block;font-size:12.5px;color:#555;margin:0 0 6px}
+  #authOverlay input{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #d8d4cc;border-radius:9px;
+    font-size:14px;margin-bottom:14px;font-family:inherit}
+  #authOverlay button{width:100%;padding:12px;border:none;border-radius:9px;background:#1f1d1a;color:#fff;
+    font-size:14px;cursor:pointer;font-family:inherit}
+  #authOverlay .err{display:none;color:#c0392b;font-size:12.5px;margin:-6px 0 12px}
+  body.auth-locked .wrap,body.auth-locked .fbar{display:none!important}
+</style>
+</head>
+<body>
+<div id="authOverlay">
+  <div class="box">
+    <h2>面经看板 · 访问密码</h2>
+    <p class="sub">请输入查看密码（分享给他人时请一并告知）</p>
+    <label for="authPass">密码</label>
+    <input id="authPass" type="password" autocomplete="current-password" placeholder="请输入密码">
+    <div class="err" id="authErr">密码错误</div>
+    <button id="authBtn">进入看板</button>
+  </div>
+</div>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow"><span class="dot"></span>Interview Question Board</div>
+  <h1>留学面试题目看板</h1>
+  <p class="sub">加拿大 · 新加坡 · 香港 — 本科 / 研究生 分阶段面试真题汇总</p>
+  <p class="upd" id="upd"></p>
+</header>
+
+<div class="fbar" id="fbar">
+  <button class="back" id="fback">← 返回完整看板</button>
+  <span>正在查看单条面经</span>
+  <span class="tag" id="fbarTag"></span>
+  <span class="ro">只读视图 · 他人无法编辑</span>
+</div>
+
+<div class="nav">
+  <div class="row">
+    <button class="rtab ca" data-r="ca">🇨🇦 加拿大</button>
+    <button class="rtab sg" data-r="sg">🇸🇬 新加坡</button>
+    <button class="rtab hk" data-r="hk">🇭🇰 香港</button>
+    <button class="rtab on" data-r="all">全部</button>
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="text" id="q" placeholder="搜学校 / 项目 / 专业 / 题型关键词…">
+    </div>
+    <button class="ctab" id="openContrib">＋ 我要投稿</button>
+  </div>
+  <div class="srow" id="schoolIndex"></div>
+</div>
+
+<div class="stats" id="stats"></div>
+<div class="toolbar2" id="stageFilters"></div>
+<div class="legend">
+  <span><span class="lg" style="background:#e7eefb"></span> 原题 ACTUAL — 逐字取自公开来源</span>
+  <span><span class="lg" style="background:#eee"></span> 变体 VARIANT — 基于公开经验原创改写</span>
+</div>
+
+<div id="board"></div>
+
+<footer>
+  <div><b>内容说明：</b>本站题目均来自公开网络来源（院校官网、教育机构解读、公开论坛与博主整理），属申请者回忆或机构整理，<b>非官方题库</b>；标「原题」者尽量保留来源原文，标「变体」者为基于公开经验的备考改写，二者均不构成官方措辞。面试形式以各校官网为准。</div>
+  <div style="margin-top:8px">最后更新 <span id="foot"></span> · 待采集项目将在补充真实面经后更新，不编造题目。</div>
+</footer>
+
+<!-- 投稿弹窗 -->
+<div class="overlay" id="contribOverlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-h">
+      <h3>＋ 我要投稿面经</h3>
+      <button class="x" id="closeContrib" aria-label="关闭">×</button>
+    </div>
+    <div class="modal-b">
+      <div class="fgrid">
+        <div class="fld">
+          <label>地区 <span class="req">*</span></label>
+          <select id="c_region">
+            <option value="加拿大">🇨🇦 加拿大</option>
+            <option value="新加坡">🇸🇬 新加坡</option>
+            <option value="香港">🇭🇰 香港</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label>阶段 <span class="req">*</span></label>
+          <select id="c_stage">
+            <option value="本科">本科</option>
+            <option value="研究生">研究生</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgrid">
+        <div class="fld">
+          <label>学校 <span class="req">*</span></label>
+          <input id="c_school" placeholder="如 香港大学 / University of Toronto">
+        </div>
+        <div class="fld">
+          <label>项目 / 专业 <span class="req">*</span></label>
+          <input id="c_prog" placeholder="如 金融学 MFin / Master of Finance">
+        </div>
+      </div>
+      <div class="fld">
+        <label>面经题目 <span class="req">*</span></label>
+        <textarea id="c_qs" placeholder="每行一条。可写中英文题目、面试流程、小组 case、追问等。例：&#10;1. 为什么选择本专业？&#10;2. 描述一次团队领导的经历"></textarea>
+        <div class="hint">真实回忆优先；若记不清原句，请选下方“变体”，我们会在入库时标注。</div>
+      </div>
+      <div class="fgrid">
+        <div class="fld">
+          <label>题目性质</label>
+          <select id="c_kind">
+            <option value="原题">原题（尽量逐字，来自官网/帖子等）</option>
+            <option value="变体">变体（基于回忆的备考改写）</option>
+            <option value="不确定">不确定</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label>年份</label>
+          <select id="c_year">
+            <option value="2026">2026 / 27Fall</option>
+            <option value="2025">2025 / 26Fall</option>
+            <option value="2024">2024 / 25Fall</option>
+            <option value="更早">更早（&gt;3年可能不收录）</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgrid">
+        <div class="fld">
+          <label>来源类型</label>
+          <select id="c_srctype">
+            <option value="公众号/机构站">公众号 / 留学机构站</option>
+            <option value="留学论坛">留学论坛（Gter / 一亩三分地 / ChaseDream）</option>
+            <option value="知乎">知乎</option>
+            <option value="小红书">小红书</option>
+            <option value="官网">院校官网</option>
+            <option value="其他">其他 / 亲身经历</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label>来源详情 / 链接</label>
+          <input id="c_src" placeholder="公众号名、帖子链接、博主等（选填）">
+        </div>
+      </div>
+      <div class="fld">
+        <label>你的称呼 / 联系方式（选填）</label>
+        <input id="c_contact" placeholder="方便我们核实或致谢，如 微信/邮箱">
+      </div>
+    </div>
+    <div class="modal-f">
+      <button class="btn-send" id="sendContrib">提交投稿</button>
+      <button class="btn-can" id="cancelContrib">取消</button>
+      <span class="status" id="contribStatus"></span>
+    </div>
+    <div class="note">提交后由看板管理员（主控人）审核，核实后合并进看板。本站不收录编造内容，3 年以上且无佐证的一般不收录。</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* ============ 数据 ============ */
+const DATA = {
+  meta:{ lastUpdated:"2026-11-03（补充公众号/机构站+论坛+知乎近3年面经：香港研究生按专业整理——港大金融(视频面)/CS/数据科学、港中文会计MAcc、港科大金融MFin、城大金融/CS·工程、理大商业管理BM/会计；加拿大研究生商科——Rotman MBA、UBC Sauder MBA·MBAN、McGill Desautels MBA、Ivey MBA。剔除3年以上内容）", seasons:["24Fall","25Fall","26Fall"] },
+  regions:[
+  /* ===================== 加拿大 ===================== */
+  { id:"ca", name:"加拿大", en:"CANADA", flag:"🇨🇦", color:"#d52b1e",
+    desc:"热门本科（商科/工程/计算机/医学）普遍要求补充申请视频面试；医学类多采用 MMI。以下为已检索到公开信息的项目。",
+    schools:[
+      { id:"utoronto", name:"多伦多大学", abbr:"U of T", color:"#002a5e",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"Rotman Commerce / 工程 / 计算机 等补充申请",
+            interviewType:"补充申请含视频面试：Rotman 用 Kira Talent，工程/CS 用校内系统。Rotman = 4 题（1 写作 200 词/20min 提前给 + 1 视频 30s 准备 45s 答 提前给 + 1 随机写作 200 词/20min + 1 随机视频 60s 准备 60s 答）；工程 = 3 题（2 视频 + 1 写作）。无标准答案。",
+            official:[
+              {k:"面试平台",v:"Rotman=Kira Talent；工程/部分文理=校内视频系统"},
+              {k:"必做范围",v:"Rotman、工程所有专业、CS、建筑景观、运动机能学、音乐等强制补充申请"},
+              {k:"形式",v:"预录视频 + 计时写作，部分随机抽题"},
+              {k:"语言",v:"全英"}
+            ],
+            flow:["设备检测 + 练习题熟悉平台","正式录制（通常仅一次机会）","提交链接回传网申系统"],
+            questions:[
+              {kind:"actual",en:"Why are you interested in Rotman Commerce at U of T?",zh:"为什么选择多大 Rotman Commerce？",cat:"动机",tip:"具体到课程/资源，杜绝罗列排名",src:"myls.ai Rotman 指南"},
+              {kind:"actual",en:"Tell us about a time you demonstrated leadership / teamwork.",zh:"描述一次展现领导力或团队合作的经历",cat:"行为",tip:"用 STAR 法则，结合 community engagement 与 passion for business",src:"多大招生会现场速递"},
+              {kind:"actual",en:"What is an object you can't live without and why?",zh:"生活中你离不开的一件东西是什么，为什么？",cat:"开放思辨",tip:"关注思考过程而非标准答案（例：眼镜可延展到材料/人体工学）",src:"lxs.net 多大攻略"},
+              {kind:"actual",en:"If you could improve one thing in your high school, what would it be?",zh:"如果能改进你高中的一件事，会是什么？",cat:"解决问题",tip:"展示发现问题→分析→方案的能力",src:"lxs.net 多大攻略"},
+              {kind:"variant",en:"Describe an academic challenge you faced and how you overcame it.",zh:"描述你遇到的一个学术挑战及如何克服",cat:"经历深挖",tip:"体现从体验到认知的升级"}
+            ],
+            warnings:[
+              "视频面试通常仅一次录制机会，正式开始前务必用练习题熟悉平台与计时压力",
+              "英语国家学习不满 4 年需另附语言成绩；工程/商科无合格语言不予录取",
+              "早录阶段 11 年级成绩很重要，会结合 12 年级成绩发放 early offer"
+            ],
+            sources:[{t:"U of T Rotman 补充申请指南",u:"https://myls.ai/zh-CN/blog/university-of-toronto-rotman-commerces-supplementary-application-guide-myls-interview"},{t:"冲刺多伦多大学攻略",u:"https://www.lxs.net/read-blog/793629"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc Management Analytics（MMA）",
+            interviewType:"三环节：①视频面试（VidCruiter/Kira，2 视频 + 1 即时写作；视频 30s 准备/90s 录制，写作 10min 不限词数）②技术笔试（60min，概率统计/线代/计算/Python）③真人面试（3 人一组 + Rotman staff，或 15min 1v1，提前 2 天告知面试官姓名可查 LinkedIn）。",
+            official:[
+              {k:"视频平台",v:"VidCruiter / Kira Talent"},
+              {k:"视频形式",v:"2 视频题（30s 准备/90s 录制）+ 1 写作（10min，邮件类任务）"},
+              {k:"笔试",v:"60min，定量与计算：概率统计、线性代数、计算、Python"},
+              {k:"真人面",v:"3 人一组 + Rotman staff；或 15min 1v1，提前 2 天知面试官可查 LinkedIn"},
+              {k:"文书原题",v:"Why is Management Analytics important to your career? / Why are you a good fit?（3000 字符）"}
+            ],
+            flow:["设备检测（电脑+畅通网络+略正式着装）","视频面试（2 视频+1 写作）","技术笔试 60min","真人面试（小组/1v1）"],
+            questions:[
+              {kind:"actual",en:"What personal strength do you have that makes you a good classmate?",zh:"你有什么个人长处，让你成为好同学？",cat:"视频·行为",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What's your favorite quantitative concept?",zh:"你最喜欢的定量概念是什么？",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How can MMA help you with your employment / career?",zh:"MMA 如何能帮助你就业？",cat:"视频·动机",tip:"高频，需结合具体职业目标",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What was your biggest achievement during undergrad?",zh:"你本科期间最大的成就是什么？",cat:"视频·行为",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Why should MMA admit you?",zh:"为什么 MMA 应该录取你？",cat:"视频·动机",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"An achievement you are most proud of.",zh:"你最自豪的一项成就是什么？",cat:"视频·行为",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What do you need most in the MMA program?",zh:"你在 MMA 项目中最需要什么？",cat:"视频·动机",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How would your professor evaluate / describe you?",zh:"你的教授会如何评价/描述你？",cat:"视频·行为",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Write an email to a person you met at a Rotman Speaker event that you'd like to keep talking with.",zh:"给在 Rotman 讲座活动上认识、想继续交流的人写一封邮件。",cat:"写作·邮件",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"You meet the HR of your target top-10 company in an elevator — how do you communicate and prove your ability?",zh:"电梯里遇到想进的 top10 公司 HR，你如何沟通并证明自己的能力？",cat:"写作·情景",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Email career service to make an appointment, including a self-introduction.",zh:"给 career service 写一封预约邮件，包含自我介绍。",cat:"写作·邮件",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Why did you choose your current US undergrad / why major in Finance?",zh:"为什么选择现在的美本 / 为什么选本科 Finance 专业？",cat:"真人·背景",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Why MMA (esp. if you already have a math/stats background)?",zh:"为什么选 MMA（已有数学/统计背景为何还读这个专业）？",cat:"真人·动机",tip:"高频，需讲清差异与 gap",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Introduce a data/quant project; go over programming skills, courses (calculus, stats), how to prepare for MMA.",zh:"介绍做过的 data/量化项目；聊编程能力、相关课程（微积分/统计）及如何为 MMA 做准备。",cat:"真人·项目/技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Walk through your resume project (e.g. OCR): what language, how to confirm accuracy, what if results inaccurate?",zh:"深挖简历项目（如 OCR）：用了什么语言、如何确认准确率、结果不准时做了什么？",cat:"真人·简历深挖/技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What is Bayes Theorem? (plus follow-ups: data project, matrix inconvertible error, online learning impact)",zh:"什么是贝叶斯定理？（并追问数据项目、矩阵不可逆报错、在线学习影响等）",cat:"真人·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What is your career design / career goal?",zh:"你的 career design / 职业规划是什么？",cat:"真人·规划",tip:"高频，贯穿所有面试",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What other schools/programs did you apply to?",zh:"你还申请了哪些学校与专业？",cat:"真人·动机",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Describe a stressful experience; an experience with a backup plan; your hobbies?",zh:"讲一个压力很大的经历；一个有备选方案的经历；你的兴趣爱好？",cat:"真人·行为",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Important skills/characteristics for this program? Your strength? Your challenge? Learn from classmates? Programming/data experience?",zh:"本项目重要技能/特质？你的优势？挑战？想从同学学到什么？编程/数据经验？",cat:"真人·动机/行为",src:"xdf 新东方前途/用户提供"}
+            ],
+            warnings:[
+              "视频面通常仅一次机会，先用练习熟悉 30s/90s 计时；设备：电脑 + 畅通网络 + 略正式着装 + 安静背景",
+              "技术笔试考概率统计/线代/计算/Python，提前刷定量基础",
+              "真人面 1v1 会提前 2 天告知面试官姓名，务必查 LinkedIn/官网研究其 research 方向",
+              "自我介绍与简历项目极可能被深挖（语言、accuracy、模型选择、变量确定等），准备 1–2 个可深挖的量化项目"
+            ],
+            sources:[{t:"新东方前途 UT MMA 面试题目参考.pdf（用户提供）",u:"D:/爱云盘同步/Elaine/1. 申请/CA/面试和补充申请/硕士/27更新/1. 硕士-UT MMA面试题目参考.pdf"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"Master of Financial Risk Management（MFRM）",
+            interviewType:"三环节：①视频面试（VidCruiter，2 视频 + 1 写作；视频 30s 准备/90s 录制，写作 10min/250 词）②技术笔试（2 视频 + 10 多选 + 3 简答）③真人面试（3 人一组 + Rotman staff）。",
+            official:[
+              {k:"视频平台",v:"VidCruiter"},
+              {k:"视频形式",v:"2 视频题（30s 准备/90s 录制）+ 1 写作（10min/250 词，邮件类）"},
+              {k:"笔试",v:"3 部分：2 视频 + 10 多选 + 3 简答"},
+              {k:"真人面",v:"3 人一组 + Rotman staff，含个人介绍与问题"}
+            ],
+            flow:["设备检测（电脑+畅通网络+略正式着装）","视频面试（2 视频+1 写作）","技术笔试","真人面试（小组）"],
+            questions:[
+              {kind:"actual",en:"What part of the MFRM program excites you?",zh:"MFRM 项目中哪部分最让你兴奋？",cat:"视频·动机",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Technical question about linear regression.",zh:"线性回归相关的技术问题。",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How would your friends / teammates describe you?",zh:"你的朋友/队友会如何描述你？",cat:"视频·行为",tip:"高频行为题",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Describe an interpersonal challenge and how you solved it.",zh:"描述你遇到过的一个人际冲突，以及如何解决。",cat:"视频·行为",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How to determine if a variable is an important factor in determining price?",zh:"如何判断一个变量是否是决定价格的重要因素？",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Your favorite film.",zh:"你最喜欢的电影。",cat:"视频·开放",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Describe the Normal Distribution.",zh:"描述正态分布。",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What does Beta = 1.25 mean?",zh:"Beta = 1.25 意味着什么？",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How to spend 1 million dollars?",zh:"如果有 100 万美金你会怎么花？",cat:"视频·开放",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What is linear regression and what can it be used for?",zh:"什么是线性回归，能用来做什么？",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Why Rotman / why MFRM?",zh:"为什么选 Rotman / 为什么选 MFRM？",cat:"视频·动机",tip:"高频",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How to determine if an equation is linear or not?",zh:"如何判断一个方程是不是线性的？",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What leads you to success in the MFRM program?",zh:"是什么会让你在 MFRM 项目中成功？",cat:"视频·动机",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"What is the risk-free rate?",zh:"什么是无风险利率？",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Describe one of your best qualities; quick math: 49 * 51.",zh:"描述你最好的一个品质；速算：49 × 51。",cat:"视频·行为/速算",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Your three greatest strengths; how do you interpret the t-statistic?",zh:"说出你三个最大的优势；如何解释 t 统计量？",cat:"视频·行为/技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Email career coach to book an initial appointment (brief self-intro).",zh:"给 career coach 写邮件预约首次面谈（含简短自我介绍）。",cat:"写作·邮件",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Email asking for help with a group conflict.",zh:"写一封邮件，就小组冲突请求帮助。",cat:"写作·邮件",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Recommend a colleague/friend to the MFRM program (email).",zh:"写邮件向 MFRM 项目推荐一位同事/朋友。",cat:"写作·邮件",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Request a salary raise via email (not satisfied with offer).",zh:"对不满意的薪资，写邮件请求加薪。",cat:"写作·邮件",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Email a speaker to book a coffee chat.",zh:"写邮件给演讲嘉宾预约 coffee chat。",cat:"写作·邮件",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Explain Monte Carlo simulation; lognormal distribution; differentiation vs integration; partial derivative; standard deviation.",zh:"解释蒙特卡洛模拟；对数正态分布；微分与积分关系；偏导数；标准差。",cat:"技术题库",tip:"笔试/视频技术题常考概念库",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Explain t/z/chi-square/F statistic; R-squared; R in regression; standard normal params; intercept/slope coefficient.",zh:"解释 t/z/卡方/F 统计量；R²；回归中的 R；标准正态参数；截距/斜率系数计算。",cat:"技术题库",src:"xdf 新东方前途/用户提供"}
+            ],
+            warnings:[
+              "视频面通常仅一次机会，先熟悉 30s/90s 计时；写作 250 词限时 10min，练邮件结构",
+              "技术笔试含 10 道多选 + 3 简答，定量/统计基础（回归、分布、统计量）必须扎实",
+              "技术概念题库（回归/分布/统计量/速算）重复率高，建议逐一准备 1 分钟口头答法",
+              "行为题（朋友如何描述你、人际冲突、完美一天、爱好）第一轮几乎必出"
+            ],
+            sources:[{t:"新东方前途 UT MFRM 面试题目参考.pdf（用户提供）",u:"D:/爱云盘同步/Elaine/1. 申请/CA/面试和补充申请/硕士/27更新/2. 硕士-UT MFRM面试题目参考.pdf"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"Master of Financial Economics（MFE）",
+            interviewType:"视频问答面试：系统随机抽预录问题，每题 2 分 10 秒思考+回答；不允许用耳机，不能暂停或开新标签（否则终止且不可补录）。侧重时事/经济/金融观点 + 简历 + 行为 + 技术。",
+            official:[
+              {k:"形式",v:"视频问答（预录随机题），2:10 思考+回答"},
+              {k:"设备",v:"禁用耳机；不得暂停/开新标签，否则终止不可补录"},
+              {k:"网络",v:"网络必须非常稳定"},
+              {k:"新增",v:"2026 起加入 AI 相关题目"}
+            ],
+            flow:["设备检测（网络极度稳定、不用耳机）","视频问答（随机抽题，2:10/题）"],
+            questions:[
+              {kind:"actual",en:"Please walk me through your resume.",zh:"请带我过一遍你的简历。",cat:"视频·简历",tip:"高频",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Tell us about yourself.",zh:"请做自我介绍。",cat:"视频·动机",tip:"高频",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Why MFE over an econ research project? What can you bring to MFE and how does MFE benefit you?",zh:"为什么选 MFE 而非 econ 研究项目？你能为 MFE 带来什么、MFE 如何成就你？",cat:"视频·动机",tip:"高频",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Your short-term and long-term career goals, and how you prepare for them?",zh:"你的短期与长期职业规划是什么，如何准备？",cat:"视频·规划",tip:"高频",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Tell me about your most serious failure.",zh:"讲讲你最失败的一次经历。",cat:"视频·行为",tip:"高频",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"A specific example of using good judgement and logic to solve a problem.",zh:"举一个你用良好判断与逻辑解决问题的具体例子。",cat:"视频·行为",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Thoughts on Bitcoin price? How to forecast oil price?",zh:"你怎么看比特币价格？如何预测油价？",cat:"视频·金融",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Key differences between a stock and a bond?",zh:"股票与债券的核心区别是什么？",cat:"视频·技术",tip:"高频技术题",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Why does the US dollar appreciate during a global financial crisis?",zh:"为什么全球金融危机时美元会升值？",cat:"视频·经济",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Main objectives of the central bank? Biggest risks central banks are overlooking / facing?",zh:"央行核心目标是什么？最忽视/面临的最大风险是什么？",cat:"视频·经济",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Government deficit at low rates? Canada tariffs for fundamental workers? Forgive student loans?",zh:"低利率时政府该不该赤字？加拿大该不该对基础工人加关税？学贷该不该减免？",cat:"视频·政策",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"US dollar dominance at risk? Canada semiconductor investment? BoC digital currency?",zh:"美元主导地位是否受威胁？加拿大该不该加大半导体投资？加央行该不该发数字货币？",cat:"视频·政策",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Is AI hype or hope? What is lacking in AI infrastructure? Swap lives with someone for a week?",zh:"AI 是炒作还是希望？AI 基础设施缺什么？若能和某人互换人生一周，是谁为什么？",cat:"视频·开放",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Three significant market events this past week? Top tech innovation impacting markets in 10 years?",zh:"过去一周市场三件大事？未来十年哪项技术创新对金融市场影响最大？",cat:"视频·时事",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How do your stats/econometrics/economics background contribute to MFE? How do you survive MFE?",zh:"你的统计/计量/经济背景如何贡献于 MFE？如何扛过 MFE？",cat:"视频·动机",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"If you are a fixed-income manager, your response when the central bank raises the policy rate?",zh:"若你是固收经理，央行加息时你会怎么应对？",cat:"视频·情景/技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"View on USD-CAD exchange rate? Canada's best environmental strategy? Bond vs stock (3 tech questions).",zh:"怎么看美加汇率？加拿大最好的环保策略？债券与股票区别（3 道技术题）。",cat:"视频·技术",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"View on Toronto's soaring housing prices? Is raising minimum wage good or bad?",zh:"如何看待多伦多房价飙升？提高最低工资是好是坏？",cat:"视频·开放/政策",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"A situation where you created value for an organization/group? Which quality helps you learn this program?",zh:"描述你为组织/团体创造价值的情境；哪个品质有助于学好本项目？",cat:"视频·行为",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How can financial firms use AI to improve decision-making/efficiency? How will AI affect jobs in financial firms?",zh:"【2026 新增 AI】金融业如何用 AI 提升决策/效率？AI 如何影响金融岗位？",cat:"视频·AI",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"Ethical challenges of AI? More market efficiency or volatility? Can AI fully replace human judgment?",zh:"【2026 新增 AI】使用 AI 的伦理挑战？更多市场效率还是波动？AI 能否完全替代人类判断？",cat:"视频·AI",src:"xdf 新东方前途/用户提供"},
+              {kind:"actual",en:"How can regulators balance innovation and safety in AI? Are current AI regulations sufficient? Main risks of AI in finance?",zh:"【2026 新增 AI】监管如何平衡创新与安全？现有监管是否足够？金融用 AI 的主要风险？",cat:"视频·AI",src:"xdf 新东方前途/用户提供"}
+            ],
+            warnings:[
+              "视频问答每题仅 2:10，禁用耳机、不得暂停/开新标签，否则终止不可补录——务必网络极稳、环境安静",
+              "题目随机且偏时事/观点类，平时积累经济金融热点（央行、汇率、AI、政策）的观点库",
+              "简历/自我介绍/职业规划/最失败经历 几乎必出，准备 1 分钟标准答法",
+              "2026 起新增 AI 专题，需准备对 AI 在金融中应用的辩证看法"
+            ],
+            sources:[{t:"新东方前途 UT MFE 面试题目参考.pdf（用户提供）",u:"D:/爱云盘同步/Elaine/1. 申请/CA/面试和补充申请/硕士/27更新/3. 硕士-UT MFE面试题目参考.pdf"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"Rotman MBA（Kira 视频面）",
+            interviewType:"Rotman MBA 通过 Kira Talent 视频面试系统：固定题（写作 20min/200字 + 视频 30s 准备/1min 答）+ 随机题（写作 20min/200字 + 视频 60s 准备/1min 答）。2025 起新增 AI 评分（眼神/语调）。早申轮录取率高于常规轮。",
+            official:[{k:"平台",v:"Kira Talent 异步视频"},{k:"固定题",v:"写作20min/200字 + 视频1min"},{k:"随机题",v:"写作20min/200字 + 视频1min"},{k:"新",v:"2025 起 AI 评分"}],
+            flow:["收到 Kira 邀请","练习模式(建议≥3次)","正式录制(不可逆)"],
+            questions:[
+              {kind:"actual",en:"Two accomplishments/endeavors outside the classroom you're most proud of, and why?",zh:"课堂外最自豪的两项成就/努力，为什么？",cat:"行为",src:"新东方 Rotman Kira / chasedream Rotman 面经 25-26fall"},
+              {kind:"actual",en:"One thing you are passionate about.",zh:"你热衷的一件事。",cat:"行为",src:"chasedream Rotman 面经"},
+              {kind:"actual",en:"Agree/Disagree: tech advancement causes higher unemployment.",zh:"同意/反对：技术进步导致更高失业率。",cat:"商业伦理",src:"chasedream Rotman 面经"},
+              {kind:"actual",en:"Should government rather than firms address climate change perils?",zh:"应对气候变化风险应由政府而非企业负责？",cat:"政策辩论",src:"chasedream Rotman 面经"},
+              {kind:"actual",en:"Explain how FinTech is changing traditional banking.",zh:"解释金融科技如何改变传统银行业。",cat:"商业/科技",src:"新东方 Rotman Kira 真题示例"},
+              {kind:"actual",en:"Describe 2 extracurricular activities (leadership, impact) in 200 words.",zh:"用 200 字描述 2 项课外活动（领导力/影响力）。",cat:"写作",src:"新东方 Rotman Kira 写作题"},
+              {kind:"actual",en:"Tell me about yourself / Why Rotman MBA / career goals?",zh:"自我介绍 / 为何 Rotman MBA / 职业目标？",cat:"动机",src:"新东方 加拿大商科研究生面试"}
+            ],
+            warnings:["2025 新增 AI 评分：注意眼神接触、语速语调、微笑自信","早申轮（录取率38%）远高于常规轮（22%）","Kira 进入正式录制后不可逆，务必先练≥3次"],
+            sources:[{t:"新东方 Rotman Kira 攻略",u:"https://liuxue.xdf.cn/blog/blog_7789040.shtml"},{t:"chasedream Rotman 面经",u:"https://www.chasedream.com/article/R0mww"}]
+          }
+        ]
+      },
+      { id:"ubc", name:"英属哥伦比亚大学", abbr:"UBC", color:"#0d3b66",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"Sauder BCom 等视频面试",
+            interviewType:"视频面试（VidCruiter 平台），仅 Sauder 等部分专业要求。1 道练习题 + 3 道随机视频题，30s 思考 / 1.5min 作答，提交其中 2 道。",
+            official:[
+              {k:"平台",v:"VidCruiter"},
+              {k:"形式",v:"练习题 1 + 随机视频 3，30s 思考 / 1.5min 答，选 2 提交"},
+              {k:"权重",v:"视频面试占 Sauder 评估 20%，个人档案 30%，成绩 50%"},
+              {k:"语言",v:"全英"}
+            ],
+            flow:["设备检测","完成练习题","3 道随机视频题 → 选 2 提交回传 Education Planner BC"],
+            questions:[
+              {kind:"actual",en:"Is it better to submit average quality work on time, or high quality work but late? Explain.",zh:"准时交普通质量的作业，还是迟交高质量作业？请解释。",cat:"思辨",src:"youthfully UBC Sauder"},
+              {kind:"actual",en:"Who has been a role model for you? What have they taught you about responsibility and respect?",zh:"谁是你心中的榜样？他/她教会了你什么关于责任与尊重的事？",cat:"行为",src:"youthfully UBC Sauder"},
+              {kind:"actual",en:"Tell us about a time you were faced with an unfamiliar or challenging situation. How did you respond, and what did you learn?",zh:"讲一次你面对陌生/挑战性情境的经历，你如何应对，学到了什么？",cat:"行为反思",src:"youthfully UBC Sauder"},
+              {kind:"variant",en:"Describe a moral dilemma you faced and how you resolved it.",zh:"描述你面对过的道德困境及如何解决",cat:"道德",tip:"写作题常见，用 STAR 法则，重反思与成长",src:"jjl.cn UBC 商科指南"},
+              {kind:"variant",en:"If a team member doesn't finish tasks on time, what would you do?",zh:"若组员不能按时完成任务，你会怎么办？",cat:"情景",tip:"展现解决思路与团队协作，避免指责"}
+            ],
+            warnings:[
+              "正式视频题通常仅一次机会，先用练习题熟悉计时压力",
+              "招生官反感背稿，重真实与反思；另需提交 Personal Profile 写作（含全球挑战论述等），占评估 30%"
+            ],
+            sources:[{t:"UBC Sauder Interview Questions",u:"https://www.youthfully.com/ubc-sauder-application-and-interview-questions/"},{t:"加拿大 UBC 商科本科面试指南",u:"https://m.jjl.cn/article/1336232.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"医学 MD（MMI）等",
+            interviewType:"UBC 医学院采用 MMI（约 10 站，每站 5–10 min），现场；另部分授课硕（如商科 MBAN、教育）可能含视频面。",
+            official:[{k:"医学",v:"MMI，多站轮换，现场"},{k:"说明",v:"非医学项目以官网为准"}],
+            flow:["收到面邀","现场多站 MMI"],
+            questions:[],
+            warnings:["加拿大医面试常考 rural/Indigenous health、single-payer 资源分配、placebo 伦理（见 McGill 板块示例）"],
+            sources:[{t:"Canadian Premed 医面格式汇总",u:"http://www.canadianpremed.ca/blog/how-to-prepare-for-your-medical-school-interview-canada"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"Sauder MBA / MBAN（视频面）",
+            interviewType:"UBC Sauder MBA 为提前录制视频面试（系统给题、无真人，3 次模拟机会；每题间隔 30s、90s 内作答）；MBAN 为 Kira 视频面 + 招生官真人面两轮，重行为(STAR)与『Why UBC』具体度。",
+            official:[{k:"MBA",v:"录制视频，3次模拟，90s/题"},{k:"MBAN",v:"Kira + 真人对线"},{k:"语言",v:"全英"}],
+            flow:["3 次模拟练习","MBA 录制 / MBAN Kira+真人","行为 STAR + 技术概念"],
+            questions:[
+              {kind:"actual",en:"Why UBC? Why MBA / MBAN? How do you define leadership?",zh:"为何 UBC？为何读 MBA/MBAN？你如何定义领导力？",cat:"动机",src:"考而思 UBC MBA 面经 / lxs UBC MBAN 指南"},
+              {kind:"actual",en:"Describe a teamwork experience; a failure; your role model.",zh:"描述团队协作经历；一次失败；你的榜样。",cat:"行为",src:"考而思 UBC MBA 面经"},
+              {kind:"actual",en:"You're not from this major—why switch? Short/long-term goals?",zh:"你本科非此专业，为何转？短期/长期职业目标？",cat:"动机/规划",src:"考而思 UBC MBA 面经"},
+              {kind:"actual",en:"Explain a project or a basic concept like A/B testing in plain language.",zh:"用大白话解释一个项目或『什么是 A/B 测试』等基础概念。",cat:"技术/沟通",src:"lxs UBC MBAN 指南"},
+              {kind:"actual",en:"What community/volunteer experience? Strengths & weaknesses?",zh:"你的社区/志愿经历？优缺点？",cat:"行为",src:"考而思 UBC MBA 面经"},
+              {kind:"actual",en:"How does your background prepare you for MBAN (quant/coding prerequisites)?",zh:"你的背景如何支撑 MBAN（量化/编程先修）？",cat:"匹配",src:"lxs UBC MBAN 指南"}
+            ],
+            warnings:["MBA 视频面无真人，充分利用 3 次模拟找节奏","MBAN 真人面重『Why UBC』具体度：点名课程/教授/实习项目","技术题用外行能懂的语言讲清，忌堆术语"],
+            sources:[{t:"考而思 UBC MBA 面经",u:"https://www.kaoersi.com/xinwendongtai/28101.html"},{t:"lxs UBC MBAN 指南",u:"https://www.lxs.net/read-blog/810014"}]
+          }
+        ]
+      },
+      { id:"mcgill", name:"麦吉尔大学", abbr:"McGill", color:"#cb0a3e",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"医学 MDCM（MMI）",
+            interviewType:"多重迷你面试 MMI（法语称 mini-entrevues multiples），现场面试。多站点可含任务型 / 模拟情景 / 讨论型，每站约 5–10 min。",
+            official:[
+              {k:"形式",v:"MMI，多站点（task / simulation / discussion），现场"},
+              {k:"语言",v:"英 / 法可选（申请时注明）"},
+              {k:"必做性",v:"受邀才可；缺席（任何原因）即拒"},
+              {k:"时长",v:"半日"}
+            ],
+            flow:["签到（预留整半天）","多站轮换（每站约 5–10 min）","离场"],
+            questions:[
+              {kind:"actual",en:"Dr. Zhang recommends homeopathy to patients with mild symptoms (fatigue, headaches) though there is no scientific evidence and he doesn't believe it works, but thinks it's harmless and reassuring. Discuss the ethical issues.",zh:"张医生向仅有轻微症状（疲劳、头痛）的患者推荐顺势疗法，虽无科学证据且不相信其有效，但认为无害且能让患者安心。讨论其中的伦理问题。",cat:"道德决策",src:"McGill MMI 样题 / kaoersi"},
+              {kind:"actual",en:"The PM proposes deterrent fees ($10 per first contact with a health professional) to control costs. Consider the broad impact on health and healthcare costs.",zh:"总理提出收取 deterrent fees（每次见医护付 10 加元）以控费。讨论对健康与医疗费用的广泛影响。",cat:"卫生政策/资源分配",src:"McGill MMI 样题"},
+              {kind:"actual",en:"Is small-class or large-class teaching more effective? Discuss.",zh:"小班与大班教学，哪一种更有效？请讨论。",cat:"批判思维",src:"McGill MMI 样题"},
+              {kind:"actual",en:"You backed into a BMW in the parking lot (broken headlight + fender). The attendant gives you the owner's number and says he's waiting. How will you explain and propose a solution?",zh:"你倒车时刮蹭了邻居的宝马（左前灯+挡泥板）。车库人员给了车主电话并说车主在等你。你将如何解释并提出解决方案？",cat:"沟通技巧",src:"McGill MMI 样题"}
+            ],
+            warnings:[
+              "MMI 无临床技能测试，重点在 Physicianship（CanMEDS 角色）",
+              "缺席原定时间（任何原因）档案不再考虑，务必预留整半天",
+              "加拿大医面试普遍考 rural/Indigenous health、single-payer 资源分配、placebo 伦理"
+            ],
+            sources:[{t:"McGill 医学院 MDCM 选拔流程",u:"https://www.mcgill.ca/medadmissions/files/medadmissions/medicine_qc_university_applicants-_mededcine_postulants_universitaires_qc.pdf"},{t:"Official MMI Practice Questions Canada",u:"https://canadianpremed.com/blog/official-mmi-practice-questions-canada"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"部分硕士（视专业）",
+            interviewType:"多数授课硕无统一面试；研究型/部分专业可能含面试或笔试，以官网为准。",
+            official:[{k:"形式",v:"因项目而异"},{k:"说明",v:"以各专业官网为准"}],
+            flow:["查目标项目官网"],
+            questions:[],
+            warnings:["研究生面试非普遍要求，需逐项目核实官网"],
+            sources:[]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"Desautels MBA / 商科硕士（Kira）",
+            interviewType:"麦吉尔 Desautels 商科硕士/MBA 多采用 Kira Talent 异步视频面试：通常 3–5 道视频题（30–60s 准备 / 1–2min 答）+ 书面题（5min 短文）。题目随机，录制后直接提交，仅一次机会。",
+            official:[{k:"平台",v:"Kira Talent 异步视频"},{k:"视频题",v:"3–5 道，1–2min/题"},{k:"书面题",v:"5min 短文"}],
+            flow:["收到 Kira 邀请","设备测试 + 练习","视频题 + 书面题（一次性）"],
+            questions:[
+              {kind:"actual",en:"Tell us about yourself.",zh:"介绍一下你自己。",cat:"自我",src:"考而思 加拿大Kira指南"},
+              {kind:"actual",en:"What is your proudest personal achievement?",zh:"你最自豪的个人成就是什么？",cat:"行为",src:"考而思 加拿大Kira指南"},
+              {kind:"actual",en:"What will you bring to this programme?",zh:"你能为这个项目带来什么？",cat:"匹配",src:"考而思 加拿大Kira指南"},
+              {kind:"actual",en:"What are your career goals after graduation?",zh:"毕业后的职业规划？",cat:"规划",src:"考而思 加拿大Kira指南"},
+              {kind:"actual",en:"A recent news story that caught your attention.",zh:"一个最近引起你注意的新闻故事。",cat:"书面/热点",src:"考而思 加拿大Kira指南"},
+              {kind:"actual",en:"What interests you most about the programme you applied to?",zh:"你申请的项目最吸引你的是什么？",cat:"动机",src:"考而思 加拿大Kira指南"}
+            ],
+            warnings:["Kira 仅一次录制机会，无法重录，务必先练","书面题 5min 内成稿，迅速理清思路再写","答案内核通用，可准备一套故事库套用不同问法"],
+            sources:[{t:"考而思 加拿大Kira指南",u:"https://www.kaoersi.com/xinwendongtai/27275html"}]
+          }
+        ]
+      },
+      { id:"mcmaster", name:"麦克马斯特大学", abbr:"McMaster", color:"#7a1f2b",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"健康科学 BHSc 补充申请",
+            interviewType:"健康科学（BHSc）补充申请：2–4 道开放式简答题（约 1500 字符/题），多名评审盲审、回避个人身份信息，是录取唯一决定因素。题目极开放，考察思辨与内省。",
+            official:[
+              {k:"形式",v:"开放简答题（线上），盲审打分"},
+              {k:"竞争",v:"每年 5000+ 95%+ 申请者，仅录 ~160 人"},
+              {k:"语言",v:"全英；禁止透露姓名等可反查身份信息"}
+            ],
+            flow:["收到补充申请邀请（通常 2 月）","线上撰写 2–4 道开放题","提交盲审"],
+            questions:[
+              {kind:"actual",en:"How have you shown your personal commitment to cognitive engagement and intellectual effort in the age of GenAI?",zh:"在生成式 AI 时代，你如何展现对深度认知投入与智力努力的承诺？",cat:"内省/动机",src:"McMaster BHSc 补充申请 2025"},
+              {kind:"variant",en:"Of the Seven Grandfather Teachings, which is hardest for you to act on, and how would you build that capacity?",zh:"七祖训（原住民价值）中，哪一个你最难践行？你将如何提升？",cat:"价值观/反思",src:"McMaster BHSc 补充申请 2025"},
+              {kind:"variant",en:"Describe a rule you consider unfair and explain why.",zh:"描述一条你认为不公平的规则，并说明理由。",cat:"思辨",tip:"典型开放题，重论证逻辑与同理心",src:"lxs.net 麦马健康科学"},
+              {kind:"variant",en:"Tell us about a time you acted with integrity.",zh:"讲述一次你坚守诚信的经历。",cat:"品格",src:"McMaster 工程补充申请样例"}
+            ],
+            warnings:[
+              "补充申请严禁代写/用 AI/发到论坛，违者取消资格",
+              "答题不要写可被谷歌搜到的个人信息（如具体竞赛名+年份）",
+              "问题无标准答案，重思维过程与真诚反思"
+            ],
+            sources:[{t:"McMaster BHSc 补充申请问题 2025",u:"https://www.youthfully.com/mcmaster-health-sciences-supplementary-application-examples/"},{t:"McMaster Health Sciences FAQ",u:"https://hhsp.healthsci.mcmaster.ca/faqs"},{t:"申加拿大本科躲不开面试的专业",u:"https://www.lxs.net/read-blog/789301"}]
+          },
+          { stage:"本科", stageKey:"ug", prog:"工程 / 计算机 / iBioMed / BTech 补充申请",
+            interviewType:"工程学院（含工程、计算机、iBioMed、BTech）强制补充申请：Kira Talent 平台，3 段视频（1min 准备 + 2min 答）+ 1 段写作（10min 读题+作答），仅一次机会。",
+            official:[
+              {k:"平台",v:"Kira Talent"},
+              {k:"形式",v:"3 视频（1 准备+2 答）+ 1 写作（10min）"},
+              {k:"频率",v:"仅一次提交机会"},
+              {k:"重点",v:"沟通、批判性思维、解决问题，无知识点测试题"}
+            ],
+            flow:["提交工程申请后 10 工作日内收 Kira 邀请","设备调试与练习","录 3 视频 + 写 1 题提交"],
+            questions:[
+              {kind:"variant",en:"What does being resourceful mean to you, and why is it important?",zh:"『机敏/善用资源』对你意味着什么，为何重要？",cat:"品格/思辨",src:"McMaster Engineering 补充申请官网样例"},
+              {kind:"variant",en:"Tell us about a time-management strategy you have used.",zh:"讲述你用过的一个时间管理策略。",cat:"方法",src:"McMaster Engineering 官网样例"},
+              {kind:"variant",en:"How do you stay balanced during stressful times?",zh:"压力大的时候你如何保持平衡？",cat:"抗压",src:"McMaster Engineering 官网样例"},
+              {kind:"variant",en:"Give an example of a time you acted with integrity.",zh:"举一个你坚守诚信的例子。",cat:"品格",src:"McMaster Engineering 官网样例"}
+            ],
+            warnings:[
+              "视频题一般仅一次机会，先用练习环节熟悉计时",
+              "着装半正式、背景干净、眼神看镜头、语速平稳",
+              "答题结合真实经历（课内外皆可），勿背稿"
+            ],
+            sources:[{t:"McMaster Engineering Supplementary Application",u:"https://www.eng.mcmaster.ca/supplementary-application/"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"金融硕士 MFin（DeGroote 商学院）· Kira 视频面",
+            interviewType:"DeGroote 商学院 Master of Finance 采用 Kira Talent 异步视频面试：3–5 道随机题（行为类 + 动机/动力类），每题 30–60s 准备 + 1–2min 录制，摄像头自动开启并录像；部分批次附加书面任务（约 8min，无单独准备时间）。面邀邮件标题形如「Action Required: Your Interview for McMaster University - [Program] - [Applicant ID]」。",
+            official:[
+              {k:"平台",v:"Kira Talent 异步视频"},
+              {k:"形式",v:"3–5 视频题（30–60s 准备 + 1–2min 答）+ 书面写作（部分批次）"},
+              {k:"语言",v:"全英"},
+              {k:"特点",v:"题目随机，每人不同"}
+            ],
+            flow:["收到 Kira 面邀邮件","设备调试 + 练习模式","录 3–5 视频题 + 书面写作","提交"],
+            questions:[
+              {kind:"actual",en:"What are your career aspirations, and how will the DeGroote MFin program specifically help you achieve them?",zh:"你的职业抱负是什么，DeGroote 金融硕士项目将如何具体帮你实现？",cat:"动机/规划",tip:"45s 准备 + 2min 答；具体到课程/资源",src:"kaoersi 麦马 Kira 面经"},
+              {kind:"actual",en:"Tell us about a community activity you participated in. What was it, what was your specific contribution, and what did you learn?",zh:"讲述你参加过的一项社区活动：是什么、你的具体贡献、学到了什么？",cat:"经历/贡献",tip:"45s 准备 + 2min 答；STAR 结构",src:"kaoersi 麦马 Kira 面经"},
+              {kind:"actual",en:"Describe a goal you had to work hard to achieve. What steps were involved, and did you achieve it?",zh:"描述一个你必须努力实现的目标：涉及哪些步骤，你达成了吗？",cat:"目标/执行",tip:"30s 准备 + 1.5min 答",src:"kaoersi 麦马 Kira 面经"},
+              {kind:"actual",en:"Describe a time you had to work with people different from you (age / gender / ethnicity etc.). What problems arose, how did you address them, and what was the outcome?",zh:"讲述一次你必须与不同背景的人（年龄/性别/种族等）共事的经历：遇到什么问题、如何解决、结果如何？",cat:"多元/团队",tip:"30s 准备 + 1.5min 答",src:"kaoersi 麦马 Kira 面经"},
+              {kind:"variant",en:"Written task: How do you manage stress? Give an example. / How do you divide roles in a team project, and how does that affect its success?",zh:"书面任务（约 8min，无准备时间）：你如何管理压力？举例说明 / 你如何在团队项目中分工，这对成功有何影响？",cat:"书面写作",tip:"练快速构思与打字速度",src:"kaoersi 麦马 Kira 面经"},
+              {kind:"variant",en:"Why McMaster / DeGroote MFin specifically? (not just any Canadian business school)",zh:"为什么选麦马 / DeGroote 金融硕士，而非其他加拿大商学院？",cat:"动机",tip:"必考题；具体到某课程/教授/方向，忌泛泛而谈",src:"lxs.net 麦马面试救命帖"},
+              {kind:"variant",en:"Why do you want to study finance, and what is your future career plan?",zh:"你为什么想学金融？未来的职业规划是什么？",cat:"动机/规划",tip:"逻辑清晰，短期具体（如多伦多投行/风控）、长期有格局",src:"lxs.net 麦马金融硕士录取经验"},
+              {kind:"variant",en:"What is your greatest strength and weakness?",zh:"你最大的优势与劣势是什么？",cat:"自我认知",tip:"劣势转进步点+改进措施，勿答『太追求完美』",src:"kaoersiedu Kira 通用题"},
+              {kind:"variant",en:"Tell us about a time you overcame a difficult challenge.",zh:"讲述一次你克服重大挑战的经历。",cat:"挑战/韧性",tip:"STAR 讲清结果与收获",src:"kaoersiedu Kira 通用题"}
+            ],
+            warnings:[
+              "Kira 题目随机、每人不同，准备 STAR 故事库 + 动机素材比背题更有效",
+              "书面写作约 8min 且无单独准备时间，提前练快速构思与打字",
+              "面邀邮件标题含「Action Required」即面试通知，注意查收垃圾箱",
+              "务必用 Kira 自带练习模式熟悉计时、摄像头与网络环境"
+            ],
+            sources:[
+              {t:"加拿大麦克马斯特大学 Kira 面试如何准备（DeGroote）",u:"https://www.kaoersi.com/ask/14612.html"},
+              {t:"麦马面试救命帖（过来人坑点总结）",u:"https://www.lxs.net/read-blog/854257_%E9%BA%A6%E5%85%8B%E9%A9%AC%E6%96%AF%E7%89%B9%E5%A4%A7%E5%AD%A6%E9%9D%A2%E8%AF%95%E6%95%91%E5%91%BD%E5%B8%96-%E6%88%91%E8%B8%A9%E7%9A%84%E5%9D%91%E4%BD%A0%E5%88%AB%E5%86%8D%E8%B7%B3%E4%BA%86.html"},
+              {t:"麦马金融硕士录取经验分享",u:"https://www.lxs.net/read-blog/438890_%E9%BA%A6%E5%85%8B%E9%A9%AC%E6%96%AF%E7%89%B9%E9%87%91%E8%9E%8D%E7%A1%95%E5%A3%AB%E5%BD%95%E5%8F%96%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB.html"},
+              {t:"留学 Kira 面试常见问题（考而思）",u:"https://www.kaoersiedu.com/rxbs/16344.html"},
+              {t:"McMaster 研究生面试准备（Student Success Centre）",u:"https://studentsuccess.mcmaster.ca?p=33193/"}
+            ]
+          }
+        ]
+      },
+      { id:"waterloo", name:"滑铁卢大学", abbr:"Waterloo", color:"#d11f27",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"工程 / 软件工程 / 计算机 补充申请（AIF + 视频面）",
+            interviewType:"工程/计算机相关项目：Admission Information Form (AIF) 书面 + Kira Talent 视频面试（强烈推荐=事实必须）。软件工程额外 600 字符写作题。视频 2 题（30s 思考 + 60–90s 答）+ 1 写作；软件工程有编程经历列举题。",
+            official:[
+              {k:"平台",v:"Kira Talent + AIF 书面"},
+              {k:"形式",v:"2 视频（30s 思考/60–90s 答）+ 1 写作；软工加 600 字符写作"},
+              {k:"必做性",v:"软件工程必修；其余强烈推荐（等同必须）"},
+              {k:"时间",v:"OUAC 1/15；补充 2/1 截止（2025 周期）"}
+            ],
+            flow:["提交 OUAC 申请","填 AIF 书面题","Kira 视频面试（1 题公共+软工专项）"],
+            questions:[
+              {kind:"actual",en:"What experience(s) inside or outside the classroom motivated you to apply to your chosen engineering program?",zh:"课内外什么经历促使你申请这个工程专业？",cat:"动机",src:"myls.ai Waterloo 工程补充"},
+              {kind:"variant",en:"How does a degree in Engineering from Waterloo fit your long-term career plans?",zh:"滑铁卢工程学位如何契合你的长期职业规划？",cat:"规划",src:"myls.ai / lxs.net"},
+              {kind:"variant",en:"Tell us about a time you learned the importance of cooperation.",zh:"讲述一次你体会到合作重要性的经历。",cat:"团队合作",src:"myls.ai Waterloo 工程面"},
+              {kind:"variant",en:"Imagine you need to build a bridge across a small river with limited materials. What steps would you take?",zh:"假如用有限材料在小河上建桥，你会采取哪些步骤？",cat:"解决问题",tip:"不要求标准答案，看重逻辑过程",src:"lxs.net 滑铁卢工程"},
+              {kind:"variant",en:"Describe a time you worked in a team: your role and what you learned.",zh:"描述一次团队经历：你的角色与收获。",cat:"团队",src:"liuxue.xdf.cn 滑铁卢工程面"},
+              {kind:"variant",en:"Do you think technology has made people more connected or more isolated?",zh:"科技让人更联结还是更孤立？",cat:"思辨",src:"liuxue.xdf.cn 滑铁卢工程面"}
+            ],
+            warnings:[
+              "『强烈推荐』在工程申请中即等同必须，不做会劣势",
+              "视频题 30s 思考 + 60–90s 答，用 STAR + 微笑自信 + 自然不背稿",
+              "软件工程需列明编程语言/月数/用途，提前整理经历"
+            ],
+            sources:[{t:"Waterloo Engineering AIF & Video Interview",u:"https://youthfully.com/waterloo-engineering-essay-examples-video-interview-questions/"},{t:"Waterloo CS/工程 补充申请（Myls）",u:"https://myls.ai/blog/waterloo-computer-science-related-program-supplementary-application-myls-interview/"},{t:"滑铁卢大学工程本科人机面试指导",u:"https://liuxue.xdf.cn/blog/blog_7735116.shtml"}]
+          }
+        ]
+      },
+      { id:"queens", name:"女王大学", abbr:"Queen's", color:"#2a2a6a",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"医学（MD）MMI 等",
+            interviewType:"医学采用 MMI（多重迷你面试）多站形式，属加拿大医面通用格式。工程学院有常规补充申请；商科（Smith）含视频/文书要求。",
+            official:[
+              {k:"医学",v:"MMI 多站，现场"},
+              {k:"说明",v:"非医学项目以官网为准"}
+            ],
+            flow:["收到面邀","MMI 多站轮换"],
+            questions:[
+              {kind:"variant",en:"A new drug extends life by 6 months for a rare terminal cancer but costs $500,000 per patient. Should it be publicly funded?",zh:"新药可让罕见晚期癌症患者延长 6 个月生命，但每人花费 50 万，是否应由公共财政负担？",cat:"卫生政策/资源分配",tip:"用四原则（自主/有益/无害/公正）+ 重过程而非结论",src:"加拿大 MMI 通用样题"},
+              {kind:"variant",en:"You suspect a colleague is unfit for duty (e.g., smells of alcohol). What do you do?",zh:"你怀疑同事不适合当班（如身上有酒气），你会怎么办？",cat:"职业道德/安全",src:"加拿大 MMI 通用样题"}
+            ],
+            warnings:[
+              "加拿大医面常考 rural/Indigenous health、single-payer 资源分配、placebo 伦理（与 McGill/UBC 同源）",
+              "女王大学医学属加拿大 MMI 体系，具体站数/时间以当年官网面邀为准"
+            ],
+            sources:[{t:"Canadian Premed 面试格式与 MMI 真题",u:"http://www.canadianpremed.ca/blog/how-to-prepare-for-your-medical-school-interview-canada"},{t:"Official MMI Practice Questions Canada",u:"https://canadianpremed.com/blog/official-mmi-practice-questions-canada"}]
+          }
+        ]
+      },
+      { id:"western", name:"西安大略大学", abbr:"Western", color:"#2e1a47",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"Ivey 商学院 AEO 附加申请（视频面）",
+            interviewType:"Ivey AEO（毅伟商学院提前录取）补充申请：Kira Talent 视频面试 5 题（60s 准备 + 90s 答，超时不录），加 2 篇 500 字领导力论文。评估领导力、沟通、决策、团队协作、反思。",
+            official:[
+              {k:"平台",v:"Kira Talent 视频面"},
+              {k:"形式",v:"5 题（60s 准备 + 90s 答）"},
+              {k:"附加",v:"2 篇 500 字领导力论文 + 活动奖项列表"},
+              {k:"权重",v:"学术 50% + 领导力/课外 50%"}
+            ],
+            flow:["OUAC 勾选 Ivey AEO","提交领导力论文","Kira 5 题视频面"],
+            questions:[
+              {kind:"actual",en:"Tell us about a challenge you faced in collaboration.",zh:"讲述一次你在合作中遇到的挑战。",cat:"团队/挑战",src:"liuxue.xdf.cn Ivey 真题"},
+              {kind:"actual",en:"Tell us about a goal you are most proud of achieving.",zh:"讲述一个你最自豪达成的目标。",cat:"成就",src:"liuxue.xdf.cn Ivey 真题"},
+              {kind:"actual",en:"Tell us about any roles you have taken on outside of school.",zh:"讲述你在课外的任何角色/担当。",cat:"领导力",src:"liuxue.xdf.cn Ivey 真题"},
+              {kind:"actual",en:"How do you balance your commitments with your actual capabilities?",zh:"你如何在承诺与实际能力之间取得平衡？",cat:"自我管理",src:"liuxue.xdf.cn Ivey 真题"},
+              {kind:"actual",en:"Tell us about your leadership qualities.",zh:"谈谈你的领导力特质。",cat:"领导力",src:"liuxue.xdf.cn Ivey 真题"},
+              {kind:"variant",en:"Tell us about a bias you had to overcome to succeed.",zh:"讲述一个你为成功而必须克服的偏见。",cat:"反思",src:"myls.ai Ivey AEO"},
+              {kind:"variant",en:"Describe a time you influenced others without formal authority.",zh:"描述一次你在没有正式职权时影响他人的经历。",cat:"影响力",src:"my-learning-space Ivey AEO"}
+            ],
+            warnings:[
+              "5 题仅 90s 作答且超时不被录取，必须掐表模拟",
+              "题库极大、难中『原题』，重综合实力与真实经历",
+              "均分 97–98 也可能因面试被刷；AEO 仅带条件录取，大一大二成绩与活动仍决定能否进 HBA"
+            ],
+            sources:[{t:"西安大略大学 AEO 附加申请详解",u:"https://liuxue.xdf.cn/blog/blog_7732072.shtml"},{t:"Ivey AEO Video Interview Practice",u:"https://myls.ai/zh-CN/program/ivey-aeo-video"},{t:"Ivey AEO Supplementary Application Guide",u:"https://my-learning-space-ai.ghost.io/western-university-ivey-aeo-supplementary-application-and-interview-guide"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"Ivey MBA（真人面 / Kira）",
+            interviewType:"Ivey MBA 为真人校友/招生官 Zoom 面试（约 20–30min，全英），或 HBA 阶段 Kira 视频面（5 题，60s 准备/90s 答）；重行为面试、领导力、案例教学契合度与思维深度。滚动录取。",
+            official:[{k:"MBA",v:"Zoom 真人面 20–30min"},{k:"HBA",v:"Kira 5题 90s/题"},{k:"语言",v:"全英"}],
+            flow:["收到面邀（rolling）","Zoom 真人面 / Kira 视频面","行为 STAR + 领导力 + Why Ivey"],
+            questions:[
+              {kind:"actual",en:"Tell me about a failure and what you learned from it.",zh:"讲述一次失败经历及你学到的教训。",cat:"行为/反思",src:"留学生网 lxs Ivey 面经 / Ivey 申请攻略"},
+              {kind:"actual",en:"Describe a time you led a team through challenges.",zh:"描述一次你领导团队克服挑战的经历。",cat:"领导/团队",src:"国际教育网 iedu / lxs Ivey 面经"},
+              {kind:"actual",en:"Most important trait in future business? Your view on Ivey's case method?",zh:"未来商界最重要的特质是什么？/ 你对 Ivey 案例教学法的看法？",cat:"观点/契合",src:"lxs Ivey 面经"},
+              {kind:"actual",en:"Why Ivey? Why now? Walk me through your resume.",zh:"为什么 Ivey？为什么是现在？介绍你的简历。",cat:"动机",src:"新东方 Ivey 申请全攻略"},
+              {kind:"actual",en:"Tell me about a time you worked with someone with a different work style.",zh:"讲述一次与不同工作风格的人合作的经历。",cat:"行为",src:"新东方 Ivey 申请全攻略（Kira 行为题）"}
+            ],
+            warnings:["Ivey 滚动录取，越早提交机会越大；注意垃圾邮件箱别漏面邀","行为题用 STAR + 反思，避免『太追求完美』式伪装缺点","准备对 case method / 领导力的真实看法，忌背诵"],
+            sources:[{t:"lxs Ivey 面经",u:"https://www.lxs.net/read-blog/785787"},{t:"新东方 Ivey 申请全攻略",u:"https://liuxue.xdf.cn/blog/blog_7763590.shtml"}]
+          }
+        ]
+      }
+    ]
+  },
+  /* ===================== 新加坡 ===================== */
+  { id:"sg", name:"新加坡", en:"SINGAPORE", flag:"🇸🇬", color:"#ef7d00",
+    desc:"公立大学（NUS / NTU）本科以线上视频面或 AI 面试（Kira）为主，全英，约 20–30 分钟；商学院重具体行业案例。",
+    schools:[
+      { id:"nus", name:"新加坡国立大学", abbr:"NUS", color:"#ef7d00",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"各本科专业（视频 / AI 面试）",
+            interviewType:"线上视频面试为主（1–2 名招生官/教授），部分专业含 AI 面试（Kira Talent）；时长约 20–30 分钟，全英。通常 3–4 月。",
+            official:[
+              {k:"形式",v:"真人视频为主；部分专业 AI/Kira"},
+              {k:"语言",v:"全英"},
+              {k:"时长",v:"20–30 min"},
+              {k:"时间",v:"通常每年 3–4 月"}
+            ],
+            flow:["收到面邀","线上视频","围绕 动机 / 思辨 / 经历深挖"],
+            questions:[
+              {kind:"actual",en:"Why NUS? Why this program?",zh:"为什么选择国大？为什么选这个专业？",cat:"动机",tip:"具体到教授/课程/研究中心，忌说『亚洲第一』",src:"eic.org.cn / lxs.net"},
+              {kind:"actual",en:"Tell me about yourself.",zh:"自我介绍",cat:"自我",tip:"电梯演讲 1–2min：三点特质+经历+专业关联",src:"lxs.net"},
+              {kind:"actual",en:"If a new product sells poorly after launch, what angles would you analyze?",zh:"若一款新产品上市后销量低迷，你会从哪些角度分析原因？",cat:"情境思辨",tip:"逻辑推演 + 商业敏感度 + 消费者洞察",src:"eic.org.cn"},
+              {kind:"variant",en:"Tell us about a volunteer / project / competition mentioned in your application.",zh:"围绕文书中某段义工/项目/竞赛深入追问",cat:"经历深挖",tip:"核实真实性，观察反思与成长性"},
+              {kind:"actual",en:"What are your weaknesses?",zh:"你的缺点是什么？",cat:"自我认知",tip:"真实+已在改进，勿答『太追求完美』",src:"lxs.net"},
+              {kind:"variant",en:"Why do you want to study Architecture Conservation at NUS?",zh:"为何选 NUS 建筑保护方向？（结合家乡古建案例）",cat:"专业",tip:"结合家乡案例+新加坡特色（如牛车水），见 NUS 建筑面经",src:"highmarktutor.com"},
+              {kind:"actual",en:"Why Singapore, why not UK/US?",zh:"为什么选择新加坡读书，不选择英美？",cat:"动机/地区",src:"新东方 eic.org.cn NUS 本科真题 2025-2026"},
+              {kind:"actual",en:"Apart from NUS, what other universities have you applied to? If multiple offers come, how will you choose?",zh:"除 NUS 外你还申请哪些学校，拿到多份录取如何选择？",cat:"动机",src:"新东方 eic.org.cn NUS 本科真题 2025-2026"},
+              {kind:"actual",en:"What are your strengths and weaknesses?",zh:"你的优点和缺点是什么？",cat:"自我认知",src:"新东方 eic.org.cn NUS 本科真题 2025-2026"},
+              {kind:"actual",en:"Which DSE subject you enjoyed most, which one was the hardest?",zh:"DSE 哪一科你最喜欢，哪一科最难？",cat:"背景",src:"新东方 eic.org.cn NUS 本科真题 2025-2026"},
+              {kind:"actual",en:"Talk about one competition / extracurricular you joined.",zh:"讲讲你参加过的竞赛或者课外活动",cat:"经历",src:"新东方 eic.org.cn NUS 本科真题 2025-2026"},
+              {kind:"actual",en:"How do you deal with heavy study pressure?",zh:"面对繁重学习压力你如何调节？",cat:"行为",src:"新东方 eic.org.cn NUS 本科真题 2025-2026"},
+              {kind:"actual",en:"Tell me about one team project you took part in — what role did you play?",zh:"讲一次团队合作经历，你担任什么角色？",cat:"行为/团队",src:"新东方 eic.org.cn NUS 本科真题 2025-2026"},
+              {kind:"actual",en:"Describe a time you failed or received criticism. What did you learn?",zh:"描述一次失败 / 被批评的经历，你学到什么？",cat:"行为/反思",src:"新东方 eic.org.cn NUS 本科真题 2025-2026"}
+            ],
+            warnings:[
+              "2025 起部分专业启用 AI 初筛，PS 多写跨文化适应故事可提升通过率",
+              "强调学术诚信，模板化/夸大经历零容忍",
+              "商科（SMU 等）面试偏重具体行业案例，如『最近关注的新加坡企业案例』"
+            ],
+            sources:[{t:"新加坡国立大学面试全解读",u:"https://m.eic.org.cn/news/detail/5a5d9647d2ca49d9b945a3568dda9b8b"},{t:"NUS 建筑本科面经",u:"https://www.highmarktutor.com/qa/28501_57.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 金融学（Finance）",
+            interviewType:"Zoom 线上，约 20 分钟，两位老师（一位招生办、一位教授）。围绕金融时事、实习细节、动机规划展开。",
+            official:[{k:"形式",v:"Zoom 单面（2 位老师）"},{k:"时长",v:"约 20min"}],
+            flow:["收到面邀","Zoom：时事 → 实习深挖 → 动机/规划 → 反问"],
+            questions:[
+              {kind:"actual",en:"Share a recent financial news/policy you saw and its impact.",zh:"分享最近看到的金融领域时事新闻以及这个政策的影响",cat:"热点/金融",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"What drives your motivation to study this major?",zh:"学习本专业的动力来源",cat:"动机",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"What is the biggest downside of technology for the financial industry currently?",zh:"科技对于金融行业目前最大的坏处是什么？",cat:"热点/科技",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"Tell us about your most recent finance-related internship in detail.",zh:"询问最近的一段实习金融相关的细节",cat:"经历深挖",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"Which financial knowledge did you apply in your internship? Explain in detail.",zh:"在实习中运用过哪些金融知识，详细介绍",cat:"经历/专业",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"What is the relationship between economics and finance?",zh:"经济和金融的关系",cat:"专业/经济",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"What are your career goals?",zh:"职业目标",cat:"规划",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"Are you preparing other programmes? What do you look at most when investing?",zh:"是否有别的在准备的 program？投资的时候最看什么？",cat:"动机/投资",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"Where do you plan to work in the future?",zh:"未来工作地点",cat:"规划",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"What is one thing that impressed you most?",zh:"印象深刻的一件事",cat:"行为",src:"金吉列 2025-2026 NUS Finance 面经"},
+              {kind:"actual",en:"Any questions for us?",zh:"反问",cat:"反问",src:"金吉列 2025-2026 NUS Finance 面经"}
+            ],
+            warnings:["金融时事是高频开篇题，准备 1-2 条近期新加坡/全球金融政策并讲清影响","实习细节会被深挖（用了什么金融知识、具体做了什么）","时间线参考：11.30 投递 - 2.1 面试 - 2.4 推研 - 2.14 offer"],
+            sources:[{t:"金吉列 NUS 热门硕士专业面经（2025-2026）",u:"https://www.jjl.cn/case/1309864"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 可持续与绿色金融（Sustainable & Green Finance）",
+            interviewType:"Zoom 线上，约 15 分钟，三位老师。围绕绿色金融、政策、职业规划与基础概念展开。",
+            official:[{k:"形式",v:"Zoom 单面（3 位老师）"},{k:"时长",v:"约 15min"}],
+            flow:["收到面邀","Zoom：动机 → 绿色金融/政策 → 概念 → 规划/反问"],
+            questions:[
+              {kind:"actual",en:"Why did you choose this programme?",zh:"为什么选择本专业",cat:"动机",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"Briefly discuss sustainable development and green finance.",zh:"浅谈可持续发展和绿色金融",cat:"专业/ESG",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"What contribution do you think you can make to the cohort?",zh:"认为自己对班集体可能有什么贡献",cat:"动机/团队",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"Where do you prefer to work after graduation?",zh:"未来倾向的就业地点",cat:"规划",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"What are China's environmental protection policies?",zh:"中国政府关于环境保护的政策",cat:"政策/中国",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"How do you view the above policies?",zh:"如何看待上述政策（上个问题的延伸）",cat:"政策/中国",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"If admitted, which programme would you most want to attend?",zh:"如果得到 offer 最想去哪个专业",cat:"动机",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"What do you want to learn in SGF? What is your short-term goal after the master's?",zh:"想在 sgf 学到什么？获得 master 后的短期目标？",cat:"规划",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"Do you know the life cycle concept? Tell us about your internship.",zh:"是否知道 life cycle？询问实习经历",cat:"专业/概念",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"What is the Paris Agreement and its goals?",zh:"是否知道 Paris agreement，目标是什么",cat:"政策/国际",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"What are China's two emission reduction targets and their deadlines?",zh:"中国政府的两个减排目标是什么，分别什么时候？",cat:"政策/中国",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"What is CAPM? What is beta in CAPM?",zh:"CAPM 是什么？capm 里面 beta 是什么？",cat:"专业/金融",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"What are the investment decision criteria?",zh:"投资决策准则",cat:"专业/金融",src:"金吉列 2025-2026 NUS SGF 面经"},
+              {kind:"actual",en:"Any questions for us?",zh:"反问",cat:"反问",src:"金吉列 2025-2026 NUS SGF 面经"}
+            ],
+            warnings:["中国环保政策与双碳/巴黎协定是必考点，准备具体目标与年份","CAPM/beta/投资决策准则等基础概念需能口头解释","绿色金融话题结合中国案例更出彩"],
+            sources:[{t:"金吉列 NUS 热门硕士专业面经（2025-2026）",u:"https://www.jjl.cn/case/1309864"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 管理学（Management）",
+            interviewType:"Zoom 线上，1 对 4 名面试官（招生办 + 教授），约 20 分钟。围绕实习、行业洞察、动机与假设情景展开。",
+            official:[{k:"形式",v:"Zoom 小组面（1v4）"},{k:"时长",v:"约 20min"}],
+            flow:["收到面邀","Zoom：实习/行业 → 动机 → 商业洞察 → 假设题"],
+            questions:[
+              {kind:"actual",en:"Tell us about your internship experience.",zh:"询问实习经历",cat:"经历深挖",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"What is your vision for choosing this industry?",zh:"选择此行业的愿景",cat:"动机",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"Why NUS, why this programme, why Singapore?",zh:"Why NUS / why program / Why Singapore",cat:"动机",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"Which relevant courses did you score well in?",zh:"询问相关专业成绩",cat:"背景",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"Why did you choose your undergraduate university and major?",zh:"为什么选择本科大学和专业",cat:"背景/动机",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"Follow-up on career plan based on the above.",zh:"基于上个问题，追问职业规划",cat:"规划",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"What recent business news have you followed?",zh:"最近的 business news",cat:"热点/商业",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"How do you understand changing customer demand?",zh:"如何理解 changing customer demand",cat:"专业/商业",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"What is the hardest thing to manage in an organization?",zh:"组织里最难 manage 的是什么",cat:"专业/管理",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"How could you contribute to China's consumer goods industry?",zh:"浅谈自己能为中国消费品行业带来什么",cat:"专业/商业",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"What are the differences between China's and overseas consumer markets?",zh:"中国和海外消费品市场的不同",cat:"专业/商业",src:"金吉列 2025-2026 NUS Management 面经"},
+              {kind:"actual",en:"Hypothetical: lead an overseas beauty brand into China, OR take a domestic brand global — which would you choose, and why?",zh:"假设题：为海外美妆公司做中国市场，或带领国货美妆走向海外，你想做哪一种工作，为什么？",cat:"情景/商业",src:"金吉列 2025-2026 NUS Management 面经"}
+            ],
+            warnings:["假设情景题考察商业逻辑，用『目标-策略-执行』框架作答","行业洞察题需结合近期 business news，忌空泛","1v4 面试注意与每位面试官互动"],
+            sources:[{t:"金吉列 NUS 热门硕士专业面经（2025-2026）",u:"https://www.jjl.cn/case/1309864"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 项目管理（Project Management）",
+            interviewType:"Zoom 线上，约 9 分钟。先确认毕业学校与姓名，再围绕背景、动机、实习真实性展开。",
+            official:[{k:"形式",v:"Zoom 单面"},{k:"时长",v:"约 9min"}],
+            flow:["收到面邀","Zoom：核对信息 → 背景/动机 → 实习真实性 → 其他申请"],
+            questions:[
+              {kind:"actual",en:"Why this school & why Project Management?",zh:"Why school & Why PM",cat:"动机",src:"金吉列 2025-2026 NUS PM 面经"},
+              {kind:"actual",en:"Introduce your work/project experience.",zh:"介绍工作项目",cat:"经历",src:"金吉列 2025-2026 NUS PM 面经"},
+              {kind:"actual",en:"Which course did you score well in — is that grade real?",zh:"哪门课成绩好，成绩是否属实",cat:"背景",src:"金吉列 2025-2026 NUS PM 面经"},
+              {kind:"actual",en:"Without a construction background, why choose PM?",zh:"没有建筑方向的背景为什么选择 pm",cat:"转专业",src:"金吉列 2025-2026 NUS PM 面经"},
+              {kind:"actual",en:"Why NUS? Is your latest internship real?",zh:"Why NUS？最新实习是否属实？",cat:"动机/真实",src:"金吉列 2025-2026 NUS PM 面经"},
+              {kind:"actual",en:"Are you an architecture graduate? Do you have classmates in Singapore?",zh:"是否是建筑学位，是否有同学在新加坡",cat:"背景",src:"金吉列 2025-2026 NUS PM 面经"},
+              {kind:"actual",en:"What do you think is good about Singapore?",zh:"认为新加坡哪里好",cat:"动机/地区",src:"金吉列 2025-2026 NUS PM 面经"},
+              {kind:"actual",en:"Tell us about your internship. Did you apply to UK/Aus/HK — any HK offers?",zh:"实习经历；是否申请香港英国澳洲，香港是否有给 offer",cat:"经历/其他申请",src:"金吉列 2025-2026 NUS PM 面经"},
+              {kind:"actual",en:"What did you apply to in HK? Any other programmes / interviews?",zh:"香港申请的什么专业？是否有申请别的专业、收到其他面试？",cat:"其他申请",src:"金吉列 2025-2026 NUS PM 面经"}
+            ],
+            warnings:["实习/成绩真实性会被直接核实，CV 每条都要经得起追问","跨背景申请（无建筑/工程背景）要讲清为何选 PM","会横向问及其他地区申请，如实回答即可"],
+            sources:[{t:"金吉列 NUS 热门硕士专业面经（2025-2026）",u:"https://www.jjl.cn/case/1309864"}]
+          }
+        ]
+      },
+      { id:"ntu", name:"南洋理工大学", abbr:"NTU", color:"#e8412c",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"各本科专业（Zoom / 机面）",
+            interviewType:"Zoom 真人面 / 系统机面，时长 20–30 分钟，全英；2025 起新增 1 分钟英文视频自我介绍环节。",
+            official:[
+              {k:"形式",v:"Zoom 真人 / 系统机面"},
+              {k:"语言",v:"全英"},
+              {k:"时长",v:"20–30 min"},
+              {k:"新增",v:"1 分钟英文视频自我介绍（2025）"}
+            ],
+            flow:["收到面邀（2 月起陆续）","提交 1 分钟视频自我介绍（如适用）","Zoom / 机面问答"],
+            questions:[
+              {kind:"actual",en:"Please introduce yourself briefly.",zh:"请简单做一个自我介绍。",cat:"自我",src:"kaoersi NTU 面试"},
+              {kind:"actual",en:"Why Singapore? Why NTU / this program?",zh:"为什么选择新加坡？为什么选择 NTU / 这个专业？",cat:"动机",src:"kaoersi / liuxueonline"},
+              {kind:"actual",en:"What do you know about this program? Which area interests you?",zh:"你对申请专业的了解程度？对哪个领域比较感兴趣？",cat:"专业认知",src:"kaoersi NTU 面试"},
+              {kind:"actual",en:"What projects/internships have you done? What challenges did you meet and what did you learn?",zh:"你参加过哪些项目/实习？遇到什么挑战？收获是什么？",cat:"经历",src:"kaoersi NTU 面试"},
+              {kind:"actual",en:"What is your view on a recent Singapore or international news hotspot?",zh:"最近新加坡或国际的某新闻热点，你有什么看法？",cat:"时事",src:"kaoersi NTU 面试"},
+              {kind:"actual",en:"Your short-term and long-term career goals? How does this program help?",zh:"未来短期/长期职业目标？这个项目如何帮你？",cat:"规划",src:"kaoersi NTU 面试"},
+              {kind:"actual",en:"What is your favorite subject?",zh:"你最喜欢的科目是什么？",cat:"通用",src:"liuxue.xdf.cn NTU 面经"},
+              {kind:"actual",en:"A friend cheated without the teacher knowing and asks you not to tell. What would you do?",zh:"假如朋友在老师不知情下作弊，且不让你告诉老师，你会怎么办？",cat:"道德/情境",src:"liuxue.xdf.cn NTU 面经"},
+              {kind:"actual",en:"How did you overcome a setback? (typing question, ~300 words / 10 min)",zh:"你如何克服挫折？（打字题，约 10 分钟 300 字）",cat:"写作",tip:"限时打字题，需练习英文打字速度",src:"liuxue.xdf.cn NTU 面经"},
+              {kind:"actual",en:"Describe a failure and what you learned. (typing question, ~300 words / 10 min)",zh:"介绍一次失败经历及学到的（打字题，约 10 分钟 300 字）",cat:"写作",src:"liuxue.xdf.cn NTU 面经"},
+              {kind:"actual",en:"Do you have any questions for us?",zh:"你还有什么问题问我们？",cat:"反问",src:"kaoersi NTU 面试"}
+            ],
+            warnings:[
+              "部分专业（材料/计算机/机械/数学/会计/物理）已发面邀，机面与人面并存",
+              "打字题限时 10 分钟约 300 字，需练习英文打字速度",
+              "硕士 MFE 等常含数学 / Python（如 numpy 时间价值）笔试面试"
+            ],
+            sources:[{t:"NTU 本科面试辅导（真题）",u:"https://www.kaoersiedu.com/college-305/new-427343.html"},{t:"新加坡南洋理工大学面试常见问题",u:"https://liuxue.xdf.cn/blog/blog_7711008.shtml"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"金融工程等（双轮面试）",
+            interviewType:"NTU 金融工程硕士 2025 起采用「视频 + 现场」双轮面试；视频考察基本能力，现场深入问专业。",
+            official:[{k:"形式",v:"视频 + 现场 双轮（MFE 2025 起）"},{k:"说明",v:"其他硕士以官网为准"}],
+            flow:["视频面（基本能力）","现场面（专业深入）"],
+            questions:[
+              {kind:"variant",en:"What Python libraries have you used (e.g., numpy)? Have you computed time value with numpy?",zh:"用过哪些 Python 库（如 numpy）？是否用 numpy 算过时间价值？",cat:"专业/量化",tip:"MFE 面经高频，见 xdf NTU 硕士面经",src:"liuxue.xdf.cn"}
+            ],
+            warnings:["MFE 常含数学/编程面，量化背景需扎实"],
+            sources:[{t:"新加坡南洋理工大学面试常见问题（含硕士）",u:"https://liuxue.xdf.cn/blog/blog_7711008.shtml"}]
+          }
+        ]
+      },
+      { id:"sg-others", name:"新加坡 · 其余院校", abbr:"其他", color:"#7a7a7a",
+        programs:[
+          { stage:"本科 / 研究生", stageKey:"ug", prog:"SMU / SUTD / SIT 等",
+            interviewType:"SMU 商科重具体行业案例与沟通；SUTD 设计与科技结合面试；以各校官网为准。",
+            official:[{k:"说明",v:"以各校官网为准"}],
+            flow:[],
+            questions:[],
+            warnings:["SMU / SUTD / SIT 等暂无逐题公开面经采集，标记待采集。补充真实面经后更新，不编造。"],
+            sources:[],
+            pending:true
+          }
+        ]
+      }
+    ]
+  },
+  /* ===================== 香港 ===================== */
+  { id:"hk", name:"香港", en:"HONG KONG", flag:"🇭🇰", color:"#d4002a",
+    desc:"港校本科面试形式多样：常规小组讨论+个人面、医学院 MMI、法学 Case Analysis、建筑作品集答辩；研究生商科多为全英 Zoom / Kira。以下覆盖全部主要院校（港大/中大/科大/城大/理大/浸大/岭大/教大），往年真题补充自 寄托天下（Gter）面经频道 与 小红书/公开面经聚合。",
+    schools:[
+      { id:"hku", name:"香港大学", abbr:"HKU", color:"#d4002a",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"常规专业 + 医学院 MMI",
+            interviewType:"常规 = 线下小组讨论（6–8 人，约 30min）+ 个人面（约 15min），全英；医学院 = MMI 多站（4 环节 × 8min：2min 准备 + 6min 面，3 英 1 粤）；法学 Case Analysis；建筑作品集答辩。",
+            official:[
+              {k:"常规形式",v:"小组 30min 讨论 + 个人 15min"},
+              {k:"医学院",v:"MMI，4 环节 × 8min（2 准备+6 面），3 英 1 粤"},
+              {k:"周期",v:"1–3 月（提前批）/ 6–7 月（常规批）"},
+              {k:"语言",v:"常规全英；MMI 含粤语站"}
+            ],
+            flow:["注册报到（核验证件/设备）","小组讨论（科技伦理/社会热点/专业相关）","个人面（Why HKU + 专业认知 + 深度追问 + 情景/压力）"],
+            questions:[
+              {kind:"variant",en:"Group discussion: AI in healthcare — pros and cons.",zh:"小组讨论：AI 医疗的利弊",cat:"小组",tip:"发言质量 > 次数，重协调与观点创新",src:"qiantum.xdf.cn"},
+              {kind:"variant",en:"Group discussion: impact of blockchain on finance.",zh:"小组讨论：区块链对金融业的冲击",cat:"小组",src:"qiantum.xdf.cn"},
+              {kind:"actual",en:"Self-introduction (1 min, English).",zh:"自我介绍（1 分钟英文）",cat:"自我",src:"qiantum.xdf.cn"},
+              {kind:"actual",en:"Why HKU?",zh:"为什么选择港大？（必问）",cat:"动机",src:"qiantum.xdf.cn"},
+              {kind:"variant",en:"How do you understand the essence of Computer Science?",zh:"你如何理解计算机科学的本质？",cat:"专业认知",src:"qiantum.xdf.cn"},
+              {kind:"variant",en:"If someone monopolizes the group discussion, what would you do?",zh:"如果小组有人垄断发言，你会怎么办？",cat:"情景",src:"qiantum.xdf.cn"},
+              {kind:"actual",en:"MMI: You scratched a neighboring car in the car park and are rushing to an interview — what do you do?",zh:"MMI：你在停车场不小心刮到邻车，又急着去面试，会怎么做？",cat:"道德情境",src:"kaoersi HKU MMI"},
+              {kind:"actual",en:"MMI: A 15-year-old got a tattoo; her mother is furious. As her sibling, how do you resolve the conflict?",zh:"MMI：15 岁女孩纹身，妈妈愤怒，作为手足如何解决冲突？",cat:"角色/冲突",src:"kaoersi HKU MMI"},
+              {kind:"actual",en:"MMI: How should Hong Kong allocate public healthcare resources? Which services get priority?",zh:"MMI：香港应如何分配公共医疗系统资源？优先哪些服务？",cat:"卫生政策",src:"kaoersi HKU MMI"},
+              {kind:"actual",en:"MMI: What do you think of the municipal solid waste charging scheme (HK$0.11/litre)?",zh:"MMI：你对家居废物收费计划（每升 1 角 1 分）有什么看法？",cat:"时事",src:"kaoersi HKU MMI"},
+              {kind:"actual",en:"MMI: Should Hong Kong allow foreign doctors to work? Why or why not?",zh:"MMI：香港应允许外国医生来工作吗？为什么？",cat:"政策",src:"kaoersi HKU MMI"},
+              {kind:"actual",en:"How is your undergraduate major related to this programme?",zh:"你的本科专业和该项目有什么联系？",cat:"动机",src:"gter 寄托天下 24fall 中国发展研究面经"},
+              {kind:"actual",en:"Why do you want to come to Hong Kong? Why do you think Hong Kong is good?",zh:"为什么想来香港？为什么觉得香港好？",cat:"动机",src:"gter 寄托天下 24fall 中国发展研究面经"},
+              {kind:"actual",en:"The interviewer asked detailed follow-up on your CV (no self-intro session due to time).",zh:"面试官针对你的 CV 细节深入追问（因时间紧无自我介绍环节）",cat:"经历深挖",src:"gter 寄托天下 24fall 中国发展研究面经"},
+              {kind:"actual",en:"Housing Management: Why still Housing Management? (after being asked what it is)",zh:"房屋管理：为什么还选 Housing Management？（在被问『这是什么』之后）",cat:"动机追问",src:"gter 寄托天下 HKU Housing Management 面经"}
+            ],
+            warnings:[
+              "医学院 MMI 可用医学伦理四大支柱（有益、无害、公正、自主）组织答案",
+              "几乎必问时事（香港为主、兼国际），建议每日读新闻",
+              "MMI 题型四类：道德情境 / 角色发展 / 角色扮演 / 团队合作"
+            ],
+            sources:[{t:"香港大学本科面试解析",u:"https://qiantum.xdf.cn/blog/blog_7721578.shtml"},{t:"HKU 医学院 MMI 准备指南",u:"https://www.kaoersi.com/xinwendongtai/42486.html"},{t:"Interview Academy HK",u:"https://www.interviewacademyhk.com/whattoexpect"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"商学院 MSc（MFin / Fintech 等）及部分授课硕",
+            interviewType:"多为全英真人 Zoom / Kira Talent 视频面；商科提前批 7 月初面邀。个人面 15–30min（+部分小组 30–45min），部分专业加笔试/专业能力测试。",
+            official:[
+              {k:"形式",v:"个人面 15–30min（+部分小组 30–45min）；全英"},
+              {k:"商学院",v:"批判分析 + 小组讨论，部分加笔试"},
+              {k:"语言",v:"全英"}
+            ],
+            flow:["收到面邀（提前批 7 月初）","全英个人/小组面","部分专业笔试或专业能力测试"],
+            questions:[
+              {kind:"actual",en:"Tell me about yourself (1–2 min).",zh:"自我介绍（1–2 分钟）",cat:"自我",src:"nb.xhd.cn / liuxue.xdf.cn"},
+              {kind:"actual",en:"Why HKU? Why this program?",zh:"为什么选港大？为什么选这个项目？",cat:"动机",src:"nb.xhd.cn"},
+              {kind:"variant",en:"Describe your research / project / internship (STAR).",zh:"描述你的科研/项目/实习（STAR 法则）",cat:"经历",src:"nb.xhd.cn"},
+              {kind:"actual",en:"For a HK-listed company, would you issue equity or debt to finance a project? If debt, USD or RMB bonds?",zh:"若你是香港上市公司经理，项目融资发股票还是债券？发债则美元债还是人民币债？",cat:"专业/金融",src:"liuxue.xdf.cn"},
+              {kind:"actual",en:"Analyze the causes of recent global stock market volatility.",zh:"分析近期全球股市波动的原因？",cat:"专业/金融",src:"liuxue.xdf.cn"},
+              {kind:"actual",en:"How is FinTech changing traditional banking? Give examples.",zh:"金融科技如何改变传统银行业？举例说明。",cat:"专业/金融",src:"liuxue.xdf.cn"},
+              {kind:"actual",en:"What is a circuit breaker? Why does it work in the West but not in China?",zh:"熔断是什么？为何西方适用、中国不行？",cat:"专业/金融",src:"liuxue.xdf.cn"},
+              {kind:"actual",en:"How do you think AI will impact quantitative trading?",zh:"你如何看待 AI 对量化交易的影响？",cat:"热点",tip:"MFin 真实被问，需结合行业前沿",src:"lxs.net MFin 案例"},
+              {kind:"variant",en:"Views on ESG investing / digital currency.",zh:"对 ESG 投资 / 数字货币 的看法",cat:"热点",src:"lxs.net MFin 案例"},
+              {kind:"variant",en:"Short-term and long-term career goals?",zh:"你的短期与长期职业规划？",cat:"规划",src:"nb.xhd.cn"}
+            ],
+            warnings:[
+              "商科偏爱现实场景分析题，紧盯市场热点（ESG、数字货币、AI+金融）",
+              "面试前研读官网教授研究方向，引用具体论文/课程可加分",
+              "面试前研读课文，引用具体论文/课程可加分"
+            ],
+            sources:[{t:"港大面试题（研究生）",u:"https://nb.xhd.cn/ncyc/1058079.html"},{t:"港大硕士各专业面试高频问题",u:"https://liuxue.xdf.cn/blog/blog_7976385.shtml"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"金融学 Master of Finance（视频面）",
+            interviewType:"港大金融学硕士（26fall 提前批）采用录制视频面试：递交申请后约 48 小时内完成，共 3 段视频，每段不超过 1.5 分钟（MP4，≤150MB）。金融与金融科技共用题库，题型为 2 道行为面 + 1 道金融市场讨论，全英。",
+            official:[{k:"形式",v:"录制视频 3 段，每段≤1.5min"},{k:"时限",v:"递交后约 48h 内"},{k:"同题库",v:"金融与金融科技共用"}],
+            flow:["收到面邀","录制 3 段视频","提交 MP4"],
+            questions:[
+              {kind:"actual",en:"What do you think is your strength?",zh:"你觉得你的优势是什么？",cat:"行为",src:"优优留学 港大金融26fall视频面 2025-2026"},
+              {kind:"actual",en:"What's your five-year plan?",zh:"你的五年规划是什么？",cat:"规划",src:"优优留学 港大金融26fall视频面 2025-2026"},
+              {kind:"actual",en:"Imagine you're a financial advisor; a client asks whether to invest in bonds or equities during an economic downturn. How would you advise them?",zh:"假设你是理财顾问，客户问经济衰退期应投资债券还是股票，你会如何建议？",cat:"金融市场",src:"优优留学 港大金融26fall视频面 2025-2026"},
+              {kind:"variant",en:"Analyze the causes of recent global stock market fluctuations.",zh:"分析近期全球股市波动的原因。",cat:"市场",src:"新东方/新航道 港大硕士面经"},
+              {kind:"variant",en:"How does fintech transform traditional banking? Give examples.",zh:"金融科技如何改变传统银行业？举例说明。",cat:"专业",src:"新东方/新航道 港大硕士面经"},
+              {kind:"variant",en:"Explain a financial model you know and its limitations.",zh:"解释一个你熟悉的金融模型及其局限性。",cat:"专业",src:"新东方/新航道 港大硕士面经"},
+              {kind:"variant",en:"How does your career plan align with Hong Kong's role as a financial hub?",zh:"你的职业规划如何结合香港的金融中心地位？",cat:"规划",src:"新东方/新航道 港大硕士面经"}
+            ],
+            warnings:["金融与金融科技共用题库：2 行为 + 1 市场讨论","视频 1.5min 内讲清逻辑与自信，忌同质化回答","跨专业申请者需突出金融实习/研究经历"],
+            sources:[{t:"优优留学 港大金融26fall视频面",u:"http://mp.weixin.qq.com/s?__biz=MzkyNjM5MTI3MA==&mid=2247558884"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"计算机科学 MSc Computer Science（笔试+面试）",
+            interviewType:"港大 MSc CS 分笔试与面试两部分，均线下（26fall 面试可能为群面、25fall 为个面），全英。笔试 45min（11 选择 + 1 编程题：时间复杂度/内存分配/垃圾回收/贝叶斯/排列组合/LeetCode12 整数转罗马等）；面试约 30min 含个人问答与小组讨论。",
+            official:[{k:"笔试",v:"45min，11选择+1编程"},{k:"面试",v:"30min，个人+小组"},{k:"语言",v:"全英，线下"}],
+            flow:["笔试 45min（选择+编程）","个人问答（项目/Why HKU CS）","小组讨论（AI/算法/脑筋急转弯）"],
+            questions:[
+              {kind:"actual",en:"Why did you choose Computer Science as your major?",zh:"为什么选择计算机科学作为专业？",cat:"动机",src:"库克留学/金吉列 港大CS面经 2026"},
+              {kind:"actual",en:"Tell me about your final year project / thesis.",zh:"介绍你的毕业设计/论文。",cat:"项目",src:"库克留学/金吉列 港大CS面经 2026"},
+              {kind:"actual",en:"Why HKU MSc in Computer Science? Why Hong Kong for CS study?",zh:"为什么选港大 CS？为什么来香港学 CS（结合大湾区产业）？",cat:"动机",src:"库克留学/金吉列 港大CS面经 2026"},
+              {kind:"actual",en:"Describe a technical project you contributed to (languages & details).",zh:"描述你参与过的技术项目及贡献（须具体说明编程语言与技术细节）。",cat:"项目",src:"新东方 港大各硕士高频题"},
+              {kind:"variant",en:"Group: Should primary-school students be banned from using AI chatbots?",zh:"小组讨论：是否应禁止小学生使用 AI Chatbox？",cat:"小组/AI",src:"库克留学/金吉列 港大CS面经 2026"},
+              {kind:"variant",en:"Group: 9 coins, one fake lighter; find it in fewest weighings.",zh:"小组讨论：9 枚硬币 1 枚较轻假币，最少称重几次找出？",cat:"算法/脑筋急转弯",src:"库克留学/金吉列 港大CS面经 2026"},
+              {kind:"variant",en:"What impact do recent AI advances have on your research interests?",zh:"AI 最新发展对你研究方向的影响？",cat:"专业/AI",src:"新东方 港大各硕士高频题"}
+            ],
+            warnings:["笔试重视基础：时间复杂度、贝叶斯、排列组合、基础编程","小组讨论重思考过程而非标准答案","准备 2-3 个 STAR 项目故事"],
+            sources:[{t:"库克留学 港大CS面经",u:"http://mp.weixin.qq.com/s?__biz=Mzg2ODg5NzQ2OA==&mid=2247495804"},{t:"金吉列 港大CS面经",u:"https://www.jjl.cn/article/1342633.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"数据科学 Master of Data Science（笔试+面试）",
+            interviewType:"港大 MDS 含线上笔试（约 1h，Moodle + Zoom 摄像头监考，15 道选择：微积分/线代/概率统计/Python-R 伪代码）与线上面试（约 15min 英文问答）。",
+            official:[{k:"笔试",v:"约1h，15选择，Moodle+Zoom监考"},{k:"面试",v:"约15min 线上问答"},{k:"语言",v:"全英"}],
+            flow:["线上笔试 1h","线上面试 15min","Why MDS / 项目 / 数据伦理"],
+            questions:[
+              {kind:"actual",en:"Why did you choose the Master of Data Science program at HKU?",zh:"为什么选择港大数据科学硕士？",cat:"动机",src:"库克留学 港大MDS面经 2025-2026"},
+              {kind:"actual",en:"Explain the importance of data cleaning and preprocessing.",zh:"解释数据清洗与预处理的重要性。",cat:"专业",src:"库克留学 港大MDS面经 2025-2026"},
+              {kind:"actual",en:"Describe a project where you applied data analysis or machine learning.",zh:"描述一个你用数据分析/机器学习的项目（方法/数据/贡献/结果）。",cat:"项目",src:"库克留学/新东方 港大MDS面经"},
+              {kind:"variant",en:"Differences and connections between Data Science and Statistics?",zh:"数据科学与统计学的区别与联系？",cat:"专业",src:"库克留学 港大MDS面经 2025-2026"},
+              {kind:"variant",en:"Can AI replace data analysts? Why not completely?",zh:"AI 能否替代数据分析师？为何不会完全替代？",cat:"伦理/AI",src:"库克留学 港大MDS面经 2025-2026"},
+              {kind:"variant",en:"How do you handle conflict between data privacy and business needs?",zh:"如何处理数据隐私与商业需求的冲突？",cat:"伦理",src:"新东方 港大各硕士高频题"}
+            ],
+            warnings:["笔试复习优先级：概率统计 > 线代 > 微积分 > 伪代码/编程","面试每题 45s–1min，项目题 1–2min，忌背长答案","准备 2-3 个关于课程/实习项目的问题反问"],
+            sources:[{t:"库克留学 港大MDS面经",u:"http://mp.weixin.qq.com/s?__biz=Mzg2ODg5NzQ2OA==&mid=2247496980"}]
+          }
+        ]
+      },
+      { id:"cuhk", name:"香港中文大学", abbr:"CUHK", color:"#a30d14",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"医学院 MBChB（Panel）",
+            interviewType:"个人 panel 面试，2 位面试官，约 15 分钟，全英（4 月批次可能含中文）。自 2023 起 100% 现场面，不再保证线上；GET 申请人需加小组面。",
+            official:[
+              {k:"形式",v:"1 对 2 panel，10–15 min，全英（4 月批次或含中文）"},
+              {k:"现场",v:"自 2023 起 100% 现场面"},
+              {k:"语言",v:"英文为主；邀约邮件注明所用语言"},
+              {k:"GET",v:"研究生入学通道需加小组面"}
+            ],
+            flow:["签到（正装）","panel 问答（兴趣/医疗常识/伦理人文/团队领导沟通）"],
+            questions:[
+              {kind:"actual",en:"What experience proves your interest in medicine?",zh:"你有什么经历可证明自己对医学的兴趣？",cat:"动机",src:"med.cuhk.edu.hk"},
+              {kind:"actual",en:"Have you read any medical article recently?",zh:"你有没有读过某一篇医学文章？",cat:"专业/阅读",src:"med.cuhk.edu.hk"},
+              {kind:"actual",en:"Describe in detail how a doctor demonstrates good medical ethics and motivation.",zh:"详细描述医生如何展现良好医德和行医动机？",cat:"伦理",src:"med.cuhk.edu.hk"},
+              {kind:"variant",en:"Four big topics: Personal Development / Medical Ethics / Healthcare System & Current Issues / Course Questions.",zh:"四大主题：个人发展 / 医学伦理 / 医疗体系与时事 / 课程问题",cat:"综合",tip:"CUHK 与 HKU 内容同源四大主题，需准备中英文两套",src:"interviewacademyhk.com"}
+            ],
+            warnings:[
+              "医学院门槛高（IB 42-43、HKDSE 34-35、GCEAL 4A*），面试仅邀达标者",
+              "准备英文与中文两套答案（4 月批次可能中文）",
+              "重诚实、正直、热诚与关怀他人，忌模板"
+            ],
+            sources:[{t:"CUHK 医学院 Interview",u:"https://www.med.cuhk.edu.hk/study/prospective-students/undergraduate-study/programme-and-admission/mbchb-and-gps/admissions/interview"},{t:"Interview Academy HK",u:"https://www.interviewacademyhk.com/whattoexpect"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"商学院 / 文社科 等（部分专业）",
+            interviewType:"多数授课硕无统一面试；商科（如 MSc Finance）提前批多为全英 Zoom 群面 + 1min 自我介绍视频 + 诚信承诺书；部分专业（如风险与数据科学）为教授个人深面（专业题深挖）。以官网为准。",
+            official:[{k:"商学院形式",v:"全英 Zoom 群面 + 1min 自我介绍视频 + 诚信承诺书"},{k:"说明",v:"以各专业官网为准"}],
+            flow:["上传 1min 自我介绍视频 + 签诚信承诺书","全英群面（热点/案例讨论，教授引导追问）","部分专业教授个人深面（专业题）"],
+            questions:[
+              {kind:"actual",en:"Self-introduction (the professor speaks fast; clarify if unsure).",zh:"自我介绍（教授语速快，听不清需确认）",cat:"自我",src:"gter 寄托天下 风险管理与数据科学面经"},
+              {kind:"variant",en:"Your career plan? Supply chain vs risk control — which are you more specialized in?",zh:"你的工作规划？供应链与风控，你更专精哪个？",cat:"规划/专业",src:"gter 寄托天下 风险管理与数据科学面经"},
+              {kind:"variant",en:"Which are you better at — market risk or credit risk? Covered interest parity formula + derivation?",zh:"你更擅长市场风险还是信用风险？利率抛补平价公式？请推导原理。",cat:"专业/金融",src:"gter 寄托天下 风险管理与数据科学面经"},
+              {kind:"variant",en:"What option types exist? Your programming experience — languages & libraries (e.g. web-scraping libs)?",zh:"期权有哪些种类？你的编程经验——用过的语言与库（如爬虫库）？",cat:"专业/量化",src:"gter 寄托天下 风险管理与数据科学面经"},
+              {kind:"variant",en:"Group discussion: Is finance more macro or more micro?",zh:"群面：金融更偏宏观还是更偏微观？",cat:"群面/金融",src:"xdf 港中文金融提前批面经"},
+              {kind:"variant",en:"Group discussion: China's wealth gap vs US/EU; policies vs market — which matters more?",zh:"群面：中国贫富差距对比美/欧；政策与市场哪个更重要？",cat:"群面/热点",src:"xdf 港中文金融提前批面经"},
+              {kind:"variant",en:"Group discussion: Should ESG be factored into stock pricing? / Meaning of digital currency?",zh:"群面：ESG 是否应纳入股票定价？数字货币的意义？",cat:"群面/热点",src:"xdf 港中文金融提前批面经"},
+              {kind:"variant",en:"Group discussion: Is globalization good or bad? If you ran a TikTok channel for profit, what content?",zh:"群面：全球化是好是坏？若开盈利 TikTok 频道会做什么内容？",cat:"群面/开放",src:"xdf 港中文金融提前批面经"}
+            ],
+            warnings:[
+              "商科群面重英语表达、小组合作、临场逻辑；教授会针对回答二次引导",
+              "专业面（如量化/风险）会深挖成绩单课程与公式推导，务必熟悉 CV 与课程",
+              "研究生面试非普遍要求，需逐项目核实官网"
+            ],
+            sources:[{t:"gter 港中文 风险管理与数据科学面经",u:"https://bbs.gter.net/thread-2621407-1-12.html"},{t:"港中文金融(提前批)面经",u:"https://liuxue.xdf.cn/blog/gengyixuan3/blog/5313035.shtml"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"会计学 Master of Accountancy（MAcc）",
+            interviewType:"港中文会计硕士（MAcc）线上 Zoom 群面，约 30 分钟，全英；先核对证件，再个人面（深挖简历/实习/项目），后小组 case 讨论。2027-28 intake 面试安排在 8 月（HK Time，约 30min）。",
+            official:[{k:"形式",v:"Zoom 群面，约30min"},{k:"结构",v:"证件→个人面→小组case"},{k:"语言",v:"全英"}],
+            flow:["核对证件","个人面（深挖简历/实习/项目）","小组 case 讨论（约15min）","Q&A"],
+            questions:[
+              {kind:"actual",en:"Please give a brief self-introduction.",zh:"请做一个简短的自我介绍。",cat:"自我",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"What's your favourite course during undergrad?",zh:"本科期间你最喜欢的课程是什么？",cat:"背景",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"The latest impressive financial/accounting news. Why impressed you?",zh:"最近印象深刻的财经/会计新闻？为何印象深刻？",cat:"热点",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Could you explain Beta Coefficient?",zh:"请解释 Beta 系数。",cat:"专业",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Compare IFRS with CAS or HKFRS?",zh:"比较国际财务报告准则(IFRS)与中国会计准则(CAS)或香港HKFRS？",cat:"专业",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"What's the difference between FIFO and LIFO?",zh:"FIFO 与 LIFO 的区别？",cat:"专业",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Differences between auditing and accounting?",zh:"审计与会计的区别？",cat:"专业",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Compare straight-line vs declining balance method; which do you prefer?",zh:"比较直线法与余额递减法；你更偏好哪种？",cat:"专业",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"If CFO of a transnational corp, how would extreme tariffs influence decisions? Two measures in 30 days?",zh:"若你是跨国企业 CFO，极端关税如何影响决策？30 天内采取哪两项措施？",cat:"情境",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Explain connections between tax policy adjustments and ESG investment?",zh:"解释税收政策调整与 ESG 投资的关联？",cat:"专业/ESG",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"If gross profit declines, steps to pinpoint the problem?",zh:"公司毛利率下降，你会如何逐步定位问题？",cat:"专业",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Besides partner clients, what parties can an enterprise connect to improve operations?",zh:"除合作客户外，企业还可联结哪些利益相关方改善运营？",cat:"商业",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"How does your industry research internship strengthen your decision to apply?",zh:"你的行业研究实习如何强化你申请本项目的决定？",cat:"经历",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Your opinion on future development of [industry from internship]?",zh:"对实习所涉行业未来发展的看法？",cat:"行业",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Most memorable internship experience & what you learned?",zh:"最难忘的实习经历及收获？",cat:"经历",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Opinions on impacts of AI on accountancy?",zh:"AI 对会计行业影响的看法？",cat:"专业/AI",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"Is it good or bad to prevent employees from using social media at work?",zh:"禁止员工上班用社交媒体是好是坏？",cat:"情境",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"How is your MBTI? How does it fit accountancy (and which aspects not)?",zh:"你的 MBTI 是什么？如何契合/不契合会计职业？",cat:"自我",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"actual",en:"What's your career goal? Why this programme? Why CUHK?",zh:"职业目标？为什么选本项目？为什么选港中文？",cat:"动机",src:"公众号 港中文会计面经 2026-2027"},
+              {kind:"variant",en:"Group case: supermarket discounts progressively late at night (like 钱大妈) — pros & cons?",zh:"群面 case：超市夜间渐进打折（如钱大妈模式）的利弊？",cat:"小组case",src:"公众号 港中文会计面经 2026.8"}
+            ],
+            warnings:["群面约 4 人一组，先个面深挖简历，务必熟记文书/实习细节","小组 case 无标准答案，围绕专业展开（成本/品牌/浪费）即可","可坦诚说不知道，忌不懂装懂"],
+            sources:[{t:"公众号 港中文会计面经",u:"http://mp.weixin.qq.com/s?__biz=MzY5NTIxOTY2Nw==&mid=2247484278"}]
+          }
+        ]
+      },
+      { id:"hkust", name:"香港科技大学", abbr:"HKUST", color:"#0072bc",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"各本科专业（Kira）及 JUPAS 小组面",
+            interviewType:"Kira Talent 异步视频，5 题 ×（30s 准备 + 1min 作答），全英；高考出分后按学院分数线邀面。部分理/工热门专业 JUPAS 为 4–6 人小组 + 教授连环提问。",
+            official:[
+              {k:"形式",v:"Kira Talent 录播，5 题，每题 30s 准备 1min 答；开始前出示证件"},
+              {k:"语言",v:"全英"},
+              {k:"JUPAS",v:"理/工热门 = 4–6 人小组 + 教授连环提问"},
+              {k:"周期",v:"高考出分后按学院分数线邀面"}
+            ],
+            flow:["收到 Kira 面邀（含时间/注意事项）","调试设备，5 题录播提交","JUPAS 热门专业另含小组面"],
+            questions:[
+              {kind:"actual",en:"Self-introduction.",zh:"自我介绍",cat:"自我",src:"kaoersi HKUST"},
+              {kind:"actual",en:"Why our school / program? Why transfer?",zh:"为什么选择我们学校/专业？为什么转专业？",cat:"动机",src:"kaoersi HKUST"},
+              {kind:"actual",en:"Future study / career plan?",zh:"未来学习/职业规划？",cat:"规划",src:"kaoersi HKUST"},
+              {kind:"actual",en:"Which courses interest you? What research topic for thesis?",zh:"对什么课程感兴趣？毕业论文想研究什么？",cat:"专业",src:"kaoersi HKUST"},
+              {kind:"actual",en:"Which other schools/programs did you apply to? Which would you choose?",zh:"还申请了哪些学校？录取了选哪个？",cat:"策略",src:"kaoersi HKUST"},
+              {kind:"variant",en:"Questions based on PS/CV details (academic / work experience).",zh:"针对 PS/CV 细节提问（学术/工作）",cat:"经历深挖",src:"kaoersi HKUST"},
+              {kind:"actual",en:"What professional books have you read? What did you gain?",zh:"看过什么专业书？收获是什么？",cat:"阅读",src:"kaoersi HKUST"},
+              {kind:"actual",en:"Challenges of studying in HK and how to overcome?",zh:"到香港念书的困难挑战？如何克服？",cat:"适应",src:"kaoersi HKUST"},
+              {kind:"actual",en:"JUPAS (AI): What challenges does AI development currently face? Do you use AI tools? If admitted, what would you research?",zh:"JUPAS（AI）：AI 发展当前面临哪些挑战？你用 AI 工具吗？若录取想研究什么？",cat:"专业",src:"ieduchina JUPAS"},
+              {kind:"actual",en:"JUPAS (Engineering): How does a plane lift off and stay balanced? Why choose CS?",zh:"JUPAS（工程）：飞机如何升空并保持平衡？为什么选计算机？",cat:"专业/开放",src:"ieduchina JUPAS"},
+              {kind:"actual",en:"Any questions for us?",zh:"你有什么问题问我？",cat:"反问",src:"kaoersi HKUST"}
+            ],
+            warnings:[
+              "Kira 5 题一次性录制提交，提前调试摄像头/麦克风，准时",
+              "问题随机，以社会/教育/生活类为主，准备通用素材",
+              "JUPAS 小组面重逻辑深度与临场反应，非抢话"
+            ],
+            sources:[{t:"25Fall 港科大本科面试经验",u:"https://www.kaoersiedu.com/college-327/new-426175.html"},{t:"直击港科大 JUPAS 面试",u:"https://m.ieduchina.com/hongkong/education/202505/128109.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"商学院（MFin / IM 等）",
+            interviewType:"金融硕士 2026 级入学有重大调整：由往年视频录制改为实时互动面试，约 40 分钟，双模式考核 + 监考体系，严禁使用 AI 辅助工具。前 25 分钟英文写作（如『ESG 投资在当前宏观经济下的挑战』，300–500 字）+ 2 段 3 分钟视频（行为题 + 专业题，如 DCF 估值模型在并购中的应用与局限）。投资管理硕士为 Skype 经理面(10min) + 自选投资话题 presentation(5min) + Q&A。以官网为准。",
+            official:[{k:"MFin 2026 形式",v:"实时互动 40min：25min 英文写作 + 2×3min 视频，严禁 AI 辅助"},{k:"投资管理",v:"Skype 经理面 10min + 自选投资话题 5min presentation + Q&A"},{k:"说明",v:"以各专业官网为准"}],
+            flow:["收到面邀（MFin 改实时互动，全程录屏监控）","25min 英文限时写作","2 段 3min 视频（行为+专业，系统/教授查是否读稿）","投资管理另含二面：自选投资话题 presentation + Q&A"],
+            questions:[
+              {kind:"variant",en:"Why do you want to pursue the HKUST Master of Finance?",zh:"你为什么想读港科大金融硕士？",cat:"动机",src:"gter 寄托天下 HKUST MFin 面经"},
+              {kind:"variant",en:"Share your view on current financial market trends.",zh:"谈谈你对当前金融市场趋势的看法。",cat:"热点/金融",src:"gter 寄托天下 HKUST MFin 面经"},
+              {kind:"variant",en:"Describe a time you resolved a conflict in a team.",zh:"描述一次你在团队中解决冲突的经历。",cat:"行为",src:"gter 寄托天下 HKUST MFin 面经"},
+              {kind:"variant",en:"If your portfolio suddenly dropped 20%, what would you do?",zh:"如果你的投资组合突然亏损 20%，你会怎么做？",cat:"专业/金融",src:"gter 寄托天下 HKUST MFin 面经"},
+              {kind:"variant",en:"[Writing 25min] Analyze the challenges of ESG investing under the current macroeconomy (300–500 words).",zh:"[写作 25min] 分析『ESG 投资在当前宏观经济下的挑战』（300–500 字）。",cat:"写作/ESG",src:"gter 寄托天下 HKUST MFin 面经"},
+              {kind:"variant",en:"[Video] Explain the DCF valuation model's application & limitations in real M&A.",zh:"[视频] 解释 DCF 估值模型在实际并购中的应用及局限性。",cat:"专业/DCF",src:"gter 寄托天下 HKUST MFin 面经"},
+              {kind:"variant",en:"IM: Why HKUST / this programme / investment? Why you (experience & strength)?",zh:"投资管理：为什么选港科大/本项目/投资管理？你的优势（经历与强项）？",cat:"动机",src:"gter 寄托天下 HKUST IM 面经"},
+              {kind:"variant",en:"IM 2nd round: choose an investment topic, present 5min, then Q&A on your arguments/examples.",zh:"投资管理二面：自选投资话题做 5 分钟 presentation，并就论据/例子接受 Q&A。",cat:"专业/投资",src:"gter 寄托天下 HKUST IM 面经"}
+            ],
+            warnings:[
+              "MFin 2026 改实时互动 + 限时写作，彻底杜绝 AI 代写/读稿；需限时打字与脱稿口头训练",
+              "40 分钟节奏紧凑，每个回答都会被深挖，准备金融市场热点与个人经历具体细节",
+              "投资管理二面要为每个结论备好论据/例子，体现言之有理而非堆术语"
+            ],
+            sources:[{t:"港科大金融硕士面经（2026 改革）",u:"https://interviewexperience.gter.net/details/5eW1GfXeufyL"},{t:"港科大金融硕士（写作+视频）面经",u:"https://f.gter.net/details/PjmOLjTv5O1i"},{t:"港科大投资管理硕士面经",u:"https://f.gter.net/details/CKb4Waey1rzz"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 环境科学与管理及可持续发展（EVSM）",
+            interviewType:"教授/多人面（1–3 位面试官轮流提问），中英混合。风格极度个人化、深挖型：围绕 CV / PS / 申请系统里每一条经历连环追问；职业规划是绝对核心且会『疯狂纠缠』式追问刁钻细节；普遍含反问环节。具体形式以面邀邮件为准。",
+            official:[
+              {k:"形式",v:"多人教授面，深挖 CV/PS/申请系统细节"},
+              {k:"语言",v:"中英混合"},
+              {k:"核心",v:"职业规划 + 转专业逻辑 + 动机压力测试"},
+              {k:"说明",v:"形式未在来源中注明，以面邀为准"}
+            ],
+            flow:["收到面邀","多人面：自我介绍 → 动机/规划 → CV/PS 深挖 → 热点 → 反问"],
+            questions:[
+              {kind:"actual",en:"3-min self-introduction.",zh:"3 分钟自我介绍",cat:"自我",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"Why EVSM? Why HKUST?",zh:"Why EVSM？Why HKUST？",cat:"动机",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"What are your future career goals?",zh:"未来的职业目标？",cat:"规划",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"Internship deep-dive: you had an internship in another city — why, as a non-local, did you get it?",zh:"实习细节深挖：异地实习被问『为什么不是那里人，却有一个那里的实习』",cat:"经历深挖",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"Did your internship company offer you a return (full-time) offer?",zh:"实习公司给了转正 offer 吗？",cat:"经历深挖",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"What project were you responsible for at each of your two companies? What did you gain?",zh:"在两家公司分别负责什么项目？有什么收获？",cat:"经历深挖",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"Why pursue a master's after working? Aren't you afraid of not finding a job when you return?",zh:"为啥工作了要去读研？不害怕回来没有工作吗？",cat:"动机/压力",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"(Another professor) With 20 majors' data in one chart, how do you make it professional?",zh:"（另一老师）20 个专业的数据图表，怎么算专业？",cat:"专业/图表",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"Why switch from your original engineering major to EVSM? (env engineering background)",zh:"为什么从原本的工科专业转到 EVSM？（本科环境工程）",cat:"转专业",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"What is your career plan? Why do you think EVSM can help you make this transition?",zh:"职业规划是什么？为什么你觉得 EVSM 可以帮你完成这个转变？",cat:"规划/转专业",src:"xdf 面经表（用户提供）2026秋"},
+              {kind:"actual",en:"What does your bachelor's major focus on? (asked when major name is broad)",zh:"本科专业偏向于什么方向？（专业名比较杂被问）",cat:"背景",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"How does EVSM relate to your undergraduate study, and how can it further develop what you learned?",zh:"EVSM 项目与本科学习内容的关联？这个项目如何更好地发展你本科的知识？",cat:"转专业/匹配",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Once you mention career plan, expect relentless follow-ups with tricky details — 'why are you a good fit for this direction?'",zh:"提到职业规划后会疯狂深挖、追问刁钻问题——『为什么你适合这个方向？』",cat:"规划/压力",tip:"规划必须扎实到能扛住连环追问",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Explain this one sentence from your PS motivation section.",zh:"解释 PS motivation 部分的某一句话",cat:"经历深挖",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Why Hong Kong? (candidate had two exchange experiences)",zh:"为什么来香港？（有两次交换经历被问）",cat:"动机",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Explain how an obscure certificate you listed (e.g., hand-brew coffee certificate) relates to the environment.",zh:"系统里填的很偏的资格证（手冲咖啡资格证）和环境有什么关系？",cat:"经历深挖",tip:"申请系统里每一条都可能被点名，提前想好关联",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Why choose EVSM without a chemistry/biology background?",zh:"没有化学/生物背景为什么选 EVSM？",cat:"转专业",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Why this program? Why not work directly? Would you enroll in any master program? Is this your only choice?",zh:"为什么申请这个项目？为什么不直接就业？是不是只要有 master 就会读？这是不是你的 only choice？",cat:"动机/压力",tip:"体现对 EVSM 本身的了解与独特匹配，忌泛泛",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Why HK rather than Canada/US/UK? After graduation, will you stay in HK or return to Beijing/Shanghai? Why?",zh:"为什么来香港读书而不是加拿大/美国/英国？读完是否留港工作？为什么不回内地北京/上海？",cat:"地区选择",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"How does this program help you achieve your career goal?",zh:"这个项目如何帮你达成职业目标？",cat:"规划/匹配",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Expand a research item on your CV: what was the research question and conclusion? (focus on your charts) What economic language did you use to describe the conclusions? What did you use Google Earth Pro for?",zh:"CV 里的 research 展开：研究问题与结论是什么？（重点问图表）用了什么经济学语言描述结论？Google Earth Pro 是用来干嘛的？",cat:"经历深挖/专业",tip:"CV 中每个 research 都要能讲清问题-方法-结论",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Questions related to your GPA; experiences of studying in China and Canada.",zh:"与个人 GPA 有关的问题；在中国和加拿大上课的感受",cat:"背景",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"China's ESG development potential; how China fulfills its international obligations; difficulties and paths of pushing green reform in China.",zh:"中国对 ESG 发展的潜力？中国怎么履行国际义务？中国推动绿色环保改革的困难 + 怎么做？",cat:"热点/ESG",tip:"EVSM 特色考点：双碳/巴黎协定/绿色政策",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Career plan; Why EVSM? What can your bachelor's major contribute to further study? Why do you think this program has hands-on practice? (It does.)",zh:"职业规划；Why EVSM？本科专业能为你继续进修提供什么帮助？为什么你觉得这个项目会有实践操作？（我们项目也是）",cat:"规划/动机",src:"xdf 面经表（用户提供）2024秋"},
+              {kind:"actual",en:"Any questions for us?",zh:"反问 / 你有什么想问的？",cat:"反问",tip:"多条面经以此结尾，备 1–2 个问题",src:"xdf 面经表（用户提供）2024秋"}
+            ],
+            warnings:[
+              "职业规划是生死题：9 条面经 7 条被反复深挖，短期/中期/长期 + 『为什么 EVSM 能帮你实现』必须逻辑闭环",
+              "CV/PS/申请系统每个字都可能被追问（含小众资格证、research 图表、实习是否转正），面试前逐条过材料",
+              "动机题会被压力测试：『有 master 就读？』『only choice？』『为什么不就业？』——回答要落到 EVSM 独特匹配点",
+              "补中国 ESG 与环保政策热点（双碳、国际义务、绿色改革困难与路径）",
+              "反问环节普遍存在，准备 1–2 个体现项目了解的问题"
+            ],
+            sources:[{t:"新东方 xdf.cn 硕士面经表（用户提供截图，2026秋×3 + 2024秋×6 共 9 条）",u:"https://www.xdf.cn"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 全球运营（Global Operations）",
+            interviewType:"Zoom 线上，约 20min；群面形式：1 分钟自我介绍 + 小组讨论（5 分钟准备时间）。围绕 CV / PS 内容追问。",
+            official:[{k:"形式",v:"Zoom 群面（1min 自我介绍 + 小组讨论）"},{k:"时长",v:"约 20min"},{k:"准备",v:"5min 准备"}],
+            flow:["收到面邀","Zoom 群面：自我介绍 → 小组讨论 → 追问"],
+            questions:[
+              {kind:"actual",en:"Self-introduction (1 min).",zh:"1 分钟自我介绍",cat:"自我",src:"库克留学 2025-2026 面经汇总（搬运小红书）"},
+              {kind:"actual",en:"What is an effective operations strategy?",zh:"你觉得什么是有效的运营策略？",cat:"专业/运营",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"How can operations strategy improve a company's competitiveness?",zh:"怎么通过运营策略提升公司的竞争力？",cat:"专业/运营",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"Does social media development have a more positive or negative effect on communication?",zh:"社交媒体的发展对交流沟通是积极作用更大还是消极作用更大？",cat:"热点/思辨",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"How has technological progress impacted global operations?",zh:"科技的进步对全球运营带来了哪些影响？",cat:"热点/运营",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"What impact does AI have on global operations?",zh:"你觉得人工智能对全球运营产生的影响有哪些？",cat:"热点/AI",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"Why did you choose to apply for this programme?",zh:"你为什么选择申请这个项目？",cat:"动机",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"What do you think is the biggest challenge facing global operations today?",zh:"你觉得目前全球运营面临的最大的问题是什么？",cat:"专业/运营",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"How to handle cultural differences in global operations?",zh:"怎么处理全球运营中的文化差异？",cat:"专业/运营",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"Share an experience of doing an operations project.",zh:"分享一次做运营项目的经历",cat:"经历深挖",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"What role does technology play in operations management?",zh:"你怎么看待技术在运营管理中起到的作用？",cat:"专业/运营",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"What is your career plan?",zh:"你的职业规划是什么？",cat:"规划",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"What are the current challenges in global supply chains?",zh:"你认为现阶段全球供应链面临的相关挑战是什么？",cat:"专业/供应链",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"Do you understand the principles of supply chain management and logistics?",zh:"了解供应链管理和物流的基本原则吗？",cat:"专业/供应链",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"Do you have operations-related internship or work experience?",zh:"有没有运营领域的实习或工作经验？",cat:"经历",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"How does your academic background relate to this programme?",zh:"你的学术背景跟项目有什么关系？",cat:"背景/匹配",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"Pros and cons of the sharing economy.",zh:"共享经济的好处和坏处",cat:"热点/思辨",src:"库克留学 2025-2026 面经汇总"},
+              {kind:"actual",en:"What does a pioneering supply chain look like to you?",zh:"你觉得开创性的供应链是怎么样的？",cat:"专业/供应链",src:"库克留学 2025-2026 面经汇总"}
+            ],
+            warnings:["群面重英文表达与团队协作，切忌说中文、切忌『麦霸』","小组讨论给 5 分钟准备，先搭框架再发言","运营热点题（AI/供应链/共享经济）需结合实例"],
+            sources:[{t:"库克留学 NUS/HKUST 面经汇总（2025-2026，原始多搬运自小红书）",u:"https://mp.weixin.qq.com"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 市场营销（Marketing）",
+            interviewType:"Zoom 线上，约 10 分钟。问题数量少但挖掘深（4-6 题），常现场纠正回答方向、反套路追问细节。互动性强。",
+            official:[{k:"形式",v:"Zoom 单面（1v1 或小组）"},{k:"时长",v:"约 10min"},{k:"风格",v:"问题少、深挖、反套路"}],
+            flow:["收到面邀","Zoom：个人经历 → 项目匹配 → 情景分析 → 反问"],
+            questions:[
+              {kind:"actual",en:"Describe yourself in one word / trait.",zh:"用一个词/特质形容自己",cat:"自我",src:"海马课堂 2025-2026 HKUST MKT 面经"},
+              {kind:"actual",en:"Which undergraduate course impressed you most, and why?",zh:"本科印象深刻的课程及原因",cat:"背景",src:"海马课堂 2025-2026 HKUST MKT 面经"},
+              {kind:"actual",en:"What exactly did you do in your internship/project? What marketing skills did you learn?",zh:"过去的实习/项目中具体做了什么？学到了哪些 mkt 相关技能？",cat:"经历深挖",src:"海马课堂 2025-2026 HKUST MKT 面经"},
+              {kind:"actual",en:"If you are a career switcher, why did you switch to this master's?",zh:"如果转专业申请研究生，还会被问到相关原因",cat:"转专业",src:"海马课堂 2025-2026 HKUST MKT 面经"},
+              {kind:"actual",en:"Which UST course do you most want to take, and why?",zh:"最想上的 ust 课程及原因（反套路替代笼统 Why HKUST）",cat:"项目匹配",src:"海马课堂 2025-2026 HKUST MKT 面经"},
+              {kind:"actual",en:"How would you contribute to this programme?",zh:"如何为项目做贡献？",cat:"项目匹配",src:"海马课堂 2025-2026 HKUST MKT 面经"},
+              {kind:"actual",en:"What is your career plan (short-term + long-term)?",zh:"未来职业规划（短期+长期）",cat:"规划",src:"海马课堂 2025-2026 HKUST MKT 面经"},
+              {kind:"actual",en:"Design a Xiaohongshu (RED) account operation plan for HKUST.",zh:"为港科设计小红书账号运营方案（情景题）",cat:"情景/营销",src:"海马课堂 2025-2026 HKUST MKT 面经"},
+              {kind:"actual",en:"What is your view on a recent marketing hotspot / consumer trend?",zh:"如何看待某 mkt 热点/消费者趋势？",cat:"情景/营销",src:"海马课堂 2025-2026 HKUST MKT 面经"}
+            ],
+            warnings:["正面回答问题，顾左右而言他会再被追问","简历每段预设『追问点』（如『运营小红书账号』→如何定位受众/用了什么营销技巧）","情景题套用『目标-策略-执行-评估』逻辑"],
+            sources:[{t:"海马课堂 港科大 MKT 面试经验（2025-2026）",u:"https://www.highmarktutor.com/news/30011_56.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 信息系统管理（ISM）",
+            interviewType:"Zoom 线上，全程单人面，约 10-15 分钟。围绕学术背景、专业匹配、技术能力、未来规划展开，对 CV 深挖。",
+            official:[{k:"形式",v:"Zoom 单面（1v1）"},{k:"时长",v:"10-15min"},{k:"重点",v:"CV 深挖 + coding 能力"}],
+            flow:["收到面邀","Zoom：背景匹配 → CV/coding 深挖 → 规划 → 反问"],
+            questions:[
+              {kind:"actual",en:"What is your undergraduate major and how is it related to ISM?",zh:"本科的专业以及与 ISM 有什么相关性？",cat:"背景/匹配",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"If you are a career switcher, why did you choose ISM (Why ISM)?",zh:"如果你是跨专业，那么为什么会跨专业选择 ISM（Why ISM）？",cat:"转专业",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"Follow-up on your undergraduate major in detail (e.g., do you like it?).",zh:"追问你的本科专业详细问题，比如喜不喜欢这个专业",cat:"背景",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"Which courses in ISM are you interested in?",zh:"你对 ISM 的课程中什么课比较有兴趣？",cat:"项目匹配",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"Deep-dive on the career plan stated in your CV.",zh:"对你 CV 中提到的 career plan 进行深挖",cat:"规划/深挖",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"Did you learn coding in your undergraduate courses?",zh:"本科课程学过 coding 吗？",cat:"技术/coding",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"What program have you done with Python?",zh:"用 python 做过什么 program？",cat:"技术/coding",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"What libraries did you use specifically?",zh:"具体用了什么方面的库？",cat:"技术/coding",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"What exactly did you do in your internship?",zh:"实习具体做了什么？",cat:"经历深挖",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"Did you use AI during your internship?",zh:"实习过程中有没有用过 ai？",cat:"经历/AI",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"Detailed professional questions about coding.",zh:"关于 coding 的详细专业问题",cat:"技术/coding",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"What other programmes have you applied to, and how do you rank them?",zh:"还申请了什么项目，项目的优先度排序",cat:"动机",src:"海马课堂 2025-2026 HKUST ISM 面经"},
+              {kind:"actual",en:"Any questions for us?",zh:"经典反问",cat:"反问",src:"海马课堂 2025-2026 HKUST ISM 面经"}
+            ],
+            warnings:["对 coding 很在意，掌握程度决定技术深度","整场无固定节奏，会按回答追问，聪明引导到自己擅长领域","跨专业申请务必熟悉 CV（含润色部分），防被追问穿帮"],
+            sources:[{t:"海马课堂 港科大 ISM 面试全攻略（2025-2026）",u:"https://www.highmarktutor.com/news/30299_56.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 商业分析（Business Analytics）",
+            interviewType:"Zoom 线上，约 15-20 分钟。围绕数据分析能力、项目经历、统计/机器学习概念深挖。",
+            official:[{k:"形式",v:"Zoom 单面"},{k:"时长",v:"15-20min"},{k:"重点",v:"数据分析 + 统计概念 + 团队/动机"}],
+            flow:["收到面邀","Zoom：自我介绍 → 经历/课程 → 统计题 → 动机/反问"],
+            questions:[
+              {kind:"actual",en:"Self-introduction.",zh:"自我介绍",cat:"自我",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"How was your internship project implemented specifically?",zh:"你的实习经历中项目是如何具体实施的？",cat:"经历深挖",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"What is your career plan?",zh:"职业规划",cat:"规划",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Which BA course do you like most?",zh:"你最喜欢 BA 的什么课程？",cat:"项目匹配",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Tell us about the data analysis experience mentioned in your internship.",zh:"可以详细介绍一下实习经历里提到的数据分析经历吗？",cat:"经历深挖",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Why do you want to apply for BA?",zh:"为什么想申 BA？",cat:"动机",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Share a Hong Kong project experience.",zh:"分享一个香港项目的经历",cat:"经历",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"What role does business analytics play in a company?",zh:"你觉得商业分析在企业中的作用是什么？",cat:"专业/BA",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"How would you handle conflict in a team?",zh:"你将怎么处理团队中的冲突？",cat:"行为",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Why did you choose HKUST?",zh:"为什么选择申香港科技大学？",cat:"动机",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"How do you judge whether a model is good?",zh:"怎么判断一个模型好不好？",cat:"专业/统计",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Why do we do a T-test?",zh:"什么要做 T test？",cat:"专业/统计",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"If coefficients are significant but R² is low, what might be the reason?",zh:"系数显著但是 R2 低可能是什么原因？",cat:"专业/统计",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Have you done projects with programming software? Which models/tools do you know?",zh:"有没有用编程软件做过项目？熟悉哪些数据分析模型和工具？",cat:"技术",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Why is linear regression important? How to judge its fit?",zh:"为什么线性回归很重要？怎么判断线性回归模型拟合程度？",cat:"专业/统计",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Which aspect of data analysis do you want to improve? Have you studied time series and how to apply it?",zh:"具体想在哪个方面提高数据分析能力？有没有学过时间序列的内容、具体怎么应用？",cat:"专业/统计",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Among students with similar backgrounds, what makes you stand out?",zh:"这个项目也有很多背景和你相似的学生，你认为你突出的点是？",cat:"动机/优势",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Why should we admit you?",zh:"我们为什么要录取你？",cat:"动机",src:"库克留学 2025-2026 HKUST BA 面经"},
+              {kind:"actual",en:"Any questions for us?",zh:"反问",cat:"反问",src:"库克留学 2025-2026 HKUST BA 面经"}
+            ],
+            warnings:["统计概念题多（T检验/R²/线性回归/时间序列），需能口头解释","模型评价类题考察真实理解，背公式没用","同类背景学生多，『你突出点』是必准备题"],
+            sources:[{t:"库克留学 HKUST 商业分析面经（2025-2026）",u:"https://mp.weixin.qq.com"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"MSc 经济学（Economics）",
+            interviewType:"Zoom 线上，围绕经济学基础概念、时事、个人动机与学术背景展开。",
+            official:[{k:"形式",v:"Zoom 单面"},{k:"重点",v:"经济学概念 + 时事 + 动机"}],
+            flow:["收到面邀","Zoom：自我介绍 → 概念/时事 → 动机/规划 → 反问"],
+            questions:[
+              {kind:"actual",en:"Self-introduction.",zh:"自我介绍",cat:"自我",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Why did you choose to study economics?",zh:"为什么选择学习经济学？",cat:"动机",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Which branch of economics interests you most, and why?",zh:"你对经济学哪个分支最感兴趣，为什么？",cat:"专业/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"What is your view on the current global economic situation?",zh:"你对现在全球的经济形势有什么看法？",cat:"热点/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Explain the law of supply and demand with an example.",zh:"请举例解释一下供求法则",cat:"专业/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"What is opportunity cost? Give an example.",zh:"什么是机会成本？举一个实例",cat:"专业/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Explain 'externality'. How to solve externality problems?",zh:"经济学里提到的『外部性』是指什么？怎么解决外部性的问题？",cat:"专业/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"How do you understand the difference between macro- and micro-economics?",zh:"怎么理解宏观经济学和微观经济学的区别？",cat:"专业/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Why do you apply for this programme?",zh:"你为什么申请这个专业？",cat:"动机",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"How do supply and demand affect market prices?",zh:"解释一下供给和需求怎么影响市场价格",cat:"专业/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Which economic issues or hot topics do you follow?",zh:"比较关注哪些经济问题或者热点话题？",cat:"热点/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"How is your academic background related to economics?",zh:"你的学术背景和经济学有什么相关？",cat:"背景/匹配",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Share an economics research project experience.",zh:"分享一个你在经济领域的研究项目经验",cat:"经历深挖",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Would you prefer to study macro- or micro-economics in depth?",zh:"你更想深入学习宏观经济学还是微观经济学？",cat:"专业/经济",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"Do you have economics-related internship/work experience?",zh:"你有没有经济学相关的实习或工作经历？",cat:"经历",src:"库克留学 2025-2026 HKUST Econ 面经"},
+              {kind:"actual",en:"What is your career plan?",zh:"你的职业规划是怎么样的？",cat:"规划",src:"库克留学 2025-2026 HKUST Econ 面经"}
+            ],
+            warnings:["概念题要能中英文口头解释（供求/机会成本/外部性/宏微观）","准备 1-2 个关注的经济热点并讲清逻辑","跨专业申请者重点补经济学基础术语"],
+            sources:[{t:"库克留学 HKUST 经济学面经（2025-2026）",u:"https://mp.weixin.qq.com"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"金融学 Master of Finance（MFin）",
+            interviewType:"港科大金融硕士（MFin）仅邀请入围者参加个人评估面试（Personal Assessment Interview），境外申请者线上进行（不接受电话）。约 20–30min，两位面试官，考察动机、职业目标、沟通、分析思维、市场理解与项目匹配。",
+            official:[{k:"形式",v:"线上 1v2 个人面"},{k:"时长",v:"约20–30min"},{k:"对象",v:"仅 shortlisted"}],
+            flow:["收到面邀（仅 shortlist）","线上 1v2 面试","动机→学术→职业→市场→反问"],
+            questions:[
+              {kind:"actual",en:"Why do you want to pursue a Master of Finance? Why HKUST over other finance programs?",zh:"为什么读金融硕士？为什么选港科大而非其他金融项目？",cat:"动机",src:"myls.ai HKUST MFin 面经 2024-2025"},
+              {kind:"actual",en:"Why now? Tell me about your undergrad studies & favourite quant/finance course.",zh:"为什么是现在？介绍本科经历与最喜爱的量化/金融课程。",cat:"学术",src:"myls.ai HKUST MFin 面经"},
+              {kind:"actual",en:"What are your short & long-term career goals? Which area of finance interests you most?",zh:"你的短期与长期职业目标？最感兴趣的金融领域？",cat:"规划",src:"myls.ai HKUST MFin 面经"},
+              {kind:"actual",en:"Tell me about a challenging project / time under pressure / conflict in a team.",zh:"讲述一个有挑战的项目 / 高压经历 / 团队冲突。",cat:"行为",src:"myls.ai HKUST MFin 面经"},
+              {kind:"actual",en:"What recent financial event interests you? How do rate changes affect markets?",zh:"近期关注的金融事件？利率变化如何影响市场？",cat:"市场",src:"myls.ai HKUST MFin 面经"},
+              {kind:"variant",en:"Which finance/quant courses did you enjoy most? Proudest academic achievement?",zh:"你最喜欢哪些金融/量化课程？最自豪的学术成就？",cat:"学术",src:"myls.ai HKUST MFin 面经"}
+            ],
+            warnings:["MFin 面更重动机/沟通/职业方向，非技术计算考试","用具体技能缺口 + 课程关联回答 Why HKUST","勿答『work in finance』式空泛目标，须具体职能/行业/进阶"],
+            sources:[{t:"myls.ai HKUST MFin 面试指南",u:"https://myls.ai/blog/hkust-master-of-finance-mfin-admission-application-and-interview-guide"}]
+          }
+        ]
+      },
+      { id:"cityu", name:"香港城市大学", abbr:"CityU", color:"#00923f",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"各本科专业（英文面，含热点讨论）",
+            interviewType:"大部分专业英文面试，围绕申请专业与当前社会热点展开，考察逻辑思维。兽医学士（JUPAS）为小组/个人英语面，重价值观与同理心；创意媒体等或含作品/笔试。",
+            official:[
+              {k:"形式",v:"英文个人/小组面，围绕专业+社会热点"},
+              {k:"语言",v:"全英为主；中医/中文等或辅以中文"},
+              {k:"兽医",v:"小组+个人英语面，需 800 字英文个人简介+≥2 周动物机构义工/实习反思"},
+              {k:"周期",v:"6 月下旬高考后面试"}
+            ],
+            flow:["收到面邀","英文个人/小组面（专业 + 社会热点）","兽医另含价值观/同理心情境题"],
+            questions:[
+              {kind:"actual",en:"Why did you choose this major?",zh:"你为什么选择这个专业？",cat:"动机",src:"jingsailian / zggx100 港校面经"},
+              {kind:"actual",en:"What is your greatest strength? How do you use it?",zh:"你最大的优点是什么？如何运用它？",cat:"自我认知",src:"jingsailian 港城大面经"},
+              {kind:"actual",en:"What goals do you hope to achieve during your college years?",zh:"你希望在大学期间达成什么目标？",cat:"规划",src:"jingsailian 港城大面经"},
+              {kind:"variant",en:"What is your view on a current social hotspot (e.g., AI impact on employment)?",zh:"对某个当前社会热点（如 AI 对就业的影响）你有什么看法？",cat:"时事/思辨",src:"liuxue360 / isixue 城大面经"},
+              {kind:"variant",en:"Why choose CityU over other HK / mainland universities?",zh:"为何选城大而非其他港校或内地院校？",cat:"动机",tip:"结合专业资源（如创意媒体、兽医）"},
+              {kind:"actual",en:"1-min self-introduction on Zoom (interrupted: 'get to the point').",zh:"Zoom 1 分钟自我介绍（被教授打断：『直接说重点』）",cat:"自我",src:"gter 寄托天下 港城大面经"},
+              {kind:"actual",en:"Why CityU instead of PolyU? (answered: CityU's quant finance is more industry-oriented).",zh:"为什么选城大而不是港理工？（答：城大的量化金融更偏工业界）",cat:"动机",src:"gter 寄托天下 港城大面经"}
+            ],
+            warnings:[
+              "面试围绕社会热点与专业，需每日关注新闻并整理观点",
+              "兽医面试重价值观与同理心，需真实动物照护经历+反思，绝非标准答案",
+              "部分专业（中医/中文/社会工作）或辅以中文/粤语"
+            ],
+            sources:[{t:"2025 港校面试形式与常见问题",u:"https://www.jingsailian.com/news/1587988.html"},{t:"香港城市大学升学全攻略",u:"http://hk.m.liuxue360.com/news/04509576.html"},{t:"城大兽医收生重动物照护经验",u:"https://www.stheadline.com/admission-guide/3620706"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"授课型硕士（部分专业面/笔试）",
+            interviewType:"部分专业设面试或笔试：商科可能涉及 CAPM 等专业知识，研究型（MRes/PhD）重研究计划；以官网为准。",
+            official:[{k:"形式",v:"因专业而异；商科或含专业题/笔试"},{k:"说明",v:"以各专业官网为准"}],
+            flow:["查目标项目官网确认"],
+            questions:[
+              {kind:"variant",en:"Please explain the CAPM model.",zh:"请解释 CAPM 模型。",cat:"专业",src:"liuxue360 城大硕士面经"},
+              {kind:"variant",en:"What are your career goals in 5 years?",zh:"你毕业 5 年内的职业目标是什么？",cat:"规划",src:"liuxue360 城大硕士面经"}
+            ],
+            warnings:["研究生面试非普遍要求，需逐项目核实官网"],
+            sources:[{t:"香港城市大学升学全攻略",u:"http://hk.m.liuxue360.com/news/04509576.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"金融学 MSc Finance",
+            interviewType:"城大金融硕士（MSc Finance）通常为线上小组面试，全英；考察金融基础知识、对项目的理解、未来职业规划及团队协作表达。也可能为个人问答（Skype/Zoom）。",
+            official:[{k:"形式",v:"线上小组面/个人面"},{k:"语言",v:"全英"}],
+            flow:["收到面邀","小组 case / 个人问答","Why CityU/Finance → 基础 → 职业 → 反问"],
+            questions:[
+              {kind:"actual",en:"Why HK? Why CityU? Why Finance?",zh:"为什么香港？为什么城大？为什么选金融？",cat:"动机",src:"留学生网 lxs 城大金融面经 2025"},
+              {kind:"actual",en:"How would recent global economic situation impact Hong Kong's financial market?",zh:"近期全球经济形势对香港金融市场有何影响？",cat:"市场",src:"留学生网 lxs 城大金融面经 2025"},
+              {kind:"actual",en:"What are your career goals? Prepare 1-2 questions about the programme.",zh:"你的职业目标？准备 1-2 个关于项目的提问。",cat:"规划/反问",src:"留学生网 lxs 城大金融面经 2025"},
+              {kind:"actual",en:"Analyze a case and give an investment recommendation (group).",zh:"小组分析一个案例并给出投资建议。",cat:"小组case",src:"留学生网 lxs 城大金融面经 2025"},
+              {kind:"variant",en:"Tell me about yourself / your internship & what you learned.",zh:"自我介绍 / 你的实习及收获。",cat:"自我/经历",src:"优朗教育 城大商学院通关 2024"},
+              {kind:"variant",en:"What's the most interesting course to you? What matters most for this profession?",zh:"本项目你最感兴趣的课？该职业最重要的是什么？",cat:"专业",src:"考而思 城大研究生面试 2024"}
+            ],
+            warnings:["小组面重逻辑总结与团队贡献，不必抢第一发言","真诚优于完美，卡壳可坦诚『需进一步学习』再尽力作答","务必准备项目相关提问展现诚意"],
+            sources:[{t:"留学生网 城大金融面经",u:"https://www.lxs.net/read-blog/844990"},{t:"优朗教育 城大商学院",u:"https://www.englang.cn/shownews.asp?NewsId=1961"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"计算机科学 / 工程类（CS / Civil 等）",
+            interviewType:"城大计算机科学/工程类硕士面试聚焦学科核心能力与案例分析，全英；可能含技术问题与项目深挖，结合 AI 伦理、ESG、绿色工程等热点。",
+            official:[{k:"形式",v:"个人问答/技术分析"},{k:"语言",v:"全英"}],
+            flow:["收到面邀","技术/项目问答","结合专业热点作答"],
+            questions:[
+              {kind:"actual",en:"Explain how blockchain ensures data security, with real-world applications.",zh:"解释区块链如何保障数据安全，并举实际应用场景。",cat:"专业/CS",src:"公众号 港城硕士专业面试问题 2024-2025"},
+              {kind:"actual",en:"What was your biggest technical challenge in a coding project and how resolved?",zh:"编程项目中遇到的最大技术障碍是什么？如何解决的？",cat:"专业/CS",src:"公众号 港城硕士专业面试问题 2024-2025"},
+              {kind:"actual",en:"How can green building materials reduce carbon emissions in construction?",zh:"绿色建材如何减少建筑碳排放？",cat:"专业/工程",src:"公众号 港城硕士专业面试问题 2024-2025"},
+              {kind:"actual",en:"Analyse potential engineering risks in Hong Kong's Lantau Tomorrow Vision reclamation.",zh:"分析香港『明日大屿』填海计划的潜在工程风险。",cat:"专业/工程",src:"公众号 港城硕士专业面试问题 2024-2025"}
+            ],
+            warnings:["结合 AI 伦理、ESG、绿色工程等专业热点作答","准备项目技术细节（语言/算法/障碍/解决）","工程类可关注香港本地基建案例"],
+            sources:[{t:"公众号 港城硕士专业面试问题",u:"http://mp.weixin.qq.com/s?__biz=MzkwMTMxMjQ0Ng==&mid=2247490899"}]
+          }
+        ]
+      },
+      { id:"polyu", name:"香港理工大学", abbr:"PolyU", color:"#8c1d2c",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"各本科专业（单面 / 小组 / 作品集）",
+            interviewType:"以全英为主：个人面（工科/商科/计算机/护理/酒店/生物等，1–2 面试官，10–15min）+ 小组面（人文社科/时装/部分商科，4–6 人，30–60min）。设计/建筑/时装须带电子作品集；酒店/护理/社工重同理心与抗压。",
+            official:[
+              {k:"形式",v:"个人面 10–15min + 小组面 30–60min；全英"},
+              {k:"作品集",v:"设计/建筑/时装须带电子作品集（讲解灵感+工艺）"},
+              {k:"评分",v:"专业契合 30% / 英语逻辑 25% / 思辨视野 20% / 应变抗压 15% / 院校认同 10%"},
+              {k:"周期",v:"高考出分后 6 月；3D 综评计划面试占 15%"}
+            ],
+            flow:["身份核验+设备调试","1min 英文自我介绍","单面深挖 PS/成绩/竞赛 或 小组议题辩论","考生提问"],
+            questions:[
+              {kind:"actual",en:"Tell me about yourself. (1-min self-intro)",zh:"做自我介绍（1 分钟）",cat:"自我",src:"jiaoyubao / 15386 / xdf PolyU 面经"},
+              {kind:"actual",en:"Why PolyU instead of HKU/CUHK/Mainland universities?",zh:"为何选理大而非港大/中大/内地院校？",cat:"动机",src:"15386 PolyU 面经"},
+              {kind:"actual",en:"Why choose this major? When did you develop interest?",zh:"为何选此专业？你从何时产生兴趣？",cat:"动机",src:"15386 / xdf PolyU 面经"},
+              {kind:"actual",en:"What's your biggest strength & weakness? How will you improve?",zh:"你最大的优缺点？如何改进？",cat:"自我认知",src:"15386 PolyU 面经"},
+              {kind:"actual",en:"What's your 5-year career plan? Will you stay in HK or return?",zh:"五年职业规划？留港还是回内地？",cat:"规划",src:"15386 PolyU 面经"},
+              {kind:"variant",en:"How would you design a hotel experience for elderly guests?",zh:"你会如何为老年宾客设计酒店体验？",cat:"专业/酒店",src:"hkguide PolyU 面经"},
+              {kind:"variant",en:"If your group project teammate stops contributing, what do you do?",zh:"若小组作业时组员不再贡献，你会怎么办？",cat:"情景/团队",src:"hkguide PolyU 面经"},
+              {kind:"variant",en:"Should schools limit students' use of ChatGPT? / How to balance tech convenience with privacy?",zh:"学校是否应限制学生用 ChatGPT？科技便利与隐私如何平衡？",cat:"社会思辨",src:"15386 PolyU 面经"},
+              {kind:"variant",en:"Explain the creative inspiration behind your favorite portfolio piece.",zh:"讲解你作品集里最满意作品的创作灵感。",cat:"作品集（设计类）",src:"xdf / liuxueyun PolyU 面经"},
+              {kind:"variant",en:"How has cross-border e-commerce changed the supply chain industry?",zh:"跨境电商给供应链行业带来了哪些改变？",cat:"专业/商科",src:"15386 港理工 2026 面经"},
+              {kind:"variant",en:"What do you think of current youth consumption trends and new-brand marketing?",zh:"你如何看待当下青年消费趋势与新品牌营销模式？",cat:"专业/商科",src:"15386 港理工 2026 面经"},
+              {kind:"variant",en:"How can new energy help solve the carbon emission problem?",zh:"新能源可以如何助力碳排放问题的解决？",cat:"专业/工科",src:"15386 港理工 2026 面经"}
+            ],
+            warnings:[
+              "小组面发言 3–4 次、每次≤45s 为佳，用『首先/其次』等逻辑词，忌抢话或沉默",
+              "设计/建筑/时装必须带电子作品集，用『灵感—技术—社会价值』框架讲解",
+              "收尾提问避免学费住宿等基础问题，优先问专业学习/能力培养"
+            ],
+            sources:[{t:"香港理工大学 2026 本科面试攻略",u:"http://mp.weixin.qq.com/s?__biz=MzA5MDg4MzY5Nw==&mid=2247503336&idx=1&sn=638f3f30a6035134bec25747c5a25af0"},{t:"PolyU 申请材料与面试策略",u:"https://qiantum.xdf.cn/blog/blog_7721605.shtml"},{t:"香港理工大学本科面试流程",u:"https://liuxue.xdf.cn/blog/blog_7717207.shtml"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"授课型硕士（部分专业）",
+            interviewType:"多数授课硕无统一面试；设计/酒店/护理等专业或含面试/作品集/情景模拟，以官网为准。",
+            official:[{k:"形式",v:"因专业而异"},{k:"说明",v:"以各专业官网为准"}],
+            flow:["查目标项目官网确认"],
+            questions:[],
+            warnings:["研究生面试非普遍要求，需逐项目核实官网"],
+            sources:[]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"商业管理 MSc Business Management（BM）",
+            interviewType:"理大商业管理（MSc BM）含 20 分钟线上笔试（阅读 10 道选择，淘汰率约半数）与约 10–15min Zoom 面试（2 位老师，深挖简历/选修课/职业规划/其他申请）。全英。",
+            official:[{k:"笔试",v:"20min 阅读选择题，淘汰率~50%"},{k:"面试",v:"Zoom 10–15min，2 老师"},{k:"语言",v:"全英"}],
+            flow:["20min 线上笔试","Zoom 面试（简历/选修课/规划）","反问"],
+            questions:[
+              {kind:"actual",en:"Self-introduction.",zh:"自我介绍。",cat:"自我",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Career plan: civil service or enterprise?",zh:"毕业后的职业规划：考公还是去企业？",cat:"规划",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Your short & long-term career goals?",zh:"你的长短期职业目标？",cat:"规划",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Why study in HK? Why our programme?",zh:"为何来港读硕？为何选我们专业？",cat:"动机",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"What did you learn from a specific internship?",zh:"你从某段实习中学到了什么？",cat:"经历",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Which other programmes/schools applied? If both PolyU offers, which? If neither?",zh:"还申请了哪些项目/学校？两专业都录选哪个？都没录怎么办？",cat:"其他申请",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"If employees leave frequently, how to retain them?",zh:"若员工频繁离职，你如何留住他们？",cat:"管理情境",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Group meeting: one too busy, another unsure of task — what do you do?",zh:"小组会议中一人太忙一人不知做什么，你怎么办？",cat:"团队情境",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Which course do you like most/least? Why?",zh:"本项目你最喜欢/最不喜欢哪门课？为什么？",cat:"专业",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Why should we admit you? Your strengths?",zh:"我们为何录取你？你的优势？",cat:"匹配",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Milk & Coke economics: why is milk carton square?",zh:"牛奶可乐经济学：牛奶盒为何是方的？",cat:"思维/趣味",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Your view on work-life balance?",zh:"你对工作生活平衡的看法？",cat:"观点",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Latest book you read?",zh:"最近读过的一本书？",cat:"通用",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Share a research experience / a failure and its lesson.",zh:"分享一段研究经历 / 一次失败及启发。",cat:"经历/反思",src:"新东方 tangnan3 理大BM面经 20题"},
+              {kind:"actual",en:"Any questions for us?",zh:"你有什么问题问我们？",cat:"反问",src:"新东方 tangnan3 理大BM面经 20题"}
+            ],
+            warnings:["笔试淘汰率约 50%，重细节理解，须仔细","面试常有未准备过的突袭题，熟记简历/PS 细节","简历勿夸大，细化问题答不出会很尴尬"],
+            sources:[{t:"新东方 tangnan3 理大BM面经",u:"https://liuxue.xdf.cn/blog/tangnan3/blog/5032677.shtml"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"会计相关硕士（ACC / PA / ACA）",
+            interviewType:"理大会计相关硕士（ACC/PA/ACA）面试围绕自我介绍、实习、会计基础与职业规划，全英；ACA 每年必问 Python 学习内容。",
+            official:[{k:"形式",v:"个人问答"},{k:"语言",v:"全英"}],
+            flow:["自我介绍","实习/会计基础问答","职业规划/Why PolyU"],
+            questions:[
+              {kind:"actual",en:"Self-intro; why PolyU; why this accounting programme; career plan?",zh:"自我介绍；为何理大；为何选此会计项目；职业规划？",cat:"动机",src:"金矢留学/新东方 理大会计面经"},
+              {kind:"actual",en:"Introduce an internship: where, what you learned.",zh:"介绍实习：在哪里、学到什么？",cat:"经历",src:"金矢留学 理大会计面经"},
+              {kind:"actual",en:"Explain a microeconomics and a finance concept.",zh:"解释一个微观经济学理念与一个金融学理念。",cat:"专业",src:"金矢留学 理大会计面经"},
+              {kind:"actual",en:"Why ACC not other accounting programmes? Goal?",zh:"为何选 ACC 而非其他会计项目？目标？",cat:"动机",src:"金矢留学 理大会计面经"},
+              {kind:"actual",en:"Plan to take CPA/ACCA? Preparation?",zh:"是否打算考 CPA/ACCA？准备情况？",cat:"规划",src:"金矢留学 理大会计面经"},
+              {kind:"actual",en:"ACA: How far is your Python? What specifically?",zh:"ACA：你的 Python 学到哪了，具体学了什么？（每年必问）",cat:"专业/编程",src:"金矢留学 理大会计面经"},
+              {kind:"actual",en:"Favourite financial institution & why? Practical accounting/finance experience?",zh:"你最喜欢的金融机构是哪家？为何？会计金融分析实践经验？",cat:"专业",src:"金矢留学 理大会计面经"}
+            ],
+            warnings:["ACA 几乎必问 Python，提前准备具体学习内容与项目","职业规划须具体到证书/行业/岗位","结合课程特色（数据分析+会计）回答 Why"],
+            sources:[{t:"金矢留学 理大会计面经",u:"https://www.ukpass.org/study/detail-11141.html"}]
+          }
+        ]
+      },
+      { id:"hkbu", name:"香港浸会大学", abbr:"HKBU", color:"#6a1b9a",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"理学院 / 传理学院 / 文社等",
+            interviewType:"群面或个人问答，评核英文口语、思维逻辑及综合能力（专业功底、社会阅历、辩证思维、临场应变）。全程英语；中医学/中药学/社会工作/语言文学等辅以中文，社工一般辅以粤语。理学院为 2 考官 4 学生（无小组讨论）；传理学院一组约 15 人轮流作答。",
+            official:[{k:"形式",v:"群面 / 个人问答，全英（部分专业辅中文/粤语）"},{k:"理学院",v:"2 考官 4 学生，有自我介绍，约半小时，无小组讨论"},{k:"传理",v:"约 15 人一组轮流作答，无自我介绍，无讨论"},{k:"周期",v:"6 月下旬高考后面试"}],
+            flow:["收到面邀（电邮）","身份/设备核验","个人或小组问答（围绕专业+社会议题）","考生提问"],
+            questions:[
+              {kind:"actual",en:"How did you learn about HKBU?",zh:"你是怎么了解浸会大学的？",cat:"动机",src:"kaoersi 浸会本科面经"},
+              {kind:"actual",en:"Who is your favourite/most admired [mathematician/physicist…] and why?",zh:"你最喜欢/最敬佩的某家（数学/物理等）是谁，为什么？",cat:"专业/兴趣",src:"kaoersi 浸会本科面经"},
+              {kind:"actual",en:"What are your plans after graduation? How will you overcome difficulties studying in HK?",zh:"你大学毕业以后有什么打算？到香港念书会遇到什么困难，如何克服？",cat:"规划/适应",src:"kaoersi 浸会本科面经"},
+              {kind:"actual",en:"Communication: which major in COMM do you most want to study & why? What if parents disagree?",zh:"传理：最想学传理哪个专业及原因？父母不同意怎么办？",cat:"动机",src:"kaoersi 浸会本科面经"},
+              {kind:"actual",en:"Communication: most impressive news report (domestic & overseas)? Favourite journalist & why?",zh:"传理：印象最深的新闻报道（国内+国外）？最喜欢/欣赏哪位记者，为什么？",cat:"专业/传媒",src:"kaoersi 浸会本科面经"},
+              {kind:"variant",en:"Communication: how do you view discrimination against the mainland in HK?",zh:"传理：怎么看待香港对内地的歧视现象？",cat:"社会议题",src:"kaoersi 浸会本科面经"},
+              {kind:"actual",en:"What do you know about the field of Business Administration?",zh:"你对工商管理学领域有什么了解？",cat:"专业",src:"jiaoyubao / ieduchina 港校面经"},
+              {kind:"actual",en:"How do you manage time & resources between study and other activities?",zh:"你如何管理时间和资源，在学业和其他活动间取得平衡？",cat:"自我认知",src:"jiaoyubao / ieduchina 港校面经"}
+            ],
+            warnings:[
+              "传理/社会学含时事与社会议题（贫富差距、中港矛盾等），需形成自己观点而非复述",
+              "社工专业辅以粤语，需中英粤三语心理准备",
+              "理学院为小范围问答，重专业兴趣与大学生活规划"
+            ],
+            sources:[{t:"香港浸会大学本科往年面试真题盘点",u:"https://www.kaoersiedu.com/college-330/new-380706.html"},{t:"港校面试形式与常见问题",u:"https://www.jiaoyubao.cn/news/n355183.html"},{t:"香港本科面试攻略",u:"https://www.ieduchina.com/hongkong/abroad/202606/140191.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"授课型硕士（部分专业）",
+            interviewType:"多数授课硕无统一面试；传理/中医药/部分商科或含面试，以官网为准。",
+            official:[{k:"形式",v:"因专业而异"},{k:"说明",v:"以各专业官网为准"}],
+            flow:["查目标项目官网确认"],
+            questions:[],
+            warnings:["研究生面试非普遍要求，需逐项目核实官网"],
+            sources:[]
+          }
+        ]
+      },
+      { id:"lingnan", name:"香港岭南大学", abbr:"Lingnan", color:"#1b5e20",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"各本科专业（个人面 / 小组依次答）",
+            interviewType:"面试难度较低、录取率较高。多为个人面试，约 15 分钟，自我介绍（2 分钟以内）+ 8–10 个提问；部分专业（如商科）为 4–6 人一组面对 2 位考官，每人依次回答、无讨论。问题多以社会问题为主。",
+            official:[{k:"形式",v:"个人面 15min（自介2min+8–10问）/ 商科 4–6 人小组依次答"},{k:"难度",v:"相对偏低，录取率较高"},{k:"语言",v:"全英为主"}],
+            flow:["身份核验","1–2 分钟自我介绍","考官依次提问（8–10 个，多为社会问题）","考生提问"],
+            questions:[
+              {kind:"actual",en:"Why did you choose this major?",zh:"你为什么选择这个专业？",cat:"动机",src:"ieduchina / jiaoyubao 港校面经"},
+              {kind:"actual",en:"What do you know about our university and this major?",zh:"你对我们大学和这个专业了解多少？",cat:"动机",src:"ieduchina / jiaoyubao 港校面经"},
+              {kind:"actual",en:"Share a challenge you once faced and how you overcame it.",zh:"讲讲你曾经遇到的一个挑战，你是如何克服它的？",cat:"经历",src:"ieduchina / jiaoyubao 港校面经"},
+              {kind:"actual",en:"Business: What do you know about business? What is its core?",zh:"商科：你对商科有何了解？你认为商科的核心是什么？",cat:"专业/商科",src:"ieduchina 岭大商科面经"},
+              {kind:"actual",en:"Business: business-related activities/projects in high school? Team role & conflict resolution?",zh:"商科：高中参与过哪些商科相关活动/项目？团队角色与冲突处理经验？",cat:"专业/商科",src:"ieduchina 岭大商科面经"},
+              {kind:"actual",en:"Business: what do you think is the future trend of business majors?",zh:"商科：你认为商科专业的未来发展趋势是什么？",cat:"专业/商科",src:"ieduchina 岭大商科面经"},
+              {kind:"variant",en:"What do you usually do during your rest time?",zh:"你课余时间通常做什么？",cat:"生活",src:"jingsailian 港校面经"},
+              {kind:"variant",en:"Which aspects of Lingnan University interest you most?",zh:"你对岭南大学的哪些方面更感兴趣？",cat:"动机",src:"jingsailian 港校面经"}
+            ],
+            warnings:[
+              "虽难度较低，但需准备 8–10 个连续问答，讲真实经历而非模板",
+              "商科为小组依次作答、无讨论，重点在个人观点表达清晰",
+              "想清楚面试官『为什么问这个』，围绕所申专业展开"
+            ],
+            sources:[{t:"香港岭南大学本科面试真题汇总（商科）",u:"https://m.ieduchina.com/hongkong/abroad/202408/115605.html"},{t:"2025 港校面试形式与常见问题",u:"https://www.jingsailian.com/dse/1587988.html"},{t:"香港本科面试建议",u:"https://www.jiaoyubao.cn/news/n353366.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"授课型硕士（部分专业）",
+            interviewType:"多数授课硕无统一面试，以官网为准。",
+            official:[{k:"说明",v:"以各专业官网为准"}],
+            flow:["查目标项目官网确认"],
+            questions:[],
+            warnings:["研究生面试非普遍要求，需逐项目核实官网"],
+            sources:[]
+          }
+        ]
+      },
+      { id:"eduhk", name:"香港教育大学", abbr:"EdUHK", color:"#0277bd",
+        programs:[
+          { stage:"本科", stageKey:"ug", prog:"教育类 / 文社等（小组面为主）",
+            interviewType:"Zoom 线上小组面（约 5 人，全英为主，中国语文教育等辅普通话）。含 1–2 分钟自我介绍 + 小组讨论（先读教育材料、轮流陈述、自由讨论）+ 考官提问。师范类含小组讨论+个人问答；音乐类需额外提交演奏视频/乐理成绩。",
+            official:[{k:"形式",v:"Zoom 小组面（~5 人），全英（部分专业辅中文）"},{k:"环节",v:"自介1–2min + 小组讨论(读材料/陈述/讨论) + 考官提问"},{k:"师范",v:"小组讨论 + 个人问答；音乐类需演奏视频"},{k:"周期",v:"6 月下旬高考后 / JUPAS 面试"}],
+            flow:["提前进入 Zoom 等候","1–2 分钟英文自我介绍","小组讨论（教育材料阅读+陈述+自由讨论）","考官针对经历/讨论提问","考生提问"],
+            questions:[
+              {kind:"actual",en:"Brief self-introduction.",zh:"请简单做一个自我介绍。",cat:"自我",src:"kaoersi JUPAS 教大面经"},
+              {kind:"actual",en:"Why EdUHK? Why this major?",zh:"为什么申请港教大？为什么选这个专业？",cat:"动机",src:"kaoersi JUPAS 教大面经"},
+              {kind:"actual",en:"Your greatest strengths & weaknesses?",zh:"你最大的优缺点分别是什么？",cat:"自我认知",src:"kaoersi JUPAS 教大面经"},
+              {kind:"actual",en:"How do you understand this major? Which course interests you most?",zh:"你如何理解这个专业？你最感兴趣的课程是什么？",cat:"专业",src:"kaoersi JUPAS 教大面经"},
+              {kind:"actual",en:"How will you adapt to EdUHK's education system?",zh:"你将如何适应港教大的教育体系？",cat:"适应",src:"kaoersi JUPAS 教大面经"},
+              {kind:"actual",en:"Which jobs might AI replace in the future?",zh:"你认为 AI 今后将可能取代哪些职业？",cat:"热点",src:"kaoersi JUPAS 教大面经"},
+              {kind:"actual",en:"Do you want to teach math or science later? What's the difference between them?",zh:"以后想教数学还是科学？数学和科学有什么区别？",cat:"专业/教育",src:"jingsailian / zggx100 港校面经"},
+              {kind:"actual",en:"Where do you want to teach after graduation? What age group?",zh:"毕业后想去哪里教书？教什么年龄段的学生？",cat:"规划",src:"jingsailian / zggx100 港校面经"},
+              {kind:"variant",en:"Group discussion: impact of the 'double reduction' policy on education / Can AI fully replace teachers?",zh:"小组讨论：『双减』对教育的影响？AI 能否完全替代教师？",cat:"群面/教育",src:"highmarktutor 教大群面攻略"}
+            ],
+            warnings:[
+              "小组讨论重交流技巧与团队协作，建议发言 2–3 次，用『Building on your point…』等句式补充",
+              "教育类专业需准备教育时事观点（双减、AI 助教等）",
+              "师范类可能做 1–2 道专业课题目，提前复习专业概念"
+            ],
+            sources:[{t:"香港教育大学 JUPAS 面试秘籍",u:"https://www.kaoersiedu.com/college-333/new-430148.html"},{t:"港教大高考生本科群面攻略",u:"https://www.highmarktutor.com/news/29375_56.html"},{t:"2025 港校面试形式与常见问题",u:"https://www.jingsailian.com/dse/1587988.html"}]
+          },
+          { stage:"研究生", stageKey:"gr", prog:"授课型硕士（部分专业）",
+            interviewType:"多数授课硕无统一面试；教育类相关硕士或含面试/教学演示，以官网为准。",
+            official:[{k:"形式",v:"因专业而异"},{k:"说明",v:"以各专业官网为准"}],
+            flow:["查目标项目官网确认"],
+            questions:[],
+            warnings:["研究生面试非普遍要求，需逐项目核实官网"],
+            sources:[]
+          }
+        ]
+      }
+    ]
+  }
+  ]
+};
+
+/* ============ 渲染 ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let CUR={region:"all",stage:"all",school:"all",kw:""};
+
+function allCards(){
+  const out=[];
+  DATA.regions.forEach(r=>r.schools.forEach(s=>s.programs.forEach(p=>{
+    out.push({region:r, school:s, prog:p});
+  })));
+  return out;
+}
+function match(card){
+  const {region,school,prog}=card;
+  if(CUR.region!=="all" && region.id!==CUR.region) return false;
+  if(CUR.school!=="all" && school.id!==CUR.school) return false;
+  if(CUR.stage!=="all" && prog.stageKey!==CUR.stage) return false;
+  const kw=CUR.kw.trim().toLowerCase();
+  if(kw){
+    const hay=[region.name,region.en,school.name,school.abbr,prog.stage,prog.prog,prog.interviewType,
+      (prog.questions||[]).map(q=>q.en+" "+(q.zh||"")+" "+(q.cat||"")).join(" "),
+      (prog.warnings||[]).join(" "), (prog.official||[]).map(o=>o.k+" "+o.v).join(" ")].join(" ").toLowerCase();
+    if(!hay.includes(kw)) return false;
+  }
+  return true;
+}
+function qHtml(q){
+  if(!q) return "";
+  const tag = q.kind==="actual"
+    ? '<span class="tag actual">原题</span>'
+    : '<span class="tag variant">变体</span>';
+  const cat = q.cat?`<span class="cat">${esc(q.cat)}</span>`:"";
+  const tip = q.tip?`<span class="tip">💡 ${esc(q.tip)}</span>`:"";
+  const src = q.src?`<span class="src">　来源：${esc(q.src)}</span>`:"";
+  const zh = q.zh?`<div class="zh">${esc(q.zh)}</div>`:"";
+  return `<div class="q">${tag}<div class="body"><div class="en">${esc(q.en)}</div>${zh}${cat}${tip}${src}</div></div>`;
+}
+function cardHtml(card,pid){
+  const {region,school,prog}=card;
+  const stageCls = prog.stageKey==="gr"?"gr":"ug";
+  const stageTxt = prog.stageKey==="gr"?"研究生":"本科";
+  if(prog.pending){
+    return `<div class="pending"><span class="stage ${stageCls}">${stageTxt}</span> &nbsp;<b>${esc(prog.prog)}</b><br>${esc((prog.warnings||[]).join(" "))}</div>`;
+  }
+  const official = (prog.official||[]).map(o=>`<div class="off"><span class="k">${esc(o.k)}</span><span class="v">${esc(o.v)}</span></div>`).join("");
+  const flow = (prog.flow&&prog.flow.length)?`<ul class="flow">${prog.flow.map(f=>`<li>${esc(f)}</li>`).join("")}</ul>`:"";
+  const questions = (prog.questions&&prog.questions.length)?`<div class="blk"><div class="blk-t">真题 / 题目</div>${prog.questions.map(qHtml).join("")}</div>`:"";
+  const warns = (prog.warnings||[]).length?`<div class="blk"><div class="blk-t">避坑提醒</div><ul class="warn">${prog.warnings.map(w=>`<li>${esc(w)}</li>`).join("")}</ul></div>`:"";
+  const srcs = (prog.sources||[]).length?`<div class="blk"><div class="blk-t">参考来源</div><div class="srcs">${prog.sources.map(s=>`<a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a>`).join(" &nbsp;·&nbsp; ")}</div></div>`:"";
+  return `<div class="card" data-pid="${pid}">
+    <button class="sharebtn" data-pid="${pid}" title="复制此条面经的单独链接">🔗 复制链接</button>
+    <div class="card-h">
+      <span class="stage ${stageCls}">${stageTxt}</span>
+      <h4>${esc(prog.prog)}</h4>
+      <div class="itype"><b>面试形式：</b>${esc(prog.interviewType)}</div>
+    </div>
+    <div class="card-b">
+      ${official?`<div class="blk"><div class="blk-t">官方信息</div>${official}</div>`:""}
+      ${flow?`<div class="blk"><div class="blk-t">面试流程</div>${flow}</div>`:""}
+      ${questions}
+      ${warns}
+      ${srcs}
+    </div>
+  </div>`;
+}
+function render(){
+  // stats
+  const total = allCards().filter(c=>!c.prog.pending).length;
+  let qn=0, sn=0;
+  DATA.regions.forEach(r=>r.schools.forEach(s=>s.programs.forEach(p=>{
+    if(p.pending) return;
+    if(p.questions) qn+=p.questions.length;
+    if(p.sources) sn+=p.sources.length;
+  })));
+  $("#stats").innerHTML=[
+    [DATA.regions.length,"覆盖地区",0],
+    [total,"已建项目板块",1],
+    [qn,"已收录题目",0],
+    [sn,"可溯源来源",0]
+  ].map(x=>`<div class="stat${x[2]?' hi':''}"><div class="n">${x[0]}</div><div class="l">${x[1]}</div></div>`).join("");
+
+  // board
+  const shown = allCards().filter(match);
+  let html="";
+  DATA.regions.forEach(r=>{
+    if(CUR.region!=="all" && r.id!==CUR.region) return;
+    const rs = shown.filter(c=>c.region.id===r.id);
+    if(!rs.length) return;
+    html+=`<section class="region" id="reg-${r.id}">
+      <div class="rhead"><span class="flag">${r.flag}</span><h2>${esc(r.name)}</h2><span class="en">${esc(r.en)}</span></div>
+      <div class="rline" style="background:${r.color}"></div>
+      <div class="rdesc">${esc(r.desc)}</div>`;
+    // group by school
+    const bySchool={};
+    rs.forEach(c=>{(bySchool[c.school.id]=bySchool[c.school.id]||[]).push(c);});
+    Object.keys(bySchool).forEach(sid=>{
+      const list=bySchool[sid]; const sc=list[0].school;
+      html+=`<div class="school" id="sch-${sid}"><div class="badge" style="background:${sc.color}">${esc(sc.abbr.slice(0,4))}</div>
+        <div><h3>${esc(sc.name)}</h3><div class="sc">${esc(sc.abbr)}</div></div></div>`;
+      html+=`<div class="cards">${list.map((c,idx)=>cardHtml(c, sid+'-'+idx)).join("")}</div>`;
+    });
+    html+=`</section>`;
+  });
+  $("#board").innerHTML = html || `<div class="empty">没有匹配的项目<br><br>换个关键词，或点「全部」重置</div>`;
+}
+function renderStageFilters(){
+  const opts=[["all","全部"],["ug","本科"],["gr","研究生"]];
+  $("#stageFilters").innerHTML=opts.map(o=>`<button class="schip${CUR.stage===o[0]?' on':''}" data-s="${o[0]}">${o[1]}</button>`).join("");
+  document.querySelectorAll('.schip').forEach(b=>b.addEventListener('click',()=>{
+    CUR.stage=b.dataset.s; renderStageFilters(); render();
+  }));
+}
+function renderSchoolIndex(){
+  const regs=DATA.regions.filter(r=>CUR.region==="all"||r.id===CUR.region);
+  let chips=`<button class="stab${CUR.school==="all"?' on':''}" data-sch="all">全部院校</button>`;
+  regs.forEach(r=>r.schools.forEach(s=>{
+    chips+=`<button class="stab${CUR.school===s.id?' on':''}" data-sch="${s.id}" title="${esc(r.name)} · ${esc(s.name)}"><span class="dot" style="background:${s.color}"></span>${esc(s.abbr)}</button>`;
+  }));
+  $("#schoolIndex").innerHTML=`<span class="lbl">院校索引</span>`+chips;
+  document.querySelectorAll('.stab').forEach(b=>b.addEventListener('click',()=>{
+    const sid=b.dataset.sch;
+    if(sid==="all"){ CUR.school="all"; }
+    else{
+      const reg=DATA.regions.find(r=>r.schools.some(s=>s.id===sid));
+      if(!reg) return;
+      CUR.school=sid; CUR.region=reg.id;
+      document.querySelectorAll('.rtab').forEach(x=>x.classList.toggle('on',x.dataset.r===reg.id));
+    }
+    renderSchoolIndex(); render();
+    if(CUR.school!=="all"){
+      const el=document.getElementById('sch-'+CUR.school);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    } else window.scrollTo({top:0,behavior:'smooth'});
+  }));
+}
+document.querySelectorAll('.rtab').forEach(b=>b.addEventListener('click',()=>{
+  CUR.region=b.dataset.r; CUR.school="all";
+  document.querySelectorAll('.rtab').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  renderSchoolIndex();
+  render();
+  if(b.dataset.r!=="all"){
+    const el=document.getElementById('reg-'+b.dataset.r);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  } else window.scrollTo({top:0,behavior:'smooth'});
+}));
+$("#q").addEventListener('input',e=>{CUR.kw=e.target.value; render();});
+$("#upd").textContent="覆盖 加拿大 · 新加坡 · 香港 三大板块，本科与研究生分阶段呈现";
+$("#foot").textContent=DATA.meta.lastUpdated;
+renderStageFilters();
+renderSchoolIndex();
+render();
+
+/* ============ 投稿功能 ============ */
+/* 主控人填这里：接收端点。优先 Formspree（https://formspree.io/f/xxxxxx），
+   留空则退回 mailto 到 ownerEmail。两端都未配置时仅本地校验、不发送。 */
+const CONFIG = {
+  submitEndpoint: "https://formspree.io/f/YOUR_FORM_ID",  // ← 替换为你的 Formspree 表单地址
+  ownerEmail: "your-email@example.com"                   // ← 替换为你的邮箱（mailto 兜底）
+};
+
+(function(){
+  const ov = document.getElementById('contribOverlay');
+  const open = ()=> ov.classList.add('on');
+  const close = ()=> ov.classList.remove('on');
+  document.getElementById('openContrib').addEventListener('click', open);
+  document.getElementById('closeContrib').addEventListener('click', close);
+  document.getElementById('cancelContrib').addEventListener('click', close);
+  ov.addEventListener('click', e=>{ if(e.target===ov) close(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
+
+  const $ = id => document.getElementById(id);
+  const status = $('contribStatus');
+  $('sendContrib').addEventListener('click', async ()=>{
+    const v = {
+      region: $('c_region').value, stage: $('c_stage').value,
+      school: $('c_school').value.trim(), prog: $('c_prog').value.trim(),
+      questions: $('c_qs').value.trim(), kind: $('c_kind').value,
+      year: $('c_year').value, srctype: $('c_srctype').value,
+      src: $('c_src').value.trim(), contact: $('c_contact').value.trim()
+    };
+    if(!v.school || !v.prog || !v.questions){
+      status.textContent = '请填写学校、项目/专业、面经题目（带 * 为必填）'; status.className='status err'; return;
+    }
+    const payload = {
+      region:v.region, stage:v.stage, school:v.school, program:v.prog,
+      questions:v.questions, kind:v.kind, year:v.year,
+      source_type:v.srctype, source_detail:v.src, contact:v.contact,
+      submitted_at:new Date().toISOString()
+    };
+    const btn = $('sendContrib'); btn.disabled = true;
+    status.textContent = '提交中…'; status.className='status';
+
+    // 优先 POST 到接口
+    if(CONFIG.submitEndpoint && !CONFIG.submitEndpoint.includes('YOUR_FORM_ID')){
+      try{
+        const r = await fetch(CONFIG.submitEndpoint,{
+          method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify(payload)
+        });
+        if(r.ok){ status.textContent='✓ 投稿已提交，感谢分享！管理员审核后会合并进看板。'; status.className='status ok'; resetForm(); }
+        else { status.textContent='提交返回异常（'+r.status+'），可改用邮件发送。'; status.className='status err'; }
+      }catch(err){
+        status.textContent='网络提交失败：'+err.message+'，可改用邮件发送。'; status.className='status err';
+      }
+      btn.disabled = false; return;
+    }
+    // 兜底：mailto
+    if(CONFIG.ownerEmail && !CONFIG.ownerEmail.includes('example.com')){
+      const body = `【面经投稿】\n地区：${v.region}\n阶段：${v.stage}\n学校：${v.school}\n项目/专业：${v.prog}\n题目性质：${v.kind}\n年份：${v.year}\n来源类型：${v.srctype}\n来源详情：${v.src}\n联系方式：${v.contact}\n\n面经题目：\n${v.questions}`;
+      window.location.href = `mailto:${CONFIG.ownerEmail}?subject=面经投稿-${v.school}-${v.prog}&body=`+encodeURIComponent(body);
+      status.textContent='已调起邮件客户端，发送即完成投稿。'; status.className='status ok';
+      btn.disabled = false; return;
+    }
+    status.textContent='尚未配置接收端点（CONFIG.submitEndpoint / ownerEmail），请主控人填写后再提交。';
+    status.className='status err'; btn.disabled = false;
+  });
+
+  function resetForm(){ $('c_school').value=''; $('c_prog').value=''; $('c_qs').value=''; $('c_src').value=''; $('c_contact').value=''; }
+})();
+
+/* ============ 单条面经独立链接 + 只读聚焦视图 ============ */
+function copyText(t){
+  if(navigator.clipboard && navigator.clipboard.writeText){ return navigator.clipboard.writeText(t); }
+  const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
+  try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta); return Promise.resolve();
+}
+document.addEventListener('click', e=>{
+  const b=e.target.closest('.sharebtn'); if(!b) return;
+  const pid=b.dataset.pid;
+  const link=location.origin+location.pathname+'#p='+encodeURIComponent(pid);
+  copyText(link).then(()=>{ const old=b.textContent; b.textContent='✓ 已复制'; setTimeout(()=>b.textContent=old,1500); });
+});
+const fbar=document.getElementById('fbar');
+function setFocus(pid){
+  const card=document.querySelector('.card[data-pid="'+CSS.escape(pid)+'"]');
+  if(!card){ clearFocus(); return; }
+  document.body.classList.add('focus');
+  document.querySelectorAll('.region').forEach(r=>r.style.display='none');
+  const region=card.closest('.region'); if(region) region.style.display='';
+  if(region){
+    region.querySelectorAll('.school').forEach(s=>{ if(!s.contains(card)) s.style.display='none'; });
+    region.querySelectorAll('.card').forEach(c=>{ if(c!==card) c.style.display='none'; });
+  }
+  const tag=document.getElementById('fbarTag');
+  const h4=card.querySelector('h4'); if(tag&&h4) tag.textContent=h4.textContent;
+  fbar.classList.add('on'); card.scrollIntoView({block:'start'});
+  card.classList.add('flash'); setTimeout(()=>card.classList.remove('flash'),1600);
+}
+function clearFocus(){
+  document.body.classList.remove('focus');
+  document.querySelectorAll('.region,.school,.card').forEach(el=>el.style.display='');
+  fbar.classList.remove('on');
+}
+document.getElementById('fback').addEventListener('click', ()=>{ clearFocus(); location.hash=''; });
+function applyHash(){
+  const m=location.hash.match(/^#p=(.+)$/);
+  if(m){ setFocus(decodeURIComponent(m[1])); } else { clearFocus(); }
+}
+window.addEventListener('hashchange', applyHash);
+
+/* ============ 账密门逻辑 ============ */
+/* 只设密码（无账号）。可设多个密码。注意：纯前端校验，密码写在文件里，
+   懂技术的人查看源码可绕过——适合「分享给可信的人 + 加一层门槛」，非绝对安全。
+   如需真正安全，需服务端鉴权（见 GitHub Pages + 服务端方案）。 */
+const AUTH = {
+  enabled: true,
+  passwords: [ "study2026" ],  // ← 改成你自己的查看密码（可设多个）
+  sessionHours: 12
+};
+(function(){
+  if(!AUTH.enabled) return;
+  const KEY="ib_auth_v1";
+  const ov=document.getElementById('authOverlay');
+  const err=document.getElementById('authErr');
+  const p=document.getElementById('authPass');
+  function ok(){ try{return sessionStorage.getItem(KEY)==="1";}catch(e){return false;} }
+  function unlock(){ try{sessionStorage.setItem(KEY,"1");}catch(e){} document.body.classList.remove('auth-locked'); ov.style.display='none'; applyHash(); }
+  if(ok()){ document.body.classList.remove('auth-locked'); ov.style.display='none'; }
+  else { document.body.classList.add('auth-locked'); ov.style.display='flex'; p.focus(); }
+  function tryLogin(){
+    const pw=p.value;
+    const hit=AUTH.passwords.some(x=>x===pw);
+    if(hit){ unlock(); } else { err.style.display='block'; p.value=''; p.focus(); }
+  }
+  document.getElementById('authBtn').addEventListener('click', tryLogin);
+  p.addEventListener('keydown', e=>{ if(e.key==="Enter") tryLogin(); });
+})();
+
+applyHash();
+</script>
+</body>
+</html>
