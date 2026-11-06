@@ -120,7 +120,7 @@
   .legend span{display:inline-flex;align-items:center;gap:6px}
   .lg{width:14px;height:14px;border-radius:4px}
   .empty{text-align:center;padding:40px 20px;color:var(--ink-3);font-size:14px}
-  .toolbar2{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 4px}
+  .toolbar2{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
   .schip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;
     background:var(--panel);border:1px solid var(--line);color:var(--ink-2);font-family:inherit}
   .schip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -241,11 +241,11 @@
     </div>
     <button class="ctab" id="openContrib">＋ 我要投稿</button>
   </div>
+  <div class="toolbar2" id="stageFilters"></div>
   <div class="srow" id="schoolIndex"></div>
 </div>
 
 <div class="stats" id="stats"></div>
-<div class="toolbar2" id="stageFilters"></div>
 <div class="legend">
   <span><span class="lg" style="background:#e7eefb"></span> 原题 ACTUAL — 逐字取自公开来源</span>
   <span><span class="lg" style="background:#eee"></span> 变体 VARIANT — 基于公开经验原创改写</span>
