@@ -194,6 +194,11 @@
   body.guest .fbar .back{display:none!important}
   body.guest .nav,body.guest .stats,body.guest .toolbar2,body.guest .legend,
   body.guest #schoolIndex,body.guest footer,body.guest .upd{display:none!important}
+  /* 访客只读标题（board 重建后只剩这一条） */
+  .guest-head{padding:6px 2px 16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+  .guest-head .g-crumb{font-size:12.5px;color:var(--ink-3);letter-spacing:.5px;margin-bottom:8px}
+  .guest-head .g-title{font-size:20px;font-weight:800;color:var(--ink);margin:0;line-height:1.35}
+  body.guest .card{max-width:960px}
   .srcs .srclocal{color:var(--ink-3);font-size:12px}
 </style>
 </head>
@@ -1879,8 +1884,10 @@ let CUR={region:"all",stage:"all",school:"all",kw:""};
 
 function allCards(){
   const out=[];
-  DATA.regions.forEach(r=>r.schools.forEach(s=>s.programs.forEach(p=>{
-    out.push({region:r, school:s, prog:p});
+  DATA.regions.forEach(r=>r.schools.forEach(s=>s.programs.forEach((p,pi)=>{
+    // 稳定 id：地区-院校-专业序号，取自数据固定下标，不随筛选/搜索变化，
+    // 保证「每个国别下每所院校每个专业」都有一条唯一、长期有效的独立分享链接
+    out.push({region:r, school:s, prog:p, pid:r.id+'-'+s.id+'-'+pi});
   })));
   return out;
 }
@@ -1971,7 +1978,7 @@ function render(){
       const list=bySchool[sid]; const sc=list[0].school;
       html+=`<div class="school" id="sch-${sid}"><div class="badge" style="background:${sc.color}">${esc(sc.abbr.slice(0,4))}</div>
         <div><h3>${esc(sc.name)}</h3><div class="sc">${esc(sc.abbr)}</div></div></div>`;
-      html+=`<div class="cards">${list.map((c,idx)=>cardHtml(c, sid+'-'+idx)).join("")}</div>`;
+      html+=`<div class="cards">${list.map(c=>cardHtml(c, c.pid)).join("")}</div>`;
     });
     html+=`</section>`;
   });
@@ -2132,14 +2139,17 @@ document.addEventListener('click', e=>{
 });
 
 const fbar=document.getElementById('fbar');
+function findCard(pid){
+  return Array.prototype.find.call(document.querySelectorAll('.card[data-pid]'), el=>el.dataset.pid===pid) || null;
+}
 function setFocus(pid){
-  const card=document.querySelector('.card[data-pid="'+CSS.escape(pid)+'"]');
+  const card=findCard(pid);
   if(!card){ clearFocus(); return; }
   document.body.classList.add('focus');
   document.querySelectorAll('.region').forEach(r=>r.style.display='none');
   const region=card.closest('.region'); if(region) region.style.display='';
   if(region){
-    region.querySelectorAll('.school').forEach(s=>{ if(!s.contains(card)) s.style.display='none'; });
+    region.querySelectorAll('.school').forEach(s=>s.style.display='none');
     region.querySelectorAll('.card').forEach(c=>{ if(c!==card) c.style.display='none'; });
   }
   const tag=document.getElementById('fbarTag');
@@ -2153,24 +2163,38 @@ function clearFocus(){
   document.querySelectorAll('.region,.school,.card').forEach(el=>el.style.display='');
   fbar.classList.remove('on');
 }
-/* 访客只读模式：物理裁剪 DOM，只留目标卡片；去掉返回/复制链接/导航/搜索/投稿 */
+/* 访客只读模式：重建 board，物理上只保留「只读标题 + 目标那一条卡片」。
+   不依赖 .school/.cards 的 DOM 层级假设（两者是兄弟节点），彻底避免漏删其它专业。 */
 function applyGuest(pid){
-  const card=document.querySelector('.card[data-pid="'+CSS.escape(pid)+'"]');
+  const card=findCard(pid);
   const board=document.getElementById('board');
   if(!card){
-    if(board) board.innerHTML='<div class="empty">链接无效或已过期<br><br>请向分享者重新索取专属链接</div>';
     document.body.classList.add('guest');
+    board.innerHTML='<div class="empty">链接无效或已过期<br><br>请向分享者重新索取该专业的专属链接</div>';
     return;
   }
+  // 提取「国别 / 院校 / 专业」用于只读标题
   const region=card.closest('.region');
-  const school=card.closest('.school');
-  document.querySelectorAll('.region').forEach(r=>{ if(r!==region) r.remove(); });
-  if(region) region.querySelectorAll('.school').forEach(s=>{ if(s!==school) s.remove(); });
-  if(school) school.querySelectorAll('.card').forEach(c=>{ if(c!==card) c.remove(); });
+  const rEl=region?region.querySelector('.rhead h2'):null;
+  const regionName=rEl?rEl.textContent:'';
+  const wrap=card.closest('.cards');
+  let schoolName='';
+  if(wrap && wrap.previousElementSibling && wrap.previousElementSibling.classList.contains('school')){
+    const h3=wrap.previousElementSibling.querySelector('h3');
+    if(h3) schoolName=h3.textContent;
+  }
+  const h4=card.querySelector('h4'); const progName=h4?h4.textContent:'';
   card.querySelectorAll('.sharebtn').forEach(b=>b.remove());
+  // 重建：board 里只剩这一条，其它地区/院校/专业的卡片全部不复存在
+  board.innerHTML='';
+  const head=document.createElement('div'); head.className='guest-head';
+  const crumb=document.createElement('div'); crumb.className='g-crumb';
+  crumb.textContent=[regionName,schoolName].filter(Boolean).join('  ·  ');
+  const title=document.createElement('h2'); title.className='g-title'; title.textContent=progName;
+  head.appendChild(crumb); head.appendChild(title);
+  board.appendChild(head); board.appendChild(card);
   document.body.classList.add('guest');
-  const tag=document.getElementById('fbarTag');
-  const h4=card.querySelector('h4'); if(tag&&h4) tag.textContent=h4.textContent;
+  const tag=document.getElementById('fbarTag'); if(tag) tag.textContent=progName;
   const ro=fbar.querySelector('.ro'); if(ro) ro.textContent='只读分享 · 仅此一条 · 无权限访问主看板';
   const back=document.getElementById('fback'); if(back) back.remove();
   fbar.classList.add('on');
