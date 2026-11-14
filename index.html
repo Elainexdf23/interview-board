@@ -199,6 +199,7 @@
   .guest-head .g-crumb{font-size:12.5px;color:var(--ink-3);letter-spacing:.5px;margin-bottom:8px}
   .guest-head .g-title{font-size:20px;font-weight:800;color:var(--ink);margin:0;line-height:1.35}
   body.guest .card{max-width:960px}
+  body.guest .srcblk,body.guest .q .src,body.guest .off-src{display:none!important}   /* 访客视图不显示任何来源信息 */
   .srcs .srclocal{color:var(--ink-3);font-size:12px}
 </style>
 </head>
@@ -3400,7 +3401,7 @@ const DATA = {
                 },
                 {
                   k:"练习",
-                  v:"官方说明：可无限做 practice questions 熟悉系统；学生面经：正式前 2 道 practice 题各 1 次机会。两来源描述略有差异，以当年系统提示为准"
+                  v:"官方说明：可无限做 practice questions 熟悉系统；学生面经：正式前 2 道 practice 题各 1 次机会。两种说法略有差异，以当年系统提示为准"
                 },
                 {
                   k:"设备",
@@ -11953,11 +11954,11 @@ function cardHtml(card,pid){
   if(prog.pending){
     return `<div class="pending"><span class="stage ${stageCls}">${stageTxt}</span> &nbsp;<b>${esc(prog.prog)}</b><br>${esc((prog.warnings||[]).join(" "))}</div>`;
   }
-  const official = (prog.official||[]).map(o=>`<div class="off"><span class="k">${esc(o.k)}</span><span class="v">${esc(o.v)}</span></div>`).join("");
+  const official = (prog.official||[]).map(o=>`<div class="off${/来源/.test(o.k||'')?' off-src':''}"><span class="k">${esc(o.k)}</span><span class="v">${esc(o.v)}</span></div>`).join("");
   const flow = (prog.flow&&prog.flow.length)?`<ul class="flow">${prog.flow.map(f=>`<li>${esc(f)}</li>`).join("")}</ul>`:"";
   const questions = (prog.questions&&prog.questions.length)?`<div class="blk"><div class="blk-t">真题 / 题目</div>${prog.questions.map(qHtml).join("")}</div>`:"";
   const warns = (prog.warnings||[]).length?`<div class="blk"><div class="blk-t">避坑提醒</div><ul class="warn">${prog.warnings.map(w=>`<li>${esc(w)}</li>`).join("")}</ul></div>`:"";
-  const srcs = (prog.sources||[]).length?`<div class="blk"><div class="blk-t">参考来源</div><div class="srcs">${prog.sources.map(s=>s.u?`<a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a>`:`<span class="srclocal">${esc(s.t)}</span>`).join(" &nbsp;·&nbsp; ")}</div></div>`:"";
+  const srcs = (prog.sources||[]).length?`<div class="blk srcblk"><div class="blk-t">参考来源</div><div class="srcs">${prog.sources.map(s=>s.u?`<a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a>`:`<span class="srclocal">${esc(s.t)}</span>`).join(" &nbsp;·&nbsp; ")}</div></div>`:"";
   return `<div class="card" data-pid="${pid}">
     <button class="sharebtn" data-pid="${pid}" title="复制此条面经的单独链接">🔗 复制链接</button>
     <div class="card-h">
@@ -12215,6 +12216,10 @@ function applyGuest(pid){
   }
   const h4=card.querySelector('h4'); const progName=h4?h4.textContent:'';
   card.querySelectorAll('.sharebtn').forEach(b=>b.remove());
+  // 访客视图不展示任何来源：移除「参考来源」整块（含外链）与题目级逐题来源标注
+  card.querySelectorAll('.srcblk').forEach(e=>e.remove());
+  card.querySelectorAll('.q .src').forEach(e=>e.remove());
+  card.querySelectorAll('.off-src').forEach(e=>e.remove());
   // 重建：board 里只剩这一条，其它地区/院校/专业的卡片全部不复存在
   board.innerHTML='';
   const head=document.createElement('div'); head.className='guest-head';
